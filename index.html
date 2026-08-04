@@ -207,16 +207,28 @@
 
 .hero-quote{
     position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:24px 30px;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.95),
+        rgba(0,0,0,.55),
+        transparent
+    );
+}
+    position:absolute;
     left:34px;
     right:34px;
-    bottom:10px;
+    bottom:30px;
     color:var(--accent-light);
     text-shadow:0 2px 12px rgba(0,0,0,.8);
 }
 
 .hero-quote p{
     color:#ffffff;
-    text-shadow:0 2px 10px rgba(0,0,0,.9);
+text-shadow:none;
     font-family:Georgia,"Times New Roman",serif;
     font-size:2rem;
     font-style:italic;
