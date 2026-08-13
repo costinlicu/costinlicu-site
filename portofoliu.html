@@ -14,7 +14,7 @@
 
   <meta
     name="description"
-    content="Portofoliul lui Costin Licu — deserturi moderne, torturi, entremets, ciocolaterie, sous-vide, panificație și proiecte educaționale."
+    content="Portofoliul lui Costin Licu — deserturi moderne, torturi și entremets, ciocolaterie, sous-vide, panificație, patiserie și proiecte educaționale."
   >
 
   <meta name="robots" content="index, follow">
@@ -26,18 +26,33 @@
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ro_RO">
-  <meta property="og:url" content="https://costinlicu.ro/portofoliu.html">
-  <meta property="og:title" content="Portofoliu — Costin Licu">
+
+  <meta
+    property="og:url"
+    content="https://costinlicu.ro/portofoliu.html"
+  >
+
+  <meta
+    property="og:title"
+    content="Portofoliu — Costin Licu"
+  >
 
   <meta
     property="og:description"
-    content="Creații construite cu tehnică, identitate și precizie."
+    content="Creații construite cu tehnică, identitate, cercetare și precizie."
   >
 
-  <meta name="theme-color" content="#16120f">
+  <meta
+    name="theme-color"
+    content="#16120f"
+  >
 
 
   <style>
+
+    /* ========================================
+       VARIABILE
+    ======================================== */
 
     :root {
       --background: #0e0c0a;
@@ -50,6 +65,11 @@
       --border: rgba(255, 255, 255, 0.11);
       --max-width: 1180px;
     }
+
+
+    /* ========================================
+       RESET
+    ======================================== */
 
     * {
       box-sizing: border-box;
@@ -86,12 +106,19 @@
     }
 
     .container {
-      width: min(calc(100% - 40px), var(--max-width));
+      width:
+        min(
+          calc(100% - 40px),
+          var(--max-width)
+        );
+
       margin: 0 auto;
     }
 
 
-    /* HEADER */
+    /* ========================================
+       HEADER
+    ======================================== */
 
     header {
       position: sticky;
@@ -159,6 +186,9 @@
       color: var(--accent-light);
     }
 
+
+    /* HAMBURGER */
+
     .menu-toggle {
       display: none;
 
@@ -176,7 +206,9 @@
     }
 
 
-    /* SECȚIUNI */
+    /* ========================================
+       SECȚIUNI
+    ======================================== */
 
     section {
       padding: 90px 0;
@@ -184,6 +216,7 @@
 
     .section-heading {
       max-width: 760px;
+
       margin-bottom: 48px;
     }
 
@@ -196,7 +229,11 @@
         serif;
 
       font-size:
-        clamp(1.8rem, 3vw, 2.7rem);
+        clamp(
+          1.8rem,
+          3vw,
+          2.7rem
+        );
 
       font-weight: 400;
 
@@ -205,6 +242,7 @@
 
     .section-heading p {
       color: var(--muted);
+
       font-size: 1.08rem;
     }
 
@@ -225,7 +263,9 @@
     }
 
 
-    /* CARDURI */
+    /* ========================================
+       CARDURI CATEGORII
+    ======================================== */
 
     .cards {
       display: grid;
@@ -237,8 +277,6 @@
     }
 
     .service-card {
-      min-height: 310px;
-
       padding: 30px;
 
       border:
@@ -252,6 +290,22 @@
           var(--surface-light),
           var(--surface)
         );
+
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .service-card:hover {
+      transform:
+        translateY(-3px);
+
+      border-color:
+        rgba(215, 164, 91, 0.35);
+    }
+
+    .cards .service-card {
+      min-height: 300px;
     }
 
     .number {
@@ -289,19 +343,150 @@
     }
 
 
-    /* ZONA FINALĂ */
+    /* ========================================
+       PROIECTE SELECTATE
+    ======================================== */
 
-    .portfolio-future {
-      margin-top: 90px;
+    .selected-projects {
+      margin-top: 100px;
 
-      padding-top: 70px;
+      padding-top: 75px;
+
+      border-top:
+        1px solid var(--border);
+    }
+
+    .project-list {
+      display: grid;
+
+      gap: 18px;
+    }
+
+    .project-card {
+      display: grid;
+
+      grid-template-columns:
+        100px 1fr auto;
+
+      gap: 30px;
+
+      align-items: center;
+
+      padding: 32px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          145deg,
+          var(--surface-light),
+          var(--surface)
+        );
+
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .project-card:hover {
+      transform:
+        translateY(-3px);
+
+      border-color:
+        rgba(215, 164, 91, 0.35);
+    }
+
+    .project-number {
+      color: var(--accent);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 2rem;
+    }
+
+    .project-content h3 {
+      margin-bottom: 8px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 1.45rem;
+
+      font-weight: 400;
+    }
+
+    .project-content p {
+      max-width: 680px;
+
+      color: var(--muted);
+    }
+
+
+    /* ========================================
+       BUTOANE
+    ======================================== */
+
+    .button {
+      display: inline-flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      min-height: 48px;
+
+      padding: 0 22px;
+
+      border:
+        1px solid var(--accent);
+
+      border-radius: 999px;
+
+      font-weight: 700;
+
+      white-space: nowrap;
+
+      transition: 0.25s ease;
+    }
+
+    .button-secondary {
+      color: var(--text);
+    }
+
+    .button-secondary:hover {
+      background:
+        rgba(215, 164, 91, 0.12);
+
+      transform:
+        translateY(-2px);
+    }
+
+
+    /* ========================================
+       FILOSOFIA PORTOFOLIULUI
+    ======================================== */
+
+    .portfolio-philosophy {
+      margin-top: 100px;
+
+      padding-top: 75px;
 
       border-top:
         1px solid var(--border);
     }
 
 
-    /* FOOTER */
+    /* ========================================
+       FOOTER
+    ======================================== */
 
     footer {
       padding: 30px 0;
@@ -324,7 +509,9 @@
     }
 
 
-    /* TABLETĂ / MOBIL */
+    /* ========================================
+       TABLETĂ / MOBIL
+    ======================================== */
 
     @media (max-width: 850px) {
 
@@ -381,13 +568,34 @@
         border-bottom: 0;
       }
 
+
+      /* CATEGORII */
+
       .cards {
         grid-template-columns: 1fr;
       }
 
-      .service-card {
+      .cards .service-card {
         min-height: auto;
       }
+
+
+      /* PROIECTE */
+
+      .project-card {
+        grid-template-columns:
+          80px 1fr;
+
+        gap: 20px;
+      }
+
+      .project-card .button {
+        grid-column:
+          2 / 3;
+
+        justify-self: start;
+      }
+
 
       .footer-content {
         flex-direction: column;
@@ -396,7 +604,9 @@
     }
 
 
-    /* TELEFOANE MICI */
+    /* ========================================
+       TELEFOANE MICI
+    ======================================== */
 
     @media (max-width: 600px) {
 
@@ -447,6 +657,7 @@
 
       .number {
         margin-bottom: 18px;
+
         font-size: 1.8rem;
       }
 
@@ -454,8 +665,42 @@
         font-size: 1.3rem;
       }
 
-      .portfolio-future {
-        margin-top: 65px;
+
+      /* PROIECTE PE TELEFON */
+
+      .selected-projects {
+        margin-top: 70px;
+
+        padding-top: 55px;
+      }
+
+      .project-card {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+
+        padding: 24px;
+      }
+
+      .project-number {
+        font-size: 1.6rem;
+      }
+
+      .project-content h3 {
+        font-size: 1.3rem;
+      }
+
+      .project-card .button {
+        grid-column: auto;
+
+        width: 100%;
+
+        justify-self: stretch;
+      }
+
+      .portfolio-philosophy {
+        margin-top: 70px;
+
         padding-top: 55px;
       }
 
@@ -463,6 +708,10 @@
 
   </style>
 
+
+  <!-- ========================================
+       STRUCTURED DATA
+  ======================================== -->
 
   <script type="application/ld+json">
   {
@@ -476,12 +725,12 @@
     },
     "about": [
       "Deserturi moderne",
-      "Torturi",
-      "Entremets",
+      "Torturi și entremets",
       "Ciocolaterie",
       "Sous-vide",
       "Panificație",
-      "Patiserie"
+      "Patiserie",
+      "Educație gastronomică"
     ]
   }
   </script>
@@ -492,7 +741,9 @@
 <body>
 
 
-  <!-- HEADER -->
+  <!-- ========================================
+       HEADER
+  ======================================== -->
 
   <header>
 
@@ -521,19 +772,33 @@
 
       <div class="nav-links">
 
-        <a href="index.html">Acasă</a>
+        <a href="index.html">
+          Acasă
+        </a>
 
-        <a href="despre.html">Despre</a>
+        <a href="despre.html">
+          Despre
+        </a>
 
-        <a href="portofoliu.html">Portofoliu</a>
+        <a href="portofoliu.html">
+          Portofoliu
+        </a>
 
-        <a href="experienta.html">Experiență</a>
+        <a href="experienta.html">
+          Experiență
+        </a>
 
-        <a href="retete.html">Rețete</a>
+        <a href="retete.html">
+          Rețete
+        </a>
 
-        <a href="articole.html">Articole</a>
+        <a href="articole.html">
+          Articole
+        </a>
 
-        <a href="contact.html">Contact</a>
+        <a href="contact.html">
+          Contact
+        </a>
 
       </div>
 
@@ -543,14 +808,19 @@
 
 
 
-  <!-- CONȚINUT -->
+  <!-- ========================================
+       CONȚINUT
+  ======================================== -->
 
   <main>
+
 
     <section>
 
       <div class="container">
 
+
+        <!-- INTRODUCERE -->
 
         <div class="section-heading">
 
@@ -558,21 +828,28 @@
             Portofoliu
           </p>
 
+
           <h2>
             Creații construite<br>
             cu tehnică și identitate.
           </h2>
 
+
           <p>
-            O selecție de proiecte din cofetărie, patiserie,
-            ciocolaterie, panificație și dezvoltare de produse,
-            în care gustul, textura, tehnica și prezentarea
-            sunt construite ca un întreg.
+            O selecție de proiecte din cofetărie,
+            patiserie, ciocolaterie, panificație
+            și dezvoltare de produse, în care gustul,
+            textura, tehnica și prezentarea sunt
+            construite ca un întreg.
           </p>
 
         </div>
 
 
+
+        <!-- ========================================
+             DOMENII
+        ======================================== -->
 
         <div class="cards">
 
@@ -588,9 +865,9 @@
             </h3>
 
             <p>
-              Deserturi și monoporții dezvoltate prin combinații
-              de texturi, arome și tehnici contemporane
-              de cofetărie.
+              Deserturi și monoporții dezvoltate
+              prin combinații de texturi, arome
+              și tehnici contemporane de cofetărie.
             </p>
 
           </article>
@@ -608,9 +885,10 @@
             </h3>
 
             <p>
-              Construcții stratificate în care blaturile,
-              cremele, inserturile și elementele crocante
-              sunt echilibrate într-un produs coerent.
+              Construcții stratificate în care
+              blaturile, cremele, inserturile
+              și elementele crocante sunt echilibrate
+              într-un produs coerent.
             </p>
 
           </article>
@@ -628,8 +906,9 @@
             </h3>
 
             <p>
-              Praline, ganache-uri, inserții și elemente
-              din ciocolată, realizate cu atenție la aromă,
+              Praline, ganache-uri, inserții
+              și elemente din ciocolată,
+              realizate cu atenție la aromă,
               textură și finisaj.
             </p>
 
@@ -648,9 +927,10 @@
             </h3>
 
             <p>
-              Dezvoltarea deserturilor prin procesare
-              sous-vide, cu accent pe controlul temperaturii,
-              textură, siguranță și reproductibilitate.
+              Dezvoltarea deserturilor prin
+              procesare sous-vide, cu accent
+              pe controlul temperaturii, textură,
+              siguranță și reproductibilitate.
             </p>
 
           </article>
@@ -669,8 +949,9 @@
 
             <p>
               Produse fermentate, aluaturi laminate
-              și panificație cu maia, dezvoltate prin
-              controlul fermentației și al structurii aluatului.
+              și panificație cu maia, dezvoltate
+              prin controlul fermentației și
+              al structurii aluatului.
             </p>
 
           </article>
@@ -689,7 +970,8 @@
 
             <p>
               Produse realizate în cadrul cursurilor,
-              workshop-urilor și demonstrațiilor profesionale.
+              workshop-urilor și demonstrațiilor
+              profesionale.
             </p>
 
           </article>
@@ -699,25 +981,250 @@
 
 
 
-        <div class="portfolio-future">
+        <!-- ========================================
+             PROIECTE SELECTATE
+        ======================================== -->
+
+        <div class="selected-projects">
+
 
           <div class="section-heading">
 
             <p class="eyebrow">
-              În dezvoltare
+              Proiecte selectate
             </p>
+
+
+            <h2>
+              Creații care mă reprezintă.
+            </h2>
+
+
+            <p>
+              O selecție de proiecte în care tehnica,
+              gustul, cercetarea și povestea produsului
+              se întâlnesc într-o abordare personală.
+            </p>
+
+          </div>
+
+
+
+          <div class="project-list">
+
+
+            <!-- CAFÉ CARAMEL -->
+
+            <article class="project-card">
+
+              <span class="project-number">
+                01
+              </span>
+
+              <div class="project-content">
+
+                <h3>
+                  Café Caramel Croustilland
+                </h3>
+
+                <p>
+                  Desert modern construit în jurul
+                  cafelei și caramelului, cu accent
+                  pe contrastul dintre texturi,
+                  echilibru aromatic și precizia
+                  construcției.
+                </p>
+
+              </div>
+
+
+              <a
+                class="button button-secondary"
+                href="#"
+              >
+                Vezi proiectul
+              </a>
+
+            </article>
+
+
+
+            <!-- CHEFI DE ROMÂNIA -->
+
+            <article class="project-card">
+
+              <span class="project-number">
+                02
+              </span>
+
+              <div class="project-content">
+
+                <h3>
+                  Chefi de România · Anotimpuri
+                </h3>
+
+                <p>
+                  Proiect de competiție inspirat
+                  de vară, construit în jurul
+                  notelor florale și fructate,
+                  cu o poveste inspirată de
+                  parfumul Mon Boudoir și
+                  de universul Reginei Maria.
+                </p>
+
+              </div>
+
+
+              <a
+                class="button button-secondary"
+                href="#"
+              >
+                Descoperă proiectul
+              </a>
+
+            </article>
+
+
+
+            <!-- SOUS-VIDE -->
+
+            <article class="project-card">
+
+              <span class="project-number">
+                03
+              </span>
+
+              <div class="project-content">
+
+                <h3>
+                  Sous-vide Desserts
+                </h3>
+
+                <p>
+                  Proiect de cercetare și dezvoltare
+                  dedicat deserturilor procesate
+                  sous-vide, cu accent pe controlul
+                  temperaturii, textură, stabilitate,
+                  siguranță și reproductibilitate.
+                </p>
+
+              </div>
+
+
+              <a
+                class="button button-secondary"
+                href="#"
+              >
+                Vezi proiectul
+              </a>
+
+            </article>
+
+
+
+            <!-- PANIFICAȚIE -->
+
+            <article class="project-card">
+
+              <span class="project-number">
+                04
+              </span>
+
+              <div class="project-content">
+
+                <h3>
+                  Panificație & patiserie artizanală
+                </h3>
+
+                <p>
+                  Produse dezvoltate prin fermentație
+                  controlată, lucrul cu maia,
+                  aluaturi laminate și tehnici
+                  de patiserie care pun accent
+                  pe structură, aromă și precizie.
+                </p>
+
+              </div>
+
+
+              <a
+                class="button button-secondary"
+                href="#"
+              >
+                Vezi proiectul
+              </a>
+
+            </article>
+
+
+
+            <!-- EDUCAȚIE -->
+
+            <article class="project-card">
+
+              <span class="project-number">
+                05
+              </span>
+
+              <div class="project-content">
+
+                <h3>
+                  Cursuri & workshop-uri
+                </h3>
+
+                <p>
+                  Proiecte educaționale,
+                  demonstrații și produse dezvoltate
+                  în cadrul cursurilor și workshop-urilor
+                  de cofetărie, patiserie,
+                  panificație și tehnici moderne.
+                </p>
+
+              </div>
+
+
+              <a
+                class="button button-secondary"
+                href="#"
+              >
+                Descoperă proiectele
+              </a>
+
+            </article>
+
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+             FILOSOFIE PORTOFOLIU
+        ======================================== -->
+
+        <div class="portfolio-philosophy">
+
+          <div class="section-heading">
+
+            <p class="eyebrow">
+              Dincolo de produs
+            </p>
+
 
             <h2>
               Fiecare produs are<br>
               o poveste proprie.
             </h2>
 
+
             <p>
-              În etapa următoare, fiecare categorie va primi
-              propriile fotografii, denumiri de produse și
-              proiecte selectate, astfel încât portofoliul
-              să reflecte atât stilul meu vizual,
-              cât și abordarea tehnică.
+              De la idee și selecția aromelor
+              până la construcția texturilor
+              și prezentarea finală, fiecare
+              proiect este rezultatul unui proces
+              în care tehnica și creativitatea
+              lucrează împreună.
             </p>
 
           </div>
@@ -729,11 +1236,14 @@
 
     </section>
 
+
   </main>
 
 
 
-  <!-- FOOTER -->
+  <!-- ========================================
+       FOOTER
+  ======================================== -->
 
   <footer>
 
@@ -753,7 +1263,9 @@
 
 
 
-  <!-- MENIU MOBIL -->
+  <!-- ========================================
+       MENIU MOBIL
+  ======================================== -->
 
   <script>
 
