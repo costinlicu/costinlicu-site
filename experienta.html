@@ -31,7 +31,7 @@
 
   <meta
     property="og:description"
-    content="Parcurs profesional construit între producție, pastry, educație și industria alimentară."
+    content="Un parcurs profesional construit între hotelărie, producție, cofetărie, educație și industria alimentară."
   >
 
   <meta name="theme-color" content="#16120f">
@@ -71,7 +71,12 @@
         var(--background);
 
       color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
       line-height: 1.6;
     }
 
@@ -81,36 +86,59 @@
     }
 
     .container {
-      width: min(calc(100% - 40px), var(--max-width));
+      width:
+        min(
+          calc(100% - 40px),
+          var(--max-width)
+        );
+
       margin: 0 auto;
     }
 
 
-    /* HEADER */
+    /* ========================================
+       HEADER
+    ======================================== */
 
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid var(--border);
-      background: rgba(14, 12, 10, 0.92);
-      backdrop-filter: blur(14px);
+
+      border-bottom:
+        1px solid var(--border);
+
+      background:
+        rgba(14, 12, 10, 0.92);
+
+      backdrop-filter:
+        blur(14px);
     }
 
     nav {
       position: relative;
+
       min-height: 76px;
+
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       align-items: center;
+
       gap: 24px;
     }
 
     .logo {
       font-size: 1.15rem;
+
       font-weight: 700;
+
       letter-spacing: 0.08em;
+
       text-transform: uppercase;
+
       white-space: nowrap;
     }
 
@@ -120,9 +148,13 @@
 
     .nav-links {
       display: flex;
+
       align-items: center;
+
       gap: 28px;
+
       color: var(--muted);
+
       font-size: 0.95rem;
     }
 
@@ -136,16 +168,24 @@
 
     .menu-toggle {
       display: none;
+
       background: transparent;
+
       border: 0;
+
       color: var(--text);
+
       font-size: 1.8rem;
+
       line-height: 1;
+
       cursor: pointer;
     }
 
 
-    /* SECȚIUNI */
+    /* ========================================
+       SECȚIUNI
+    ======================================== */
 
     section {
       padding: 90px 0;
@@ -153,45 +193,169 @@
 
     .section-heading {
       max-width: 760px;
+
       margin-bottom: 48px;
     }
 
     .section-heading h2 {
       margin-bottom: 16px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.8rem, 3vw, 2.7rem);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          1.8rem,
+          3vw,
+          2.7rem
+        );
+
       font-weight: 400;
+
       line-height: 1.08;
     }
 
     .section-heading p {
       color: var(--muted);
+
       font-size: 1.08rem;
+    }
+
+    .section-heading p + p {
+      margin-top: 20px;
     }
 
     .eyebrow {
       margin-bottom: 20px !important;
-      color: var(--accent-light) !important;
-      font-size: 0.8rem !important;
+
+      color:
+        var(--accent-light) !important;
+
+      font-size:
+        0.8rem !important;
+
       font-weight: 700;
+
       letter-spacing: 0.19em;
+
       text-transform: uppercase;
     }
 
 
-    /* CARDURI */
+    /* ========================================
+       EXPERIENȚĂ CRONOLOGICĂ
+    ======================================== */
 
-    .cards {
+    .experience-list {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      gap: 18px;
     }
 
-    .service-card {
-      min-height: 300px;
-      padding: 30px;
-      border: 1px solid var(--border);
+    .experience-card {
+      display: grid;
+
+      grid-template-columns:
+        110px 1fr;
+
+      gap: 28px;
+
+      align-items: start;
+
+      padding: 32px;
+
+      border:
+        1px solid var(--border);
+
       border-radius: 22px;
+
+      background:
+        linear-gradient(
+          145deg,
+          var(--surface-light),
+          var(--surface)
+        );
+
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .experience-card:hover {
+      transform:
+        translateY(-3px);
+
+      border-color:
+        rgba(215, 164, 91, 0.35);
+    }
+
+    .experience-number {
+      color: var(--accent);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 2rem;
+    }
+
+    .experience-content h3 {
+      margin-bottom: 5px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 1.45rem;
+
+      font-weight: 400;
+
+      line-height: 1.2;
+    }
+
+    .experience-role {
+      margin-bottom: 12px;
+
+      color: var(--accent-light);
+
+      font-size: 0.95rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.03em;
+    }
+
+    .experience-content p {
+      max-width: 800px;
+
+      color: var(--muted);
+    }
+
+
+    /* ========================================
+       FORMATOR
+    ======================================== */
+
+    .trainer-section {
+      margin-top: 100px;
+
+      padding-top: 75px;
+
+      border-top:
+        1px solid var(--border);
+    }
+
+    .trainer-card {
+      padding: 36px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 24px;
+
       background:
         linear-gradient(
           145deg,
@@ -200,53 +364,128 @@
         );
     }
 
-    .number {
-      display: block;
-      margin-bottom: 26px;
-      color: var(--accent);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 2rem;
-    }
+    .trainer-card h3 {
+      margin-bottom: 10px;
 
-    .service-card h3 {
-      margin-bottom: 12px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.45rem;
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 1.55rem;
+
       font-weight: 400;
-      line-height: 1.2;
     }
 
-    .service-card p {
+    .trainer-card p {
+      max-width: 850px;
+
+      color: var(--muted);
+    }
+
+    .trainer-card p + p {
+      margin-top: 18px;
+    }
+
+
+    /* ========================================
+       COMPETIȚII & PROIECTE
+    ======================================== */
+
+    .projects-section {
+      margin-top: 100px;
+
+      padding-top: 75px;
+
+      border-top:
+        1px solid var(--border);
+    }
+
+    .projects-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 22px;
+    }
+
+    .project-card {
+      padding: 30px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          145deg,
+          var(--surface-light),
+          var(--surface)
+        );
+    }
+
+    .project-card h3 {
+      margin-bottom: 12px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 1.4rem;
+
+      font-weight: 400;
+    }
+
+    .project-card p {
       color: var(--muted);
     }
 
 
-    /* ABORDARE PROFESIONALĂ */
+    /* ========================================
+       ABORDARE PROFESIONALĂ
+    ======================================== */
 
-    .approach {
-      margin-top: 90px;
-      padding-top: 70px;
-      border-top: 1px solid var(--border);
+    .approach-section {
+      margin-top: 100px;
+
+      padding-top: 75px;
+
+      border-top:
+        1px solid var(--border);
     }
 
 
-    /* FOOTER */
+    /* ========================================
+       FOOTER
+    ======================================== */
 
     footer {
       padding: 30px 0;
-      border-top: 1px solid var(--border);
+
+      border-top:
+        1px solid var(--border);
+
       color: var(--muted);
+
       font-size: 0.9rem;
     }
 
     .footer-content {
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       gap: 20px;
     }
 
 
-    /* TABLETĂ / MOBIL */
+    /* ========================================
+       TABLETĂ / MOBIL
+    ======================================== */
 
     @media (max-width: 850px) {
 
@@ -256,16 +495,30 @@
 
       .nav-links {
         display: none;
+
         position: absolute;
+
         top: 76px;
+
         left: -20px;
+
         right: -20px;
+
         flex-direction: column;
+
         align-items: flex-start;
+
         gap: 0;
-        padding: 10px 20px 20px;
-        border-bottom: 1px solid var(--border);
-        background: rgba(14, 12, 10, 0.99);
+
+        padding:
+          10px 20px 20px;
+
+        border-bottom:
+          1px solid var(--border);
+
+        background:
+          rgba(14, 12, 10, 0.99);
+
         box-shadow:
           0 25px 60px
           rgba(0, 0, 0, 0.4);
@@ -277,21 +530,27 @@
 
       .nav-links a {
         width: 100%;
+
         padding: 14px 0;
+
         border-bottom:
-          1px solid rgba(255,255,255,0.07);
+          1px solid
+          rgba(255,255,255,0.07);
       }
 
       .nav-links a:last-child {
         border-bottom: 0;
       }
 
-      .cards {
-        grid-template-columns: 1fr;
+      .experience-card {
+        grid-template-columns:
+          80px 1fr;
+
+        gap: 20px;
       }
 
-      .service-card {
-        min-height: auto;
+      .projects-grid {
+        grid-template-columns: 1fr;
       }
 
       .footer-content {
@@ -301,12 +560,18 @@
     }
 
 
-    /* TELEFOANE MICI */
+    /* ========================================
+       TELEFOANE MICI
+    ======================================== */
 
     @media (max-width: 600px) {
 
       .container {
-        width: min(calc(100% - 30px), var(--max-width));
+        width:
+          min(
+            calc(100% - 30px),
+            var(--max-width)
+          );
       }
 
       nav {
@@ -330,29 +595,45 @@
       }
 
       .section-heading h2 {
-        font-size: clamp(1.7rem, 8vw, 2.2rem);
+        font-size:
+          clamp(
+            1.7rem,
+            8vw,
+            2.2rem
+          );
       }
 
       .section-heading p {
         font-size: 1rem;
       }
 
-      .service-card {
+      .experience-card {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
         padding: 24px;
       }
 
-      .number {
-        margin-bottom: 18px;
-        font-size: 1.8rem;
+      .experience-number {
+        font-size: 1.6rem;
       }
 
-      .service-card h3 {
+      .experience-content h3 {
         font-size: 1.3rem;
       }
 
-      .approach {
-        margin-top: 65px;
+      .trainer-section,
+      .projects-section,
+      .approach-section {
+        margin-top: 70px;
+
         padding-top: 55px;
+      }
+
+      .trainer-card,
+      .project-card {
+        padding: 24px;
       }
 
     }
@@ -370,13 +651,6 @@
       "Pastry Chef",
       "Formator",
       "Inginer în industria alimentară"
-    ],
-    "knowsAbout": [
-      "Cofetărie",
-      "Patiserie",
-      "Panificație",
-      "Tehnologia alimentelor",
-      "Siguranța alimentelor"
     ]
   }
   </script>
@@ -387,7 +661,9 @@
 <body>
 
 
-  <!-- HEADER -->
+  <!-- ========================================
+       HEADER
+  ======================================== -->
 
   <header>
 
@@ -403,6 +679,7 @@
         Costin <span>Licu</span>
       </a>
 
+
       <button
         class="menu-toggle"
         type="button"
@@ -412,15 +689,36 @@
         ☰
       </button>
 
+
       <div class="nav-links">
 
-        <a href="index.html">Acasă</a>
-        <a href="despre.html">Despre</a>
-        <a href="portofoliu.html">Portofoliu</a>
-        <a href="experienta.html">Experiență</a>
-        <a href="retete.html">Rețete</a>
-        <a href="articole.html">Articole</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html">
+          Acasă
+        </a>
+
+        <a href="despre.html">
+          Despre
+        </a>
+
+        <a href="portofoliu.html">
+          Portofoliu
+        </a>
+
+        <a href="experienta.html">
+          Experiență
+        </a>
+
+        <a href="retete.html">
+          Rețete
+        </a>
+
+        <a href="articole.html">
+          Articole
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
 
       </div>
 
@@ -430,9 +728,12 @@
 
 
 
-  <!-- CONȚINUT -->
-
   <main>
+
+
+    <!-- ========================================
+         INTRODUCERE
+    ======================================== -->
 
     <section>
 
@@ -445,130 +746,209 @@
             Experiență
           </p>
 
+
           <h2>
-            Experiență construită<br>
-            între producție și educație.
+            Un parcurs construit<br>
+            prin practică și evoluție.
           </h2>
 
+
           <p>
-            Parcursul meu profesional reunește experiența practică
-            din cofetărie și patiserie, activitatea de formator
-            și pregătirea academică în industria alimentară.
+            Experiența mea profesională s-a format în medii diferite:
+            hotelărie, restaurante, catering, cofetărie, patiserie
+            și educație. Fiecare etapă a contribuit la disciplina,
+            precizia și modul în care privesc astăzi această profesie.
+          </p>
+
+          <p>
+            De la primele experiențe în bucătăria profesională
+            până la activitatea actuală de Pastry Chef și formator,
+            am urmărit constant să înțeleg mai bine produsul,
+            procesul și oamenii cu care lucrez.
           </p>
 
         </div>
 
 
 
-        <div class="cards">
+        <!-- ========================================
+             EXPERIENȚĂ PROFESIONALĂ
+        ======================================== -->
+
+        <div class="experience-list">
 
 
-          <article class="service-card">
+          <article class="experience-card">
 
-            <span class="number">01</span>
+            <span class="experience-number">
+              01
+            </span>
 
-            <h3>
-              InterContinental Athénée Palace Bucharest
-            </h3>
+            <div class="experience-content">
 
-            <p>
-              Activitate profesională în cadrul departamentului
-              de pastry, într-un mediu hotelier premium,
-              cu accent pe organizare, consistență, precizie
-              și standarde ridicate de execuție.
-            </p>
+              <h3>
+                JW Marriott Bucharest Grand Hotel
+              </h3>
 
-          </article>
+              <div class="experience-role">
+                Experiență hotelieră · Gastronomie
+              </div>
 
+              <p>
+                Una dintre primele experiențe profesionale importante,
+                într-un mediu hotelier de nivel înalt, unde am început
+                să înțeleg disciplina, organizarea, lucrul în echipă
+                și standardele bucătăriei profesionale.
+              </p>
 
-
-          <article class="service-card">
-
-            <span class="number">02</span>
-
-            <h3>
-              Atelierele ILBAH
-            </h3>
-
-            <p>
-              Activitate de formator în cofetărie și patiserie,
-              cu experiență în pregătirea cursanților,
-              demonstrații practice și dezvoltarea
-              competențelor profesionale.
-            </p>
+            </div>
 
           </article>
 
 
 
-          <article class="service-card">
+          <article class="experience-card">
 
-            <span class="number">03</span>
+            <span class="experience-number">
+              02
+            </span>
 
-            <h3>
-              Catering & producție
-            </h3>
+            <div class="experience-content">
 
-            <p>
-              Experiență în producție de cofetărie și patiserie
-              pentru evenimente, cu accent pe organizarea
-              fluxului de lucru, producție în volum și
-              respectarea standardelor de calitate.
-            </p>
+              <h3>
+                Athénée Palace Hilton
+              </h3>
 
-          </article>
+              <div class="experience-role">
+                Gastronomie · Mediu hotelier premium
+              </div>
 
+              <p>
+                O etapă importantă în formarea mea profesională,
+                în care am continuat să dezvolt tehnica,
+                disciplina de lucru și capacitatea de a funcționa
+                într-un mediu în care precizia și constanța
+                sunt esențiale.
+              </p>
 
-
-          <article class="service-card">
-
-            <span class="number">04</span>
-
-            <h3>
-              Workshop-uri
-            </h3>
-
-            <p>
-              Susțin workshop-uri tematice dedicate cofetăriei,
-              patiseriei, panificației și tehnicilor moderne,
-              cu accent pe aplicabilitate și înțelegerea proceselor.
-            </p>
+            </div>
 
           </article>
 
 
 
-          <article class="service-card">
+          <article class="experience-card">
 
-            <span class="number">05</span>
+            <span class="experience-number">
+              03
+            </span>
 
-            <h3>
-              Competiții & proiecte
-            </h3>
+            <div class="experience-content">
 
-            <p>
-              Participare la competiții și proiecte gastronomice
-              în care creativitatea, povestea produsului
-              și execuția tehnică funcționează împreună.
-            </p>
+              <h3>
+                Vasia Hotel & Spa · Grecia
+              </h3>
+
+              <div class="experience-role">
+                Experiență internațională
+              </div>
+
+              <p>
+                Experiența într-un hotel de cinci stele din Grecia
+                mi-a oferit contactul cu un mediu internațional,
+                alte ritmuri de lucru și o perspectivă diferită
+                asupra organizării și gastronomiei profesionale.
+              </p>
+
+            </div>
 
           </article>
 
 
 
-          <article class="service-card">
+          <article class="experience-card">
 
-            <span class="number">06</span>
+            <span class="experience-number">
+              04
+            </span>
 
-            <h3>
-              Ingineria produselor alimentare
-            </h3>
+            <div class="experience-content">
 
-            <p>
-              Pregătire academică în domeniul industriei alimentare,
-              completată prin studii de master orientate către
-              calitatea și siguranța alimentelor.
-            </p>
+              <h3>
+                Wien Event & Royal Horse
+              </h3>
+
+              <div class="experience-role">
+                Gastronomie · Producție · Evenimente
+              </div>
+
+              <p>
+                O perioadă în care experiența mea s-a extins
+                către organizarea producției, coordonarea fluxului
+                de lucru și adaptarea la cerințele specifice
+                evenimentelor și serviciilor gastronomice.
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <article class="experience-card">
+
+            <span class="experience-number">
+              05
+            </span>
+
+            <div class="experience-content">
+
+              <h3>
+                Premier Catering & Event
+              </h3>
+
+              <div class="experience-role">
+                Chef de Partie Cofetar–Patiser
+              </div>
+
+              <p>
+                Activitate concentrată pe producția de cofetărie
+                și patiserie pentru catering și evenimente,
+                cu accent pe organizare, producție în volum,
+                constanță și respectarea standardelor de calitate.
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <article class="experience-card">
+
+            <span class="experience-number">
+              06
+            </span>
+
+            <div class="experience-content">
+
+              <h3>
+                InterContinental Athénée Palace Bucharest
+              </h3>
+
+              <div class="experience-role">
+                Chef de Partie Pastry
+              </div>
+
+              <p>
+                Activitate profesională în cadrul departamentului
+                de pastry, într-un mediu hotelier premium,
+                cu accent pe precizie, consistență, organizarea
+                producției, dezvoltarea produselor și respectarea
+                unor standarde ridicate de execuție.
+              </p>
+
+            </div>
 
           </article>
 
@@ -577,7 +957,178 @@
 
 
 
-        <div class="approach">
+        <!-- ========================================
+             FORMATOR
+        ======================================== -->
+
+        <div class="trainer-section">
+
+
+          <div class="section-heading">
+
+            <p class="eyebrow">
+              Educație prin practică
+            </p>
+
+
+            <h2>
+              De la execuție<br>
+              la formare.
+            </h2>
+
+
+            <p>
+              Experiența acumulată în producție și mediul profesional
+              a devenit, în timp, baza activității mele de formator.
+            </p>
+
+          </div>
+
+
+          <div class="trainer-card">
+
+            <h3>
+              Atelierele ILBAH
+            </h3>
+
+            <div class="experience-role">
+              Formator Cofetar–Patiser
+            </div>
+
+            <p>
+              Activitatea de formator mi-a oferit o perspectivă nouă
+              asupra profesiei. Nu este suficient să știi să execuți
+              corect un produs; trebuie să poți explica procesul,
+              să identifici greșelile și să transformi experiența
+              practică în informație clară și aplicabilă.
+            </p>
+
+            <p>
+              În cadrul cursurilor și workshop-urilor urmăresc să construiesc
+              o legătură între tehnica de execuție și înțelegerea proceselor,
+              astfel încât cursanții să nu reproducă doar o rețetă,
+              ci să înțeleagă de ce funcționează.
+            </p>
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ========================================
+             COMPETIȚII & PROIECTE
+        ======================================== -->
+
+        <div class="projects-section">
+
+
+          <div class="section-heading">
+
+            <p class="eyebrow">
+              Competiții & proiecte
+            </p>
+
+
+            <h2>
+              Contextul în care<br>
+              ideile sunt testate.
+            </h2>
+
+
+            <p>
+              Competițiile și proiectele profesionale reprezintă
+              pentru mine contexte în care creativitatea,
+              tehnica și capacitatea de a construi o poveste
+              trebuie să funcționeze împreună.
+            </p>
+
+          </div>
+
+
+
+          <div class="projects-grid">
+
+
+            <article class="project-card">
+
+              <h3>
+                Chefi de România
+              </h3>
+
+              <p>
+                Participări în competiții profesionale dedicate
+                cofetăriei și patiseriei, cu proiecte dezvoltate
+                în jurul conceptului, execuției tehnice
+                și identității produsului.
+              </p>
+
+            </article>
+
+
+
+            <article class="project-card">
+
+              <h3>
+                Proiecte internaționale
+              </h3>
+
+              <p>
+                Participări la proiecte și schimburi de experiență
+                în contexte internaționale, inclusiv în Italia,
+                Turcia și Grecia, care au contribuit la dezvoltarea
+                perspectivei mele asupra gastronomiei.
+              </p>
+
+            </article>
+
+
+
+            <article class="project-card">
+
+              <h3>
+                Workshop-uri
+              </h3>
+
+              <p>
+                Dezvoltarea și susținerea de workshop-uri dedicate
+                cofetăriei, patiseriei, panificației și tehnicilor moderne,
+                cu accent pe aplicabilitate și înțelegerea proceselor.
+              </p>
+
+            </article>
+
+
+
+            <article class="project-card">
+
+              <h3>
+                Dezvoltare de produs
+              </h3>
+
+              <p>
+                Construcția și testarea de produse în care gustul,
+                textura, tehnica, stabilitatea și reproductibilitatea
+                trebuie analizate ca un sistem unitar.
+              </p>
+
+            </article>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ========================================
+             ABORDARE PROFESIONALĂ
+        ======================================== -->
+
+        <div class="approach-section">
+
 
           <div class="section-heading">
 
@@ -585,19 +1136,28 @@
               Abordare profesională
             </p>
 
+
             <h2>
               Tehnică, disciplină<br>
               și dezvoltare continuă.
             </h2>
 
+
             <p>
-              Experiența din producție, educație și tehnologia
-              alimentelor mi-a format o abordare bazată pe rigoare,
-              adaptabilitate și înțelegerea completă a produsului,
-              de la ingredient și proces până la prezentarea finală.
+              Experiența practică, activitatea de formator
+              și pregătirea în ingineria produselor alimentare
+              se întâlnesc astăzi într-o singură abordare.
+            </p>
+
+            <p>
+              Pentru mine, un produs bine construit trebuie să fie
+              nu doar atractiv vizual, ci și echilibrat, corect tehnic,
+              stabil, reproductibil și adaptat contextului
+              în care urmează să fie realizat.
             </p>
 
           </div>
+
 
         </div>
 
@@ -606,11 +1166,14 @@
 
     </section>
 
+
   </main>
 
 
 
-  <!-- FOOTER -->
+  <!-- ========================================
+       FOOTER
+  ======================================== -->
 
   <footer>
 
@@ -630,7 +1193,9 @@
 
 
 
-  <!-- MENIU MOBIL -->
+  <!-- ========================================
+       MENIU MOBIL
+  ======================================== -->
 
   <script>
 
@@ -639,6 +1204,7 @@
 
     const navLinks =
       document.querySelector(".nav-links");
+
 
     menuToggle.addEventListener(
       "click",
@@ -657,6 +1223,7 @@
 
       }
     );
+
 
     navLinks
       .querySelectorAll("a")
