@@ -1,1 +1,511 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Costin Licu — Pastry Chef, formator și inginer</title>
+
+  <meta
+    name="description"
+    content="Site-ul oficial al lui Costin Licu — Pastry Chef, formator și inginer în industria alimentară. Portofoliu, cursuri, workshop-uri și proiecte gastronomice."
+  >
+
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://costinlicu.ro/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ro_RO">
+  <meta property="og:url" content="https://costinlicu.ro/">
+  <meta property="og:title" content="Costin Licu — Pastry Chef și formator">
+  <meta
+    property="og:description"
+    content="Creație, tehnică și educație în cofetărie și patiserie."
+  >
+
+  <meta name="theme-color" content="#16120f">
+
+  <style>
+    :root {
+      --background: #0e0c0a;
+      --surface: #181410;
+      --surface-light: #211b16;
+      --text: #f7f1e8;
+      --muted: #c8bbae;
+      --accent: #d7a45b;
+      --accent-light: #f0cf94;
+      --border: rgba(255, 255, 255, 0.11);
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 75% 10%, rgba(215, 164, 91, 0.12), transparent 28rem),
+        var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--border);
+      background: rgba(14, 12, 10, 0.86);
+      backdrop-filter: blur(14px);
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-light);
+    }
+
+    .hero {
+      min-height: calc(100vh - 76px);
+      display: grid;
+      align-items: center;
+      padding: 90px 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .eyebrow {
+      color: var(--accent-light);
+      font-size: 0.83rem;
+      font-weight: 700;
+      letter-spacing: 0.19em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      max-width: 850px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.4rem, 8vw, 7.3rem);
+      font-weight: 400;
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .hero-description {
+      max-width: 700px;
+      margin: 30px 0 38px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 52px;
+      padding: 0 25px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: #17110b;
+    }
+
+    .button-primary:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+
+    .button-secondary {
+      color: var(--text);
+    }
+
+    .button-secondary:hover {
+      background: rgba(215, 164, 91, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+    position: relative;
+    overflow: hidden;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    background: #1b1714;
+    box-shadow: 0 35px 100px rgba(0,0,0,.35);
+}
+
+    .hero-photo{
+    width:100%;
+    height:auto;
+    object-fit:cover;
+    display:block;
+}
+
+.hero-quote{
+    position:absolute;
+   left:45px;
+   right:40px;
+    bottom:55;
+    padding: 40px 30px 24px;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.95),
+        rgba(0,0,0,.55),
+        transparent
+    );
+}
+    position:absolute;
+    left:34px;
+    right:34px;
+    bottom:30px;
+    color:var(--accent-light);
+    text-shadow:0 2px 12px rgba(0,0,0,.8);
+}
+
+.hero-quote p{
+    color:#ffffff;
+text-shadow:none;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size: 2.2rem;
+font-weight: 500;
+    font-style:italic;
+    line-height:1.3;
+    margin:0;
+}
+
+.hero-quote span{
+    display:block;
+    margin-top:12px;
+    font-size:.9rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    opacity:.85;
+}
+
+    section {
+      padding: 105px 0;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 48px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.5rem, 5vw, 4.4rem);
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .about-grid,
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .about-card,
+    .service-card {
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(145deg, var(--surface-light), var(--surface));
+    }
+
+    .number {
+      display: block;
+      margin-bottom: 28px;
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2.5rem;
+    }
+
+    .about-card h3,
+    .service-card h3 {
+      margin-bottom: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    .about-card p,
+    .service-card p {
+      color: var(--muted);
+    }
+
+    .portfolio {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.018);
+    }
+
+    .portfolio-placeholder {
+      min-height: 420px;
+      display: grid;
+      place-items: center;
+      padding: 40px;
+      border: 1px dashed rgba(215, 164, 91, 0.5);
+      border-radius: 28px;
+      text-align: center;
+      background:
+        radial-gradient(circle, rgba(215, 164, 91, 0.12), transparent 60%);
+    }
+
+    .portfolio-placeholder strong {
+      display: block;
+      margin-bottom: 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+    }
+
+    .portfolio-placeholder p {
+      max-width: 600px;
+      color: var(--muted);
+    }
+
+    .contact {
+      text-align: center;
+    }
+
+    .contact .section-heading {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    @media (max-width: 850px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-card {
+        min-height: 370px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Costin Licu",
+    "url": "https://costinlicu.ro/",
+    "jobTitle": [
+      "Pastry Chef",
+      "Formator",
+      "Inginer în industria alimentară"
+    ],
+    "knowsAbout": [
+      "Cofetărie",
+      "Patiserie",
+      "Panificație",
+      "Tehnologia alimentelor",
+      "Siguranța alimentelor"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <header>
+    <nav class="container" aria-label="Navigare principală">
+     <a class="logo" href="index.html">Costin <span>Licu</span></a>
+      <div class="nav-links">
+    <a href="index.html">Acasă</a>
+    <a href="despre.html">Despre</a>
+    <a href="portofoliu.html">Portofoliu</a>
+    <a href="experienta.html">Experiență</a>
+    <a href="contact.html">Contact</a>
+</div>
+    </nav>
+  </header>
+
+  <main>
+  <main>
+
+  <section class="contact">
+    <div class="container">
+
+      <div class="section-heading">
+        <p class="eyebrow">Contact</p>
+
+        <h2>
+          Să construim ceva<br>
+          memorabil.
+        </h2>
+
+        <p>
+          Pentru colaborări profesionale, workshop-uri, cursuri,
+          proiecte gastronomice sau alte propuneri, îmi poți scrie
+          direct pe e-mail.
+        </p>
+      </div>
+
+      <div class="cards">
+
+        <article class="service-card">
+          <span class="number">01</span>
+          <h3>E-mail</h3>
+          <p>
+            Pentru colaborări și solicitări profesionale:
+          </p>
+
+          <div style="margin-top: 25px;">
+            <a
+              class="button button-primary"
+              href="mailto:contact@costinlicu.ro"
+            >
+              contact@costinlicu.ro
+            </a>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <span class="number">02</span>
+          <h3>Colaborări</h3>
+          <p>
+            Sunt deschis proiectelor din zona de cofetărie și patiserie,
+            dezvoltării de produse, evenimentelor gastronomice și
+            colaborărilor profesionale.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <span class="number">03</span>
+          <h3>Cursuri & workshop-uri</h3>
+          <p>
+            Pentru propuneri de cursuri, workshop-uri, demonstrații
+            sau proiecte educaționale, mă poți contacta pentru
+            a discuta formatul și conceptul potrivit.
+          </p>
+        </article>
+
+      </div>
+
+      <div class="section-heading" style="margin-top: 90px;">
+        <p class="eyebrow">Conectează-te</p>
+
+        <h2>
+          Urmărește proiectele<br>
+          și creațiile mele.
+        </h2>
+
+        <p>
+          Aici vom adăuga ulterior accesul către rețelele mele profesionale
+          și platformele pe care public proiecte, deserturi, cursuri
+          și momente din activitatea profesională.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <p>© 2026 Costin Licu. Toate drepturile rezervate.</p>
+      <p>Pastry Chef · Formator · Inginer în industria alimentară</p>
+    </div>
+  </footer>
+</body>
+</html>
