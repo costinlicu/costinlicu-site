@@ -570,10 +570,35 @@ font-weight: 500;
   </div>
 
 </div>
+    .menu-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  color: var(--text);
+  font-size: 1.8rem;
+  cursor: pointer;
+}
     @media (max-width: 850px) {
-      .nav-links {
-        display: none;
-      }
+      .menu-toggle {
+  display: block;
+}
+
+.nav-links {
+  display: none;
+  position: absolute;
+  top: 76px;
+  left: 0;
+  right: 0;
+  padding: 24px 20px;
+  background: rgba(14, 12, 10, 0.98);
+  border-bottom: 1px solid var(--border);
+  flex-direction: column;
+  gap: 18px;
+}
+
+.nav-links.active {
+  display: flex;
+}
 
       .hero-grid,
       .about-grid,
@@ -621,6 +646,9 @@ font-weight: 500;
   <header>
     <nav class="container" aria-label="Navigare principală">
      <a class="logo" href="index.html">Costin <span>Licu</span></a>
+     <button class="menu-toggle" aria-label="Deschide meniul">
+  ☰
+</button>
       <div class="nav-links">
     <a href="index.html">Acasă</a>
     <a href="despre.html">Despre</a>
@@ -1033,5 +1061,13 @@ font-weight: 500;
       <p>Pastry Chef · Formator · Inginer în industria alimentară</p>
     </div>
   </footer>
+  <script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
 </body>
 </html>
