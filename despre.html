@@ -282,7 +282,7 @@
 
 
     .section-heading h1,
-.section-heading h2 {
+    .section-heading h2 {
 
       margin-bottom: 16px;
 
@@ -412,6 +412,32 @@
     .service-card p {
 
       color: var(--muted);
+
+    }
+
+
+    .about-link {
+
+      color: var(--accent-light);
+
+      font-weight: 700;
+
+      text-decoration: underline;
+
+      text-decoration-color: rgba(240, 207, 148, 0.45);
+
+      text-underline-offset: 3px;
+
+      transition: 0.2s ease;
+
+    }
+
+
+    .about-link:hover {
+
+      color: var(--text);
+
+      text-decoration-color: var(--accent-light);
 
     }
 
@@ -756,7 +782,7 @@
 
 
       .section-heading h1,
-.section-heading h2 {
+      .section-heading h2 {
 
         font-size:
           clamp(
@@ -857,12 +883,18 @@
     "Siguranța alimentelor",
     "Sous-vide"
   ],
+  "affiliation": {
+    "@type": "Organization",
+    "name": "Atelierele ILBAH",
+    "url": "https://www.ateliereleilbah.ro/"
+  },
   "sameAs": [
     "https://www.instagram.com/costinlicu/",
     "https://www.facebook.com/chefcostinlicu"
   ]
 }
 </script>
+
 </head>
 
 
@@ -1028,10 +1060,16 @@
             </h3>
 
             <p>
-              Predau cofetărie și patiserie, transformând experiența
-              din laborator în tehnici clare și aplicabile.
-              Pentru mine, educația înseamnă să explic nu doar
-              cum se execută un produs, ci și de ce funcționează.
+              Predau cofetărie și patiserie în cadrul
+              <a
+                class="about-link"
+                href="/experienta/atelierele-ilbah/"
+              >
+                Atelierele ILBAH
+              </a>,
+              transformând experiența din laborator în tehnici clare
+              și aplicabile. Pentru mine, educația înseamnă să explic
+              nu doar cum se execută un produs, ci și de ce funcționează.
             </p>
 
           </article>
