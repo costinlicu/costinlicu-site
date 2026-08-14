@@ -28,7 +28,9 @@
   <!-- OPEN GRAPH -->
 
   <meta property="og:type" content="article">
+
   <meta property="og:locale" content="ro_RO">
+
   <meta property="og:site_name" content="Costin Licu">
 
   <meta
@@ -46,10 +48,23 @@
     content="Madeleine cu unt noisette, vanilie și lămâie: formulă profesională, proces tehnologic și tehnica pentru o cocoașă bine dezvoltată."
   >
 
+  <meta
+    property="og:image"
+    content="https://costinlicu.ro/images/madeleine-unt-noisette.webp"
+  >
 
-  <!-- TWITTER / SOCIAL -->
+  <meta
+    property="og:image:alt"
+    content="Madeleine cu unt noisette și glazură fină de lămâie"
+  >
 
-  <meta name="twitter:card" content="summary">
+
+  <!-- TWITTER -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
 
   <meta
     name="twitter:title"
@@ -59,6 +74,11 @@
   <meta
     name="twitter:description"
     content="Rețetă profesională de madeleine cu beurre noisette, vanilie, lămâie și glazură fină."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://costinlicu.ro/images/madeleine-unt-noisette.webp"
   >
 
   <meta name="theme-color" content="#16120f">
@@ -99,7 +119,12 @@
         var(--background);
 
       color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
       line-height: 1.7;
     }
 
@@ -109,29 +134,31 @@
     }
 
     .container {
-      width: min(
-        calc(100% - 40px),
-        var(--max-width)
-      );
+      width:
+        min(
+          calc(100% - 40px),
+          var(--max-width)
+        );
 
       margin: 0 auto;
     }
 
 
-    /* ========================================
-       HEADER
-    ======================================== */
+    /* HEADER */
 
     body > header {
       position: sticky;
       top: 0;
       z-index: 100;
 
-      border-bottom: 1px solid var(--border);
+      border-bottom:
+        1px solid var(--border);
 
-      background: rgba(14, 12, 10, 0.92);
+      background:
+        rgba(14, 12, 10, 0.92);
 
-      backdrop-filter: blur(14px);
+      backdrop-filter:
+        blur(14px);
     }
 
     nav {
@@ -140,7 +167,10 @@
       min-height: 76px;
 
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       align-items: center;
 
       gap: 24px;
@@ -148,9 +178,13 @@
 
     .logo {
       font-size: 1.15rem;
+
       font-weight: 700;
+
       letter-spacing: 0.08em;
+
       text-transform: uppercase;
+
       white-space: nowrap;
     }
 
@@ -160,6 +194,7 @@
 
     .nav-links {
       display: flex;
+
       align-items: center;
 
       gap: 28px;
@@ -187,15 +222,12 @@
       color: var(--text);
 
       font-size: 1.8rem;
-      line-height: 1;
 
       cursor: pointer;
     }
 
 
-    /* ========================================
-       BREADCRUMB
-    ======================================== */
+    /* BREADCRUMB */
 
     .breadcrumb {
       padding-top: 34px;
@@ -205,34 +237,30 @@
       font-size: 0.88rem;
     }
 
-    .breadcrumb a {
-      transition: 0.2s ease;
+    .breadcrumb span {
+      margin: 0 8px;
+
+      color:
+        rgba(255,255,255,0.3);
     }
 
     .breadcrumb a:hover {
       color: var(--accent-light);
     }
 
-    .breadcrumb span {
-      margin: 0 8px;
 
-      color: rgba(255, 255, 255, 0.3);
-    }
-
-
-    /* ========================================
-       HERO
-    ======================================== */
+    /* HERO */
 
     .recipe-hero {
       padding: 68px 0 76px;
     }
 
     .recipe-shell {
-      width: min(
-        100%,
-        var(--recipe-width)
-      );
+      width:
+        min(
+          100%,
+          var(--recipe-width)
+        );
 
       margin: 0 auto;
     }
@@ -243,9 +271,11 @@
       color: var(--accent-light);
 
       font-size: 0.8rem;
+
       font-weight: 700;
 
       letter-spacing: 0.19em;
+
       text-transform: uppercase;
     }
 
@@ -279,12 +309,11 @@
       color: var(--muted);
 
       font-size: 1.18rem;
-
-      line-height: 1.75;
     }
 
     .recipe-meta {
       display: flex;
+
       flex-wrap: wrap;
 
       gap: 10px 20px;
@@ -301,9 +330,59 @@
     }
 
 
-    /* ========================================
-       DATE RAPIDE
-    ======================================== */
+    /* IMAGINE REȚETĂ */
+
+    .recipe-image-wrap {
+      width: 100%;
+
+      margin:
+        42px auto
+        10px;
+
+      text-align: center;
+    }
+
+    .recipe-image {
+      display: block;
+
+      width: 100%;
+
+      max-width: 620px;
+
+      height: 410px;
+
+      margin: 0 auto;
+
+      object-fit: cover;
+
+      object-position: center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 24px;
+
+      box-shadow:
+        0 22px 55px
+        rgba(0,0,0,0.28);
+    }
+
+    .recipe-image-wrap figcaption {
+      max-width: 620px;
+
+      margin:
+        12px auto
+        0;
+
+      color: var(--muted);
+
+      font-size: 0.82rem;
+
+      text-align: left;
+    }
+
+
+    /* DATE RAPIDE */
 
     .stats-grid {
       display: grid;
@@ -319,7 +398,9 @@
     .stat-card {
       padding: 20px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid var(--border);
+
       border-radius: 18px;
 
       background:
@@ -338,9 +419,11 @@
       color: var(--accent-light);
 
       font-size: 0.74rem;
+
       font-weight: 700;
 
       letter-spacing: 0.1em;
+
       text-transform: uppercase;
     }
 
@@ -356,14 +439,13 @@
     }
 
 
-    /* ========================================
-       SECȚIUNI
-    ======================================== */
+    /* SECȚIUNI */
 
     .recipe-section {
       padding: 72px 0;
 
-      border-top: 1px solid var(--border);
+      border-top:
+        1px solid var(--border);
     }
 
     .section-heading {
@@ -399,15 +481,13 @@
     }
 
 
-    /* ========================================
-       INGREDIENTE
-    ======================================== */
+    /* INGREDIENTE */
 
     .ingredients-grid {
       display: grid;
 
       grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2,1fr);
 
       gap: 22px;
     }
@@ -415,7 +495,9 @@
     .ingredient-card {
       padding: 30px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid var(--border);
+
       border-radius: 22px;
 
       background:
@@ -445,7 +527,9 @@
 
     .ingredient-list li {
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
 
       gap: 24px;
 
@@ -453,7 +537,7 @@
 
       border-bottom:
         1px solid
-        rgba(255, 255, 255, 0.07);
+        rgba(255,255,255,0.07);
 
       color: var(--muted);
     }
@@ -471,9 +555,7 @@
     }
 
 
-    /* ========================================
-       CASETĂ IMPORTANTĂ
-    ======================================== */
+    /* HIGHLIGHT */
 
     .highlight-box {
       margin-top: 32px;
@@ -482,14 +564,14 @@
 
       border:
         1px solid
-        rgba(215, 164, 91, 0.28);
+        rgba(215,164,91,0.28);
 
       border-radius: 20px;
 
       background:
         radial-gradient(
           circle at 90% 20%,
-          rgba(215, 164, 91, 0.08),
+          rgba(215,164,91,0.08),
           transparent 18rem
         ),
         var(--surface);
@@ -499,18 +581,12 @@
       color: var(--accent-light);
     }
 
-    .highlight-box p {
-      color: var(--text);
-    }
-
     .highlight-box p + p {
       margin-top: 14px;
     }
 
 
-    /* ========================================
-       PAȘI
-    ======================================== */
+    /* PAȘI */
 
     .steps {
       display: grid;
@@ -528,7 +604,9 @@
 
       padding: 28px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid var(--border);
+
       border-radius: 20px;
 
       background:
@@ -576,15 +654,13 @@
     }
 
 
-    /* ========================================
-       COACERE
-    ======================================== */
+    /* COACERE */
 
     .bake-box {
       display: grid;
 
       grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2,1fr);
 
       gap: 18px;
 
@@ -596,7 +672,7 @@
 
       border:
         1px solid
-        rgba(215, 164, 91, 0.24);
+        rgba(215,164,91,0.24);
 
       border-radius: 20px;
 
@@ -611,9 +687,11 @@
       color: var(--accent-light);
 
       font-size: 0.78rem;
+
       font-weight: 700;
 
       letter-spacing: 0.12em;
+
       text-transform: uppercase;
     }
 
@@ -637,15 +715,13 @@
     }
 
 
-    /* ========================================
-       TROUBLESHOOTING
-    ======================================== */
+    /* TROUBLESHOOTING */
 
     .trouble-grid {
       display: grid;
 
       grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2,1fr);
 
       gap: 18px;
     }
@@ -653,7 +729,9 @@
     .trouble-card {
       padding: 26px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid var(--border);
+
       border-radius: 20px;
 
       background: var(--surface);
@@ -677,9 +755,7 @@
     }
 
 
-    /* ========================================
-       REZULTAT
-    ======================================== */
+    /* LISTĂ REZULTAT */
 
     .result-list {
       margin-left: 22px;
@@ -698,14 +774,14 @@
     }
 
 
-    /* ========================================
-       AUTOR
-    ======================================== */
+    /* AUTOR */
 
     .author-box {
       padding: 30px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid var(--border);
+
       border-radius: 22px;
 
       background:
@@ -734,9 +810,7 @@
     }
 
 
-    /* ========================================
-       BUTON
-    ======================================== */
+    /* BUTON */
 
     .back-link {
       margin-top: 36px;
@@ -750,9 +824,12 @@
       padding: 0 24px;
 
       justify-content: center;
+
       align-items: center;
 
-      border: 1px solid var(--accent);
+      border:
+        1px solid var(--accent);
+
       border-radius: 999px;
 
       font-weight: 700;
@@ -762,20 +839,20 @@
 
     .button:hover {
       background:
-        rgba(215, 164, 91, 0.12);
+        rgba(215,164,91,0.12);
 
-      transform: translateY(-2px);
+      transform:
+        translateY(-2px);
     }
 
 
-    /* ========================================
-       FOOTER
-    ======================================== */
+    /* FOOTER */
 
     footer {
       padding: 30px 0;
 
-      border-top: 1px solid var(--border);
+      border-top:
+        1px solid var(--border);
 
       color: var(--muted);
 
@@ -785,15 +862,14 @@
     .footer-content {
       display: flex;
 
-      justify-content: space-between;
+      justify-content:
+        space-between;
 
       gap: 20px;
     }
 
 
-    /* ========================================
-       TABLETĂ
-    ======================================== */
+    /* TABLETĂ */
 
     @media (max-width: 850px) {
 
@@ -812,20 +888,19 @@
         right: -20px;
 
         flex-direction: column;
+
         align-items: flex-start;
 
         gap: 0;
 
-        padding: 10px 20px 20px;
+        padding:
+          10px 20px 20px;
 
-        border-bottom: 1px solid var(--border);
+        border-bottom:
+          1px solid var(--border);
 
         background:
-          rgba(14, 12, 10, 0.99);
-
-        box-shadow:
-          0 25px 60px
-          rgba(0, 0, 0, 0.4);
+          rgba(14,12,10,0.99);
       }
 
       .nav-links.active {
@@ -839,16 +914,12 @@
 
         border-bottom:
           1px solid
-          rgba(255, 255, 255, 0.07);
-      }
-
-      .nav-links a:last-child {
-        border-bottom: 0;
+          rgba(255,255,255,0.07);
       }
 
       .stats-grid {
         grid-template-columns:
-          repeat(2, 1fr);
+          repeat(2,1fr);
       }
 
       .ingredients-grid,
@@ -864,9 +935,7 @@
     }
 
 
-    /* ========================================
-       TELEFOANE
-    ======================================== */
+    /* TELEFOANE */
 
     @media (max-width: 600px) {
 
@@ -890,14 +959,10 @@
         top: 68px;
       }
 
-      .breadcrumb {
-        padding-top: 24px;
-
-        font-size: 0.82rem;
-      }
-
       .recipe-hero {
-        padding: 48px 0 58px;
+        padding:
+          48px 0
+          58px;
       }
 
       .recipe-hero h1 {
@@ -911,6 +976,18 @@
 
       .recipe-intro {
         font-size: 1.05rem;
+      }
+
+      .recipe-image {
+        max-width: 100%;
+
+        height: 300px;
+
+        border-radius: 18px;
+      }
+
+      .recipe-image-wrap {
+        margin-top: 32px;
       }
 
       .stats-grid {
@@ -940,10 +1017,6 @@
         font-size: 1.45rem;
       }
 
-      .ingredient-list li {
-        gap: 14px;
-      }
-
       .button {
         width: 100%;
       }
@@ -953,11 +1026,7 @@
   </style>
 
 
-  <!-- ========================================
-       STRUCTURED DATA
-       Fotografia reală a preparatului va fi
-       adăugată ulterior în proprietatea "image".
-  ======================================== -->
+  <!-- STRUCTURED DATA -->
 
   <script type="application/ld+json">
   {
@@ -970,6 +1039,9 @@
         "name": "Madeleine cu unt noisette: rețetă profesională — Costin Licu",
         "description": "Rețetă profesională de madeleine cu unt noisette, vanilie și lămâie, cu proces tehnologic, maturare și coacere în două etape.",
         "inLanguage": "ro-RO",
+        "primaryImageOfPage": {
+          "@id": "https://costinlicu.ro/retete/madeleine-unt-noisette/#image"
+        },
         "mainEntity": {
           "@id": "https://costinlicu.ro/retete/madeleine-unt-noisette/#recipe"
         },
@@ -977,28 +1049,53 @@
           "@id": "https://costinlicu.ro/retete/madeleine-unt-noisette/#breadcrumb"
         }
       },
+
+      {
+        "@type": "ImageObject",
+        "@id": "https://costinlicu.ro/retete/madeleine-unt-noisette/#image",
+        "url": "https://costinlicu.ro/images/madeleine-unt-noisette.webp",
+        "contentUrl": "https://costinlicu.ro/images/madeleine-unt-noisette.webp",
+        "caption": "Madeleine cu unt noisette, vanilie și glazură fină de lămâie",
+        "width": 1122,
+        "height": 1402
+      },
+
       {
         "@type": "Recipe",
         "@id": "https://costinlicu.ro/retete/madeleine-unt-noisette/#recipe",
         "name": "Madeleine cu unt noisette, vanilie și lămâie",
+
+        "image": [
+          "https://costinlicu.ro/images/madeleine-unt-noisette.webp"
+        ],
+
         "author": {
           "@type": "Person",
           "@id": "https://costinlicu.ro/#person",
           "name": "Costin Licu",
           "url": "https://costinlicu.ro/"
         },
+
         "datePublished": "2026-08-14",
+
+        "dateModified": "2026-08-14",
+
         "description": "Madeleine fine și aromate, preparate cu unt noisette, vanilie și lămâie, maturate la rece și coapte în două etape pentru dezvoltarea cocoașei caracteristice.",
+
         "prepTime": "PT30M",
+
         "cookTime": "PT10M",
+
         "totalTime": "PT12H40M",
-        "recipeYield": [
-          "22",
-          "22–24 madeleine"
-        ],
+
+        "recipeYield": "22–24 madeleine",
+
         "recipeCategory": "Desert",
+
         "recipeCuisine": "Franceză",
-        "keywords": "madeleine unt noisette, cocoașă madeleine, beurre noisette, glazură fină de lămâie",
+
+        "keywords": "madeleine unt noisette, madeleine lămâie, cocoașă madeleine, beurre noisette, rețetă madeleine",
+
         "recipeIngredient": [
           "180 g ou întreg",
           "125 g zahăr tos fin",
@@ -1015,108 +1112,70 @@
           "8 g apă pentru glazură",
           "2 g pastă sau extract de vanilie pentru glazură"
         ],
+
         "recipeInstructions": [
           {
-            "@type": "HowToSection",
-            "name": "Compoziția de madeleine",
-            "itemListElement": [
-              {
-                "@type": "HowToStep",
-                "name": "Prepară untul noisette",
-                "text": "Pornește cu aproximativ 175–180 g unt de 82% grăsime. Încălzește până când apa se evaporă, solidele lactice devin brun-aurii și apare aroma de alună. Strecoară și cântărește 150 g unt noisette. Lasă-l să ajungă la 45–50°C."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Aromatizează zahărul",
-                "text": "Amestecă zahărul tos cu coaja fin rasă de lămâie și freacă ușor pentru a elibera uleiurile aromatice."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Amestecă ouăle",
-                "text": "Amestecă oul întreg, zahărul aromatizat, zahărul invertit, vanilia și sarea. Nu bate compoziția pentru volum și evită introducerea excesivă de aer."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Adaugă ingredientele uscate",
-                "text": "Cerne făina împreună cu praful de copt și încorporează-le în amestecul de ou până la omogenizare, fără a lucra excesiv compoziția."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Adaugă laptele",
-                "text": "Încorporează laptele integral la temperatura camerei și omogenizează."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Emulsionează cu untul",
-                "text": "Adaugă untul noisette la 45–50°C în două sau trei tranșe și amestecă până când compoziția devine netedă și lucioasă. Pentru o emulsie foarte fină se poate utiliza pentru scurt timp un blender de mână complet scufundat."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Maturează compoziția",
-                "text": "Acoperă compoziția la contact și păstreaz-o 12 ore la frigider, la aproximativ 3–5°C. Poate fi maturată până la 24 de ore."
-              }
-            ]
+            "@type": "HowToStep",
+            "name": "Prepară untul noisette",
+            "text": "Încălzește untul până când solidele lactice devin brun-aurii și apare aroma de alună. Strecoară și cântărește 150 g unt noisette final."
           },
           {
-            "@type": "HowToSection",
-            "name": "Dozare și coacere",
-            "itemListElement": [
-              {
-                "@type": "HowToStep",
-                "name": "Pregătește formele",
-                "text": "Unge formele metalice foarte fin cu unt și, dacă este necesar, pudrează cu o peliculă subțire de făină. Păstrează formele la rece aproximativ 15–20 de minute."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Dozează compoziția",
-                "text": "Dozează compoziția direct de la frigider, aproximativ 28–30 g pentru fiecare cavitate, fără a depăși aproximativ 75–80% din volumul formei."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Coace prima etapă",
-                "text": "Într-un cuptor cu ventilație bine preîncălzit, coace madeleinele la 220°C aproximativ 3 minute."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Finalizează coacerea",
-                "text": "Fără a deschide ușa cuptorului, redu temperatura la 175°C și continuă coacerea încă aproximativ 5–7 minute, până când madeleinele sunt dezvoltate și ușor aurii."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Răcește",
-                "text": "Lasă madeleinele aproximativ un minut în formă, apoi scoate-le și transferă-le pe un grătar pentru răcire."
-              }
-            ]
+            "@type": "HowToStep",
+            "name": "Aromatizează zahărul",
+            "text": "Amestecă zahărul tos cu coaja fin rasă de lămâie și freacă ușor pentru eliberarea uleiurilor aromatice."
           },
           {
-            "@type": "HowToSection",
-            "name": "Glazura fină de lămâie",
-            "itemListElement": [
-              {
-                "@type": "HowToStep",
-                "name": "Prepară glazura",
-                "text": "Amestecă zahărul pudră cu sucul de lămâie, apa și vanilia până când obții o glazură perfect netedă și fluidă."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Glazurează",
-                "text": "Aplică un strat foarte fin de glazură pe madeleinele complet răcite, prin pensulare sau prin scufundarea ușoară a părții cu striații."
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Fixează glazura",
-                "text": "Introdu madeleinele glazurate într-un cuptor la aproximativ 140–150°C timp de 1–2 minute, doar cât să se fixeze stratul fin de glazură."
-              }
-            ]
+            "@type": "HowToStep",
+            "name": "Amestecă ouăle",
+            "text": "Omogenizează oul întreg, zahărul aromatizat, Trimoline, vanilia și sarea fără să introduci excesiv aer."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Încorporează făina",
+            "text": "Cerne făina împreună cu praful de copt și încorporează fără a lucra excesiv compoziția."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Adaugă laptele",
+            "text": "Încorporează laptele integral și omogenizează."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Emulsionează cu untul",
+            "text": "Adaugă untul noisette la 45–50°C în două sau trei tranșe și emulsionează până când compoziția este netedă și lucioasă."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Maturează compoziția",
+            "text": "Acoperă la contact și păstrează aproximativ 12 ore la frigider, la 3–5°C."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Pregătește formele",
+            "text": "Unge formele foarte fin cu unt și păstrează-le la rece aproximativ 15–20 minute."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Dozează",
+            "text": "Dozează aproximativ 28–30 g compoziție rece în fiecare cavitate."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Coace",
+            "text": "Coace aproximativ 3 minute la 220°C cu ventilație, apoi redu la 175°C fără să deschizi ușa și continuă aproximativ 5–7 minute."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Glazurează",
+            "text": "Aplică pe madeleinele răcite un strat foarte fin de glazură de lămâie și fixează-l aproximativ 1–2 minute la 140–150°C."
           }
-        ],
-        "mainEntityOfPage": {
-          "@id": "https://costinlicu.ro/retete/madeleine-unt-noisette/#webpage"
-        }
+        ]
       },
+
       {
         "@type": "BreadcrumbList",
         "@id": "https://costinlicu.ro/retete/madeleine-unt-noisette/#breadcrumb",
+
         "itemListElement": [
           {
             "@type": "ListItem",
@@ -1148,10 +1207,6 @@
 <body>
 
 
-  <!-- ========================================
-       HEADER
-  ======================================== -->
-
   <header>
 
     <nav
@@ -1166,7 +1221,6 @@
         Costin <span>Licu</span>
       </a>
 
-
       <button
         class="menu-toggle"
         type="button"
@@ -1176,36 +1230,21 @@
         ☰
       </button>
 
-
       <div class="nav-links">
 
-        <a href="/">
-          Acasă
-        </a>
+        <a href="/">Acasă</a>
 
-        <a href="/despre.html">
-          Despre
-        </a>
+        <a href="/despre.html">Despre</a>
 
-        <a href="/portofoliu.html">
-          Portofoliu
-        </a>
+        <a href="/portofoliu.html">Portofoliu</a>
 
-        <a href="/experienta.html">
-          Experiență
-        </a>
+        <a href="/experienta.html">Experiență</a>
 
-        <a href="/retete.html">
-          Rețete
-        </a>
+        <a href="/retete.html">Rețete</a>
 
-        <a href="/articole.html">
-          Articole
-        </a>
+        <a href="/articole.html">Articole</a>
 
-        <a href="/contact.html">
-          Contact
-        </a>
+        <a href="/contact.html">Contact</a>
 
       </div>
 
@@ -1214,13 +1253,8 @@
   </header>
 
 
-
   <main>
 
-
-    <!-- ========================================
-         BREADCRUMB
-    ======================================== -->
 
     <div class="container breadcrumb">
 
@@ -1241,11 +1275,6 @@
     </div>
 
 
-
-    <!-- ========================================
-         HERO
-    ======================================== -->
-
     <section class="recipe-hero">
 
       <div class="container">
@@ -1262,18 +1291,20 @@
           </h1>
 
           <p class="recipe-intro">
-            O madeleine bine executată trebuie să păstreze un echilibru
-            între exteriorul delicat, miezul fin și elastic și aroma
-            specifică de unt. În această variantă folosesc unt noisette,
-            vanilie și lămâie, iar compoziția este maturată la rece
-            înainte de coacere pentru o structură uniformă și o cocoașă
-            bine dezvoltată.
+            O madeleine bine executată trebuie să păstreze
+            un echilibru între exteriorul delicat, miezul fin
+            și elastic și aroma specifică de unt.
+            În această variantă folosesc unt noisette,
+            vanilie și lămâie, iar compoziția este maturată
+            la rece înainte de coacere.
           </p>
+
 
           <div class="recipe-meta">
 
             <span>
-              Rețetă de <strong>Costin Licu</strong>
+              Rețetă de
+              <strong>Costin Licu</strong>
             </span>
 
             <span>
@@ -1281,10 +1312,33 @@
             </span>
 
             <span>
-              Nivel: <strong>intermediar</strong>
+              Nivel:
+              <strong>intermediar</strong>
             </span>
 
           </div>
+
+
+          <!-- IMAGINE -->
+
+          <figure class="recipe-image-wrap">
+
+            <img
+              class="recipe-image"
+              src="/images/madeleine-unt-noisette.webp"
+              alt="Madeleine cu unt noisette, vanilie și glazură fină de lămâie"
+              width="1122"
+              height="1402"
+              loading="eager"
+              fetchpriority="high"
+            >
+
+            <figcaption>
+              Madeleine cu unt noisette, vanilie
+              și glazură fină de lămâie.
+            </figcaption>
+
+          </figure>
 
 
           <div class="stats-grid">
@@ -1349,17 +1403,13 @@
     </section>
 
 
-
-    <!-- ========================================
-         INGREDIENTE
-    ======================================== -->
+    <!-- INGREDIENTE -->
 
     <section class="recipe-section">
 
       <div class="container">
 
         <div class="recipe-shell">
-
 
           <div class="section-heading">
 
@@ -1372,8 +1422,8 @@
             </h2>
 
             <p>
-              Cantitățile sunt exprimate în grame pentru precizie
-              și reproductibilitate.
+              Cantitățile sunt exprimate în grame
+              pentru precizie și reproductibilitate.
             </p>
 
           </div>
@@ -1445,7 +1495,6 @@
             </div>
 
 
-
             <div class="ingredient-card">
 
               <h3>
@@ -1476,20 +1525,7 @@
 
               </ul>
 
-
-              <div class="highlight-box">
-
-                <p>
-                  Glazura trebuie să rămână
-                  <strong>foarte fină</strong>.
-                  Scopul ei este să aducă o aciditate discretă
-                  și un strat delicat la suprafață, nu să domine produsul.
-                </p>
-
-              </div>
-
             </div>
-
 
           </div>
 
@@ -1497,19 +1533,22 @@
           <div class="highlight-box">
 
             <p>
-              <strong>Important pentru untul noisette:</strong>
-              cantitatea de 150 g reprezintă untul cântărit
-              după brunificare.
+              <strong>
+                Important pentru untul noisette:
+              </strong>
+
+              cantitatea de 150 g reprezintă
+              untul cântărit după brunificare.
             </p>
 
             <p>
               Pornește cu aproximativ
-              <strong>175–180 g unt cu minimum 82% grăsime</strong>,
-              deoarece în timpul preparării se pierde o parte din apă.
+              <strong>
+                175–180 g unt cu minimum 82% grăsime
+              </strong>.
             </p>
 
           </div>
-
 
         </div>
 
@@ -1518,17 +1557,13 @@
     </section>
 
 
-
-    <!-- ========================================
-         PROCES TEHNOLOGIC
-    ======================================== -->
+    <!-- PROCES -->
 
     <section class="recipe-section">
 
       <div class="container">
 
         <div class="recipe-shell">
-
 
           <div class="section-heading">
 
@@ -1540,21 +1575,13 @@
               Compoziția
             </h2>
 
-            <p>
-              În această rețetă urmăresc o compoziție omogenă,
-              bine emulsionată și cu cât mai puțin aer introdus mecanic.
-            </p>
-
           </div>
 
 
           <div class="steps">
 
 
-            <article
-              class="step"
-              id="pas-1"
-            >
+            <article class="step">
 
               <span class="step-number">
                 01
@@ -1567,20 +1594,20 @@
                 </h3>
 
                 <p>
-                  Pune aproximativ 175–180 g unt într-o cratiță
-                  și încălzește controlat.
+                  Încălzește aproximativ 175–180 g unt
+                  până când solidele lactice devin brun-aurii
+                  și apare aroma specifică de alună.
                 </p>
 
                 <p>
-                  După evaporarea apei, solidele lactice încep
-                  să se coloreze. Oprește atunci când obții
-                  o nuanță brun-aurie și o aromă clară de alună.
+                  Strecoară și cântărește
+                  <strong>
+                    150 g unt noisette final
+                  </strong>.
                 </p>
 
                 <p>
-                  Strecoară imediat și cântărește
-                  <strong>150 g unt noisette final</strong>.
-                  Lasă-l să coboare la aproximativ
+                  Lasă-l să ajungă la
                   <strong>45–50°C</strong>.
                 </p>
 
@@ -1589,11 +1616,7 @@
             </article>
 
 
-
-            <article
-              class="step"
-              id="pas-2"
-            >
+            <article class="step">
 
               <span class="step-number">
                 02
@@ -1606,9 +1629,9 @@
                 </h3>
 
                 <p>
-                  Amestecă zahărul tos cu coaja fin rasă de lămâie.
-                  Freacă ușor amestecul pentru a favoriza eliberarea
-                  uleiurilor aromatice din zest.
+                  Amestecă zahărul cu coaja fin rasă
+                  de lămâie și freacă ușor amestecul
+                  pentru eliberarea uleiurilor aromatice.
                 </p>
 
               </div>
@@ -1616,11 +1639,7 @@
             </article>
 
 
-
-            <article
-              class="step"
-              id="pas-3"
-            >
+            <article class="step">
 
               <span class="step-number">
                 03
@@ -1629,18 +1648,17 @@
               <div>
 
                 <h3>
-                  Amestecă ouăle și zahărul
+                  Amestecă ouăle
                 </h3>
 
                 <p>
-                  Pune într-un bol oul întreg, zahărul aromatizat,
-                  Trimoline, vanilia și sarea.
+                  Omogenizează oul întreg,
+                  zahărul aromatizat, Trimoline,
+                  vanilia și sarea.
                 </p>
 
                 <p>
-                  Omogenizează cu telul,
-                  <strong>fără să bați compoziția pentru volum</strong>.
-                  Nu urmărim o spumă, ci doar o bază uniformă.
+                  Nu bate compoziția pentru volum.
                 </p>
 
               </div>
@@ -1648,11 +1666,7 @@
             </article>
 
 
-
-            <article
-              class="step"
-              id="pas-4"
-            >
+            <article class="step">
 
               <span class="step-number">
                 04
@@ -1665,13 +1679,9 @@
                 </h3>
 
                 <p>
-                  Cerne făina împreună cu praful de copt.
-                </p>
-
-                <p>
-                  Adaugă ingredientele uscate peste baza de ou
-                  și amestecă doar până când compoziția este omogenă.
-                  Evită lucrul excesiv.
+                  Cerne făina împreună cu praful de copt
+                  și încorporează fără să lucrezi excesiv
+                  compoziția.
                 </p>
 
               </div>
@@ -1679,11 +1689,7 @@
             </article>
 
 
-
-            <article
-              class="step"
-              id="pas-5"
-            >
+            <article class="step">
 
               <span class="step-number">
                 05
@@ -1696,7 +1702,7 @@
                 </h3>
 
                 <p>
-                  Încorporează cei 30 g lapte integral,
+                  Încorporează laptele integral,
                   ideal la temperatura camerei.
                 </p>
 
@@ -1705,11 +1711,7 @@
             </article>
 
 
-
-            <article
-              class="step"
-              id="pas-6"
-            >
+            <article class="step">
 
               <span class="step-number">
                 06
@@ -1722,28 +1724,21 @@
                 </h3>
 
                 <p>
-                  Adaugă untul noisette la 45–50°C
+                  Adaugă untul noisette la
+                  <strong>45–50°C</strong>
                   în două sau trei tranșe.
                 </p>
 
                 <p>
                   Amestecă până când compoziția devine
-                  <strong>netedă, lucioasă și perfect omogenă</strong>.
-                </p>
-
-                <p>
-                  Pentru o emulsie foarte fină poți utiliza
-                  blenderul de mână aproximativ 15–20 de secunde,
-                  ținut complet scufundat pentru a evita introducerea aerului.
+                  netedă, lucioasă și perfect omogenă.
                 </p>
 
               </div>
 
             </article>
 
-
           </div>
-
 
         </div>
 
@@ -1752,17 +1747,13 @@
     </section>
 
 
-
-    <!-- ========================================
-         MATURARE
-    ======================================== -->
+    <!-- MATURARE -->
 
     <section class="recipe-section">
 
       <div class="container">
 
         <div class="recipe-shell">
-
 
           <div class="section-heading">
 
@@ -1774,12 +1765,6 @@
               12 ore la rece
             </h2>
 
-            <p>
-              Repausul compoziției este o etapă importantă
-              pentru textura finală și comportamentul acesteia
-              în timpul coacerii.
-            </p>
-
           </div>
 
 
@@ -1789,17 +1774,16 @@
               Acoperă compoziția
               <strong>la contact</strong>
               și păstreaz-o aproximativ
-              <strong>12 ore la 3–5°C</strong>.
+              <strong>
+                12 ore la 3–5°C
+              </strong>.
             </p>
 
             <p>
-              Poate fi păstrată până la aproximativ 24 de ore.
-              Compoziția se folosește direct de la frigider,
-              fără să fie readusă la temperatura camerei.
+              Folosește compoziția direct de la frigider.
             </p>
 
           </div>
-
 
         </div>
 
@@ -1808,17 +1792,13 @@
     </section>
 
 
-
-    <!-- ========================================
-         PREGĂTIRE FORME
-    ======================================== -->
+    <!-- FORME -->
 
     <section class="recipe-section">
 
       <div class="container">
 
         <div class="recipe-shell">
-
 
           <div class="section-heading">
 
@@ -1835,7 +1815,6 @@
 
           <div class="steps">
 
-
             <article class="step">
 
               <span class="step-number">
@@ -1849,22 +1828,15 @@
                 </h3>
 
                 <p>
-                  Unge cavitățile cu un strat foarte fin de unt.
-                  Pentru formele metalice clasice poți aplica și
-                  o peliculă foarte subțire de făină,
-                  eliminând complet excesul.
-                </p>
-
-                <p>
-                  Păstrează forma la frigider
-                  aproximativ <strong>15–20 minute</strong>
-                  înainte de umplere.
+                  Unge cavitățile cu un strat foarte fin
+                  de unt și păstrează forma la frigider
+                  aproximativ
+                  <strong>15–20 minute</strong>.
                 </p>
 
               </div>
 
             </article>
-
 
 
             <article class="step">
@@ -1881,21 +1853,15 @@
 
                 <p>
                   Folosește compoziția rece și dozează
-                  aproximativ <strong>28–30 g / cavitate</strong>.
-                </p>
-
-                <p>
-                  Ca reper vizual, forma ar trebui umplută
-                  aproximativ 75–80%.
+                  aproximativ
+                  <strong>28–30 g / cavitate</strong>.
                 </p>
 
               </div>
 
             </article>
 
-
           </div>
-
 
         </div>
 
@@ -1904,17 +1870,13 @@
     </section>
 
 
-
-    <!-- ========================================
-         COACERE
-    ======================================== -->
+    <!-- COACERE -->
 
     <section class="recipe-section">
 
       <div class="container">
 
         <div class="recipe-shell">
-
 
           <div class="section-heading">
 
@@ -1927,16 +1889,15 @@
             </h2>
 
             <p>
-              Temperaturile de mai jos sunt punctul meu de plecare
-              pentru un cuptor cu ventilație bine preîncălzit.
-              Fiecare cuptor poate necesita o ajustare fină.
+              Temperaturile sunt orientative
+              pentru un cuptor cu ventilație
+              bine preîncălzit.
             </p>
 
           </div>
 
 
           <div class="bake-box">
-
 
             <div class="bake-stage">
 
@@ -1949,8 +1910,7 @@
               </strong>
 
               <p>
-                Impuls termic inițial pentru dezvoltarea structurii
-                și pornirea cocoașei.
+                Impuls termic inițial.
               </p>
 
             </div>
@@ -1967,12 +1927,10 @@
               </strong>
 
               <p>
-                Redu temperatura fără să deschizi ușa
-                și finalizează coacerea.
+                Finalizarea coacerii.
               </p>
 
             </div>
-
 
           </div>
 
@@ -1980,20 +1938,23 @@
           <div class="highlight-box">
 
             <p>
-              <strong>Nu deschide ușa cuptorului</strong>
-              în timpul trecerii dintre cele două temperaturi.
+              <strong>
+                Nu deschide ușa cuptorului
+              </strong>
+              între cele două etape.
             </p>
 
             <p>
-              Dacă vrei să testezi o dezvoltare mai agresivă
-              a cocoașei, poți încerca
-              <strong>225°C pentru aproximativ 2½–3 minute</strong>,
+              Pentru un impuls mai puternic,
+              poți testa
+              <strong>
+                225°C pentru 2½–3 minute
+              </strong>,
               apoi 175°C până la final.
             </p>
 
           </div>
 
-
         </div>
 
       </div>
@@ -2001,66 +1962,13 @@
     </section>
 
 
-
-    <!-- ========================================
-         RĂCIRE
-    ======================================== -->
+    <!-- GLAZURA -->
 
     <section class="recipe-section">
 
       <div class="container">
 
         <div class="recipe-shell">
-
-
-          <div class="section-heading">
-
-            <p class="eyebrow">
-              După coacere
-            </p>
-
-            <h2>
-              Răcirea
-            </h2>
-
-          </div>
-
-
-          <div class="highlight-box">
-
-            <p>
-              Lasă madeleinele aproximativ
-              <strong>1 minut în formă</strong>,
-              apoi scoate-le și transferă-le pe un grătar.
-            </p>
-
-            <p>
-              Dacă rămân prea mult în forma fierbinte,
-              vaporii se pot acumula la bază și pot înmuia
-              suprafața produsului.
-            </p>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ========================================
-         GLAZURĂ
-    ======================================== -->
-
-    <section class="recipe-section">
-
-      <div class="container">
-
-        <div class="recipe-shell">
-
 
           <div class="section-heading">
 
@@ -2072,16 +1980,10 @@
               Glazura fină de lămâie
             </h2>
 
-            <p>
-              Madeleinele trebuie să fie complet răcite
-              înainte de glazurare.
-            </p>
-
           </div>
 
 
           <div class="steps">
-
 
             <article class="step">
 
@@ -2101,15 +2003,9 @@
                   8 g apă și 2 g vanilie.
                 </p>
 
-                <p>
-                  Omogenizează până când glazura este
-                  perfect netedă și fluidă.
-                </p>
-
               </div>
 
             </article>
-
 
 
             <article class="step">
@@ -2121,23 +2017,17 @@
               <div>
 
                 <h3>
-                  Aplică un strat foarte fin
+                  Glazurează
                 </h3>
 
                 <p>
-                  Pensulează madeleinele sau scufundă ușor
-                  doar partea cu striațiile.
-                </p>
-
-                <p>
-                  Nu urmări un strat gros.
-                  Glazura trebuie să rămână discretă.
+                  Aplică un strat foarte fin
+                  pe madeleinele complet răcite.
                 </p>
 
               </div>
 
             </article>
-
 
 
             <article class="step">
@@ -2153,22 +2043,17 @@
                 </h3>
 
                 <p>
-                  Introdu madeleinele glazurate în cuptor
-                  la aproximativ
-                  <strong>140–150°C pentru 1–2 minute</strong>.
-                </p>
-
-                <p>
-                  Scopul este doar fixarea stratului de glazură.
+                  Introdu madeleinele la
+                  <strong>
+                    140–150°C pentru 1–2 minute
+                  </strong>.
                 </p>
 
               </div>
 
             </article>
 
-
           </div>
-
 
         </div>
 
@@ -2177,17 +2062,13 @@
     </section>
 
 
-
-    <!-- ========================================
-         COCOAȘA
-    ======================================== -->
+    <!-- COCOAȘĂ -->
 
     <section class="recipe-section">
 
       <div class="container">
 
         <div class="recipe-shell">
-
 
           <div class="section-heading">
 
@@ -2205,11 +2086,11 @@
           <ul class="result-list">
 
             <li>
-              Compoziția bine maturată și rece.
+              Compoziția maturată și rece.
             </li>
 
             <li>
-              Forma rece înainte de umplere.
+              Forma rece.
             </li>
 
             <li>
@@ -2221,15 +2102,15 @@
             </li>
 
             <li>
-              Reducerea temperaturii fără deschiderea ușii.
+              Reducerea temperaturii fără
+              deschiderea ușii.
             </li>
 
             <li>
-              Dozarea constantă de la o cavitate la alta.
+              Dozarea constantă.
             </li>
 
           </ul>
-
 
         </div>
 
@@ -2238,17 +2119,13 @@
     </section>
 
 
-
-    <!-- ========================================
-         TROUBLESHOOTING
-    ======================================== -->
+    <!-- TROUBLESHOOTING -->
 
     <section class="recipe-section">
 
       <div class="container">
 
         <div class="recipe-shell">
-
 
           <div class="section-heading">
 
@@ -2269,13 +2146,12 @@
             <article class="trouble-card">
 
               <h3>
-                Cocoașa este foarte mică
+                Cocoașa este prea mică
               </h3>
 
               <p>
-                Verifică temperatura reală a cuptorului,
-                temperatura compoziției și preîncălzirea formei.
-                Poți testa un impuls inițial ușor mai puternic.
+                Verifică temperatura cuptorului,
+                temperatura compoziției și preîncălzirea.
               </p>
 
             </article>
@@ -2284,12 +2160,12 @@
             <article class="trouble-card">
 
               <h3>
-                Madeleinele se colorează prea repede
+                Se colorează prea repede
               </h3>
 
               <p>
-                Temperatura inițială este prea agresivă pentru
-                cuptorul respectiv sau timpul primei etape este prea lung.
+                Redu timpul primei etape
+                înainte de a modifica formula.
               </p>
 
             </article>
@@ -2302,8 +2178,8 @@
               </h3>
 
               <p>
-                Cel mai probabil coacerea totală este prea lungă.
-                Redu timpul final înainte de a modifica formula.
+                Coacerea totală este probabil
+                prea lungă.
               </p>
 
             </article>
@@ -2316,15 +2192,14 @@
               </h3>
 
               <p>
-                Verifică emulsionarea compoziției, praful de copt
-                și modul în care a fost amestecată baza.
+                Verifică emulsionarea,
+                praful de copt și tehnica de amestecare.
               </p>
 
             </article>
 
 
           </div>
-
 
         </div>
 
@@ -2333,17 +2208,13 @@
     </section>
 
 
-
-    <!-- ========================================
-         REZULTAT
-    ======================================== -->
+    <!-- REZULTAT -->
 
     <section class="recipe-section">
 
       <div class="container">
 
         <div class="recipe-shell">
-
 
           <div class="section-heading">
 
@@ -2381,11 +2252,11 @@
             </li>
 
             <li>
-              vanilie și lămâie prezente discret;
+              vanilie și lămâie discrete;
             </li>
 
             <li>
-              glazură foarte subțire și echilibrată.
+              glazură foarte subțire.
             </li>
 
           </ul>
@@ -2394,14 +2265,14 @@
           <div class="highlight-box">
 
             <p>
-              Pentru mine, o madeleine reușită nu este definită
-              doar de cocoașă. Structura miezului, umiditatea,
-              echilibrul aromatic și modul în care se păstrează
-              după coacere sunt la fel de importante.
+              Pentru mine, o madeleine reușită
+              nu este definită doar de cocoașă.
+              Structura miezului, umiditatea,
+              echilibrul aromatic și textura
+              sunt la fel de importante.
             </p>
 
           </div>
-
 
         </div>
 
@@ -2410,17 +2281,13 @@
     </section>
 
 
-
-    <!-- ========================================
-         AUTOR
-    ======================================== -->
+    <!-- AUTOR -->
 
     <section class="recipe-section">
 
       <div class="container">
 
         <div class="recipe-shell">
-
 
           <aside class="author-box">
 
@@ -2433,10 +2300,12 @@
             </h2>
 
             <p>
-              Pastry Chef, formator și inginer în industria alimentară.
-              În rețetele publicate aici urmăresc să explic nu doar
-              gramajele, ci și procesele care influențează textura,
-              stabilitatea și rezultatul final.
+              Pastry Chef, formator și inginer
+              în industria alimentară.
+              În rețetele publicate aici urmăresc
+              să explic nu doar gramajele,
+              ci și procesele care influențează
+              textura, stabilitatea și rezultatul final.
             </p>
 
           </aside>
@@ -2453,7 +2322,6 @@
 
           </div>
 
-
         </div>
 
       </div>
@@ -2464,32 +2332,24 @@
   </main>
 
 
-
-  <!-- ========================================
-       FOOTER
-  ======================================== -->
-
   <footer>
 
     <div class="container footer-content">
 
       <p>
-        © 2026 Costin Licu. Toate drepturile rezervate.
+        © 2026 Costin Licu.
+        Toate drepturile rezervate.
       </p>
 
       <p>
-        Pastry Chef · Formator · Inginer în industria alimentară
+        Pastry Chef · Formator ·
+        Inginer în industria alimentară
       </p>
 
     </div>
 
   </footer>
 
-
-
-  <!-- ========================================
-       MENIU MOBIL
-  ======================================== -->
 
   <script>
 
@@ -2527,7 +2387,9 @@
           "click",
           () => {
 
-            navLinks.classList.remove("active");
+            navLinks
+              .classList
+              .remove("active");
 
             menuToggle.setAttribute(
               "aria-expanded",
