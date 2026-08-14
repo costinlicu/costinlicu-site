@@ -10,11 +10,11 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Articole — Costin Licu</title>
+  <title>Articole Cofetărie, Patiserie & Tehnologia Alimentelor — Costin Licu</title>
 
   <meta
     name="description"
-    content="Articole despre cofetărie, patiserie, tehnologia alimentelor, siguranță alimentară, procese tehnologice și știința din spatele produselor."
+    content="Articole de Costin Licu despre cofetărie, patiserie, tehnologia alimentelor, siguranță alimentară, reologie, sous-vide și știința din spatele produselor."
   >
 
   <meta name="robots" content="index, follow">
@@ -24,23 +24,43 @@
     href="https://costinlicu.ro/articole.html"
   >
 
+
+  <!-- OPEN GRAPH -->
+
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ro_RO">
+  <meta property="og:site_name" content="Costin Licu">
   <meta property="og:url" content="https://costinlicu.ro/articole.html">
-  <meta property="og:title" content="Articole — Costin Licu">
+
+  <meta
+    property="og:title"
+    content="Articole Cofetărie, Patiserie & Tehnologia Alimentelor — Costin Licu"
+  >
+
   <meta
     property="og:description"
-    content="Știința din spatele produsului: cofetărie, patiserie, tehnologie alimentară și siguranța alimentelor."
+    content="Știința din spatele produsului: cofetărie, patiserie, tehnologia alimentelor, siguranță alimentară, reologie și sous-vide."
+  >
+
+
+  <!-- TWITTER / SOCIAL -->
+
+  <meta name="twitter:card" content="summary">
+
+  <meta
+    name="twitter:title"
+    content="Articole — Costin Licu"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Cofetărie, patiserie și știința alimentelor explicate prin ingrediente, procese, textură, siguranță și tehnologie."
   >
 
   <meta name="theme-color" content="#16120f">
 
 
   <style>
-
-    /* ==================================================
-       VARIABILE
-    ================================================== */
 
     :root {
       --background: #0e0c0a;
@@ -53,11 +73,6 @@
       --border: rgba(255, 255, 255, 0.11);
       --max-width: 1180px;
     }
-
-
-    /* ==================================================
-       RESET
-    ================================================== */
 
     * {
       box-sizing: border-box;
@@ -94,32 +109,25 @@
     }
 
 
-    /* ==================================================
+    /* ========================================
        HEADER
-    ================================================== */
+    ======================================== */
 
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-
       border-bottom: 1px solid var(--border);
-
-      background:
-        rgba(14, 12, 10, 0.92);
-
+      background: rgba(14, 12, 10, 0.92);
       backdrop-filter: blur(14px);
     }
 
     nav {
       position: relative;
-
       min-height: 76px;
-
       display: flex;
       justify-content: space-between;
       align-items: center;
-
       gap: 24px;
     }
 
@@ -138,11 +146,8 @@
     .nav-links {
       display: flex;
       align-items: center;
-
       gap: 28px;
-
       color: var(--muted);
-
       font-size: 0.95rem;
     }
 
@@ -156,24 +161,18 @@
 
     .menu-toggle {
       display: none;
-
       background: transparent;
-
       border: 0;
-
       color: var(--text);
-
       font-size: 1.8rem;
-
       line-height: 1;
-
       cursor: pointer;
     }
 
 
-    /* ==================================================
+    /* ========================================
        SECȚIUNI
-    ================================================== */
+    ======================================== */
 
     section {
       padding: 90px 0;
@@ -184,6 +183,7 @@
       margin-bottom: 48px;
     }
 
+    .section-heading h1,
     .section-heading h2 {
       margin-bottom: 16px;
 
@@ -196,7 +196,6 @@
         clamp(1.8rem, 3vw, 2.7rem);
 
       font-weight: 400;
-
       line-height: 1.08;
     }
 
@@ -207,44 +206,30 @@
 
     .eyebrow {
       margin-bottom: 20px !important;
-
       color: var(--accent-light) !important;
-
       font-size: 0.8rem !important;
-
       font-weight: 700;
-
       letter-spacing: 0.19em;
-
       text-transform: uppercase;
     }
 
 
-    /* ==================================================
+    /* ========================================
        CARDURI ARTICOLE
-    ================================================== */
+    ======================================== */
 
     .cards {
       display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
+      grid-template-columns: repeat(3, 1fr);
       gap: 22px;
     }
 
     .service-card {
       display: flex;
-
       flex-direction: column;
-
       min-height: 360px;
-
       padding: 30px;
-
-      border:
-        1px solid var(--border);
-
+      border: 1px solid var(--border);
       border-radius: 22px;
 
       background:
@@ -253,13 +238,20 @@
           var(--surface-light),
           var(--surface)
         );
+
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(215, 164, 91, 0.35);
     }
 
     .number {
       display: block;
-
       margin-bottom: 26px;
-
       color: var(--accent);
 
       font-family:
@@ -279,9 +271,7 @@
         serif;
 
       font-size: 1.45rem;
-
       font-weight: 400;
-
       line-height: 1.2;
     }
 
@@ -295,27 +285,19 @@
     }
 
 
-    /* ==================================================
+    /* ========================================
        BUTOANE
-    ================================================== */
+    ======================================== */
 
     .button {
       display: inline-flex;
-
       justify-content: center;
       align-items: center;
-
       min-height: 50px;
-
       padding: 0 24px;
-
-      border:
-        1px solid var(--accent);
-
+      border: 1px solid var(--accent);
       border-radius: 999px;
-
       font-weight: 700;
-
       transition: 0.25s ease;
     }
 
@@ -324,41 +306,32 @@
     }
 
     .button-secondary:hover {
-      background:
-        rgba(215, 164, 91, 0.12);
-
-      transform:
-        translateY(-2px);
+      background: rgba(215, 164, 91, 0.12);
+      transform: translateY(-2px);
     }
 
 
-    /* ==================================================
+    /* ========================================
        FOOTER
-    ================================================== */
+    ======================================== */
 
     footer {
       padding: 30px 0;
-
-      border-top:
-        1px solid var(--border);
-
+      border-top: 1px solid var(--border);
       color: var(--muted);
-
       font-size: 0.9rem;
     }
 
     .footer-content {
       display: flex;
-
       justify-content: space-between;
-
       gap: 20px;
     }
 
 
-    /* ==================================================
+    /* ========================================
        TABLETĂ / MOBIL
-    ================================================== */
+    ======================================== */
 
     @media (max-width: 850px) {
 
@@ -368,28 +341,16 @@
 
       .nav-links {
         display: none;
-
         position: absolute;
-
         top: 76px;
-
         left: -20px;
         right: -20px;
-
         flex-direction: column;
-
         align-items: flex-start;
-
         gap: 0;
-
-        padding:
-          10px 20px 20px;
-
-        border-bottom:
-          1px solid var(--border);
-
-        background:
-          rgba(14, 12, 10, 0.99);
+        padding: 10px 20px 20px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(14, 12, 10, 0.99);
 
         box-shadow:
           0 25px 60px
@@ -402,7 +363,6 @@
 
       .nav-links a {
         width: 100%;
-
         padding: 14px 0;
 
         border-bottom:
@@ -429,9 +389,9 @@
     }
 
 
-    /* ==================================================
+    /* ========================================
        TELEFOANE MICI
-    ================================================== */
+    ======================================== */
 
     @media (max-width: 600px) {
 
@@ -463,6 +423,7 @@
         margin-bottom: 34px;
       }
 
+      .section-heading h1,
       .section-heading h2 {
         font-size:
           clamp(
@@ -482,7 +443,6 @@
 
       .number {
         margin-bottom: 18px;
-
         font-size: 1.8rem;
       }
 
@@ -499,15 +459,33 @@
   </style>
 
 
+  <!-- ========================================
+       STRUCTURED DATA
+  ======================================== -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
+    "@id": "https://costinlicu.ro/articole.html#articles",
     "name": "Articole — Costin Licu",
     "url": "https://costinlicu.ro/articole.html",
+    "description": "Articole despre cofetărie, patiserie, tehnologia alimentelor, siguranță alimentară, reologie și sous-vide.",
+    "inLanguage": "ro",
     "author": {
       "@type": "Person",
-      "name": "Costin Licu"
+      "@id": "https://costinlicu.ro/#person",
+      "name": "Costin Licu",
+      "url": "https://costinlicu.ro/",
+      "jobTitle": [
+        "Pastry Chef",
+        "Formator",
+        "Inginer în industria alimentară"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/costinlicu/",
+        "https://www.facebook.com/chefcostinlicu"
+      ]
     },
     "about": [
       "Cofetărie",
@@ -523,13 +501,12 @@
 </head>
 
 
-
 <body>
 
 
-  <!-- ==================================================
+  <!-- ========================================
        HEADER
-  ================================================== -->
+  ======================================== -->
 
   <header>
 
@@ -558,33 +535,19 @@
 
       <div class="nav-links">
 
-        <a href="index.html">
-          Acasă
-        </a>
+        <a href="index.html">Acasă</a>
 
-        <a href="despre.html">
-          Despre
-        </a>
+        <a href="despre.html">Despre</a>
 
-        <a href="portofoliu.html">
-          Portofoliu
-        </a>
+        <a href="portofoliu.html">Portofoliu</a>
 
-        <a href="experienta.html">
-          Experiență
-        </a>
+        <a href="experienta.html">Experiență</a>
 
-        <a href="retete.html">
-          Rețete
-        </a>
+        <a href="retete.html">Rețete</a>
 
-        <a href="articole.html">
-          Articole
-        </a>
+        <a href="articole.html">Articole</a>
 
-        <a href="contact.html">
-          Contact
-        </a>
+        <a href="contact.html">Contact</a>
 
       </div>
 
@@ -594,9 +557,9 @@
 
 
 
-  <!-- ==================================================
+  <!-- ========================================
        CONȚINUT
-  ================================================== -->
+  ======================================== -->
 
   <main>
 
@@ -605,16 +568,18 @@
       <div class="container">
 
 
+        <!-- INTRODUCERE -->
+
         <div class="section-heading">
 
           <p class="eyebrow">
             Articole
           </p>
 
-          <h2>
+          <h1>
             Știința din spatele<br>
             produsului.
-          </h2>
+          </h1>
 
           <p>
             Articole despre cofetărie, patiserie,
@@ -626,6 +591,10 @@
         </div>
 
 
+
+        <!-- ========================================
+             ARTICOLE / CATEGORII
+        ======================================== -->
 
         <div class="cards">
 
@@ -869,9 +838,9 @@
 
 
 
-  <!-- ==================================================
+  <!-- ========================================
        FOOTER
-  ================================================== -->
+  ======================================== -->
 
   <footer>
 
@@ -891,9 +860,9 @@
 
 
 
-  <!-- ==================================================
+  <!-- ========================================
        MENIU MOBIL
-  ================================================== -->
+  ======================================== -->
 
   <script>
 
