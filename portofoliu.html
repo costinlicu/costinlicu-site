@@ -10,11 +10,11 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Portofoliu — Costin Licu</title>
+  <title>Portofoliu Costin Licu — Cofetărie, Patiserie & Pastry</title>
 
   <meta
     name="description"
-    content="Portofoliul lui Costin Licu — proiecte de cofetărie, patiserie, sous-vide, panificație și educație gastronomică."
+    content="Descoperă portofoliul lui Costin Licu — proiecte de cofetărie, patiserie, deserturi sous-vide, panificație artizanală, competiții și educație gastronomică."
   >
 
   <meta name="robots" content="index, follow">
@@ -24,17 +24,60 @@
     href="https://costinlicu.ro/portofoliu.html"
   >
 
+
+  <!-- ========================================
+       OPEN GRAPH
+  ======================================== -->
+
   <meta property="og:type" content="website">
+
   <meta property="og:locale" content="ro_RO">
-  <meta property="og:url" content="https://costinlicu.ro/portofoliu.html">
-  <meta property="og:title" content="Portofoliu — Costin Licu">
+
+  <meta
+    property="og:site_name"
+    content="Costin Licu"
+  >
+
+  <meta
+    property="og:url"
+    content="https://costinlicu.ro/portofoliu.html"
+  >
+
+  <meta
+    property="og:title"
+    content="Portofoliu Costin Licu — Cofetărie, Patiserie & Pastry"
+  >
 
   <meta
     property="og:description"
-    content="Creații construite cu tehnică, identitate, cercetare și poveste."
+    content="Creații și proiecte construite prin tehnică, identitate, cercetare și poveste — cofetărie, patiserie, sous-vide, panificație și educație."
   >
 
-  <meta name="theme-color" content="#16120f">
+
+  <!-- ========================================
+       TWITTER / SOCIAL
+  ======================================== -->
+
+  <meta
+    name="twitter:card"
+    content="summary"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Portofoliu Costin Licu — Pastry Chef"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Proiecte de cofetărie, patiserie, sous-vide, panificație și educație gastronomică."
+  >
+
+
+  <meta
+    name="theme-color"
+    content="#16120f"
+  >
 
 
   <style>
@@ -51,15 +94,18 @@
       --max-width: 1180px;
     }
 
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
+
 
     body {
       background:
@@ -71,35 +117,55 @@
         var(--background);
 
       color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
       line-height: 1.6;
     }
+
 
     a {
       color: inherit;
       text-decoration: none;
     }
 
+
     .container {
-      width: min(calc(100% - 40px), var(--max-width));
+      width:
+        min(
+          calc(100% - 40px),
+          var(--max-width)
+        );
+
       margin: 0 auto;
     }
 
 
-    /* HEADER */
+
+    /* ========================================
+       HEADER
+    ======================================== */
 
     header {
       position: sticky;
+
       top: 0;
+
       z-index: 100;
 
-      border-bottom: 1px solid var(--border);
+      border-bottom:
+        1px solid var(--border);
 
       background:
         rgba(14, 12, 10, 0.92);
 
-      backdrop-filter: blur(14px);
+      backdrop-filter:
+        blur(14px);
     }
+
 
     nav {
       position: relative;
@@ -107,26 +173,37 @@
       min-height: 76px;
 
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       align-items: center;
 
       gap: 24px;
     }
 
+
     .logo {
       font-size: 1.15rem;
+
       font-weight: 700;
+
       letter-spacing: 0.08em;
+
       text-transform: uppercase;
+
       white-space: nowrap;
     }
+
 
     .logo span {
       color: var(--accent);
     }
 
+
     .nav-links {
       display: flex;
+
       align-items: center;
 
       gap: 28px;
@@ -136,13 +213,16 @@
       font-size: 0.95rem;
     }
 
+
     .nav-links a {
       transition: 0.2s ease;
     }
 
+
     .nav-links a:hover {
       color: var(--accent-light);
     }
+
 
     .menu-toggle {
       display: none;
@@ -161,17 +241,24 @@
     }
 
 
-    /* SECȚIUNI */
+
+    /* ========================================
+       SECȚIUNI
+    ======================================== */
 
     section {
       padding: 90px 0;
     }
 
+
     .section-heading {
       max-width: 760px;
+
       margin-bottom: 48px;
     }
 
+
+    .section-heading h1,
     .section-heading h2 {
       margin-bottom: 16px;
 
@@ -181,18 +268,24 @@
         serif;
 
       font-size:
-        clamp(1.8rem, 3vw, 2.7rem);
+        clamp(
+          1.8rem,
+          3vw,
+          2.7rem
+        );
 
       font-weight: 400;
 
       line-height: 1.08;
     }
 
+
     .section-heading p {
       color: var(--muted);
 
       font-size: 1.08rem;
     }
+
 
     .eyebrow {
       margin-bottom: 20px !important;
@@ -211,13 +304,17 @@
     }
 
 
-    /* PROIECTE */
+
+    /* ========================================
+       PROIECTE
+    ======================================== */
 
     .project-list {
       display: grid;
 
       gap: 18px;
     }
+
 
     .project-card {
       display: grid;
@@ -248,6 +345,7 @@
         border-color 0.25s ease;
     }
 
+
     .project-card:hover {
       transform:
         translateY(-3px);
@@ -255,6 +353,7 @@
       border-color:
         rgba(215, 164, 91, 0.35);
     }
+
 
     .project-number {
       color: var(--accent);
@@ -266,6 +365,7 @@
 
       font-size: 2rem;
     }
+
 
     .project-content h3 {
       margin-bottom: 8px;
@@ -280,6 +380,7 @@
       font-weight: 400;
     }
 
+
     .project-content p {
       max-width: 700px;
 
@@ -287,7 +388,10 @@
     }
 
 
-    /* BUTOANE */
+
+    /* ========================================
+       BUTOANE
+    ======================================== */
 
     .button {
       display: inline-flex;
@@ -312,9 +416,11 @@
       transition: 0.25s ease;
     }
 
+
     .button-secondary {
       color: var(--text);
     }
+
 
     .button-secondary:hover {
       background:
@@ -325,7 +431,10 @@
     }
 
 
-    /* FILOSOFIE */
+
+    /* ========================================
+       FILOSOFIE
+    ======================================== */
 
     .portfolio-philosophy {
       margin-top: 100px;
@@ -337,7 +446,10 @@
     }
 
 
-    /* FOOTER */
+
+    /* ========================================
+       FOOTER
+    ======================================== */
 
     footer {
       padding: 30px 0;
@@ -350,22 +462,28 @@
       font-size: 0.9rem;
     }
 
+
     .footer-content {
       display: flex;
 
-      justify-content: space-between;
+      justify-content:
+        space-between;
 
       gap: 20px;
     }
 
 
-    /* TABLETĂ / MOBIL */
+
+    /* ========================================
+       TABLETĂ / MOBIL
+    ======================================== */
 
     @media (max-width: 850px) {
 
       .menu-toggle {
         display: block;
       }
+
 
       .nav-links {
         display: none;
@@ -398,9 +516,11 @@
           rgba(0, 0, 0, 0.4);
       }
 
+
       .nav-links.active {
         display: flex;
       }
+
 
       .nav-links a {
         width: 100%;
@@ -412,9 +532,11 @@
           rgba(255,255,255,0.07);
       }
 
+
       .nav-links a:last-child {
         border-bottom: 0;
       }
+
 
       .project-card {
         grid-template-columns:
@@ -423,12 +545,14 @@
         gap: 20px;
       }
 
+
       .project-card .button {
         grid-column:
           2 / 3;
 
         justify-self: start;
       }
+
 
       .footer-content {
         flex-direction: column;
@@ -437,7 +561,10 @@
     }
 
 
-    /* TELEFOANE MICI */
+
+    /* ========================================
+       TELEFOANE MICI
+    ======================================== */
 
     @media (max-width: 600px) {
 
@@ -449,26 +576,33 @@
           );
       }
 
+
       nav {
         min-height: 68px;
       }
+
 
       .logo {
         font-size: 1rem;
       }
 
+
       .nav-links {
         top: 68px;
       }
+
 
       section {
         padding: 65px 0;
       }
 
+
       .section-heading {
         margin-bottom: 34px;
       }
 
+
+      .section-heading h1,
       .section-heading h2 {
         font-size:
           clamp(
@@ -478,9 +612,11 @@
           );
       }
 
+
       .section-heading p {
         font-size: 1rem;
       }
+
 
       .project-card {
         grid-template-columns: 1fr;
@@ -490,13 +626,16 @@
         padding: 24px;
       }
 
+
       .project-number {
         font-size: 1.6rem;
       }
 
+
       .project-content h3 {
         font-size: 1.3rem;
       }
+
 
       .project-card .button {
         grid-column: auto;
@@ -505,6 +644,7 @@
 
         justify-self: stretch;
       }
+
 
       .portfolio-philosophy {
         margin-top: 70px;
@@ -517,15 +657,34 @@
   </style>
 
 
+
+  <!-- ========================================
+       STRUCTURED DATA
+  ======================================== -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "Portofoliu — Costin Licu",
+    "@id": "https://costinlicu.ro/portofoliu.html#portfolio",
+    "name": "Portofoliu Costin Licu",
+    "description": "Proiecte de cofetărie, patiserie, deserturi sous-vide, panificație artizanală și educație gastronomică.",
     "url": "https://costinlicu.ro/portofoliu.html",
+    "inLanguage": "ro",
     "author": {
       "@type": "Person",
-      "name": "Costin Licu"
+      "@id": "https://costinlicu.ro/#person",
+      "name": "Costin Licu",
+      "url": "https://costinlicu.ro/",
+      "jobTitle": [
+        "Pastry Chef",
+        "Formator",
+        "Inginer în industria alimentară"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/costinlicu/",
+        "https://www.facebook.com/chefcostinlicu"
+      ]
     }
   }
   </script>
@@ -533,10 +692,13 @@
 </head>
 
 
+
 <body>
 
 
-  <!-- HEADER -->
+  <!-- ========================================
+       HEADER
+  ======================================== -->
 
   <header>
 
@@ -609,7 +771,9 @@
       <div class="container">
 
 
-        <!-- INTRODUCERE -->
+        <!-- ========================================
+             INTRODUCERE
+        ======================================== -->
 
         <div class="section-heading">
 
@@ -618,10 +782,10 @@
           </p>
 
 
-          <h2>
+          <h1>
             Creații construite<br>
             cu tehnică și identitate.
-          </h2>
+          </h1>
 
 
           <p>
@@ -634,7 +798,9 @@
 
 
 
-        <!-- PROIECTE -->
+        <!-- ========================================
+             PROIECTE
+        ======================================== -->
 
         <div class="project-list">
 
@@ -823,7 +989,9 @@
 
 
 
-        <!-- FILOSOFIE -->
+        <!-- ========================================
+             FILOSOFIE
+        ======================================== -->
 
         <div class="portfolio-philosophy">
 
@@ -863,7 +1031,9 @@
 
 
 
-  <!-- FOOTER -->
+  <!-- ========================================
+       FOOTER
+  ======================================== -->
 
   <footer>
 
@@ -883,7 +1053,9 @@
 
 
 
-  <!-- MENIU MOBIL -->
+  <!-- ========================================
+       MENIU MOBIL
+  ======================================== -->
 
   <script>
 
