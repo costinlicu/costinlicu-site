@@ -1,5 +1,7 @@
 const INGREDIENTS_KEY = "recipeLabIngredients";
 const RECIPES_KEY = "recipeLabRecipes";
+const TECH_SHEETS_KEY = "recipeLabTechnologySheets";
+
 
 /* =========================
    INGREDIENTE
@@ -26,9 +28,11 @@ function saveIngredients(ingredients) {
 
 function getIngredientById(id) {
     return getIngredients().find(
-        ingredient => Number(ingredient.id) === Number(id)
+        ingredient =>
+            Number(ingredient.id) === Number(id)
     );
 }
+
 
 /* =========================
    RETETE
@@ -52,6 +56,38 @@ function saveRecipes(recipes) {
         JSON.stringify(recipes)
     );
 }
+
+
+/* =========================
+   FISE TEHNOLOGICE
+========================= */
+
+function getTechnologySheets() {
+    const saved = localStorage.getItem(TECH_SHEETS_KEY);
+
+    if (!saved) return [];
+
+    try {
+        return JSON.parse(saved);
+    } catch {
+        return [];
+    }
+}
+
+function saveTechnologySheets(sheets) {
+    localStorage.setItem(
+        TECH_SHEETS_KEY,
+        JSON.stringify(sheets)
+    );
+}
+
+function getTechnologySheetByRecipeId(recipeId) {
+    return getTechnologySheets().find(
+        sheet =>
+            Number(sheet.recipeId) === Number(recipeId)
+    );
+}
+
 
 /* =========================
    FORMATARE
@@ -91,6 +127,6 @@ function formatQuantity(value) {
 
 function escapeHtml(text) {
     const div = document.createElement("div");
-    div.textContent = text;
+    div.textContent = text ?? "";
     return div.innerHTML;
 }
