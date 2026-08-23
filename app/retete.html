@@ -45,7 +45,7 @@
         .button-danger {
             background: transparent;
             color: #a44040;
-            padding: 8px 5px;
+            padding: 7px;
         }
 
         .button-edit {
@@ -81,18 +81,32 @@
 
         .recipe-info-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 18px;
         }
 
-        .ingredient-builder {
+        .builder-title {
+            margin-top: 32px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .builder-description {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .ingredient-builder,
+        .component-builder {
             display: grid;
             grid-template-columns: 2fr 1fr auto;
             gap: 12px;
             align-items: end;
-            margin-top: 25px;
-            padding-top: 25px;
-            border-top: 1px solid #eeeae3;
+            padding: 20px;
+            background: #fbfaf7;
+            border: 1px solid #eee8de;
+            border-radius: 12px;
         }
 
         .recipe-table {
@@ -113,6 +127,13 @@
             font-size: 13px;
         }
 
+        .section-label-row td {
+            background: #f7f4ee;
+            font-weight: bold;
+            font-size: 13px;
+            color: #555;
+        }
+
         .cost-summary {
             display: flex;
             justify-content: flex-end;
@@ -123,7 +144,7 @@
             background: #f7f4ee;
             padding: 20px 25px;
             border-radius: 12px;
-            min-width: 270px;
+            min-width: 290px;
         }
 
         .cost-line {
@@ -198,33 +219,60 @@
             margin-top: 20px;
             display: flex;
             justify-content: flex-end;
-            align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
 
-        .edit-notice {
+        .edit-notice,
+        .yield-notice {
             background: #f7f4ee;
             border-radius: 9px;
             padding: 12px 15px;
             margin-bottom: 22px;
             font-size: 14px;
             color: #555;
+            line-height: 1.5;
+        }
+
+        .component-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #f1ede6;
+            border-radius: 12px;
+            font-size: 11px;
+            color: #666;
+            margin-left: 8px;
+        }
+
+        .warning {
+            margin-top: 20px;
+            background: #fff5e9;
+            padding: 13px 15px;
+            border-radius: 9px;
+            font-size: 13px;
+            color: #715435;
+        }
+
+        @media (max-width: 950px) {
+
+            .recipe-info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
         }
 
         @media (max-width: 800px) {
 
             .recipe-info-grid,
-            .ingredient-builder {
+            .ingredient-builder,
+            .component-builder {
                 grid-template-columns: 1fr;
             }
 
-            .toolbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
+            .toolbar,
             .recipe-header {
                 flex-direction: column;
+                align-items: flex-start;
             }
 
             .cost-summary {
@@ -240,12 +288,7 @@
             }
 
             .recipe-table {
-                min-width: 650px;
-            }
-
-            .recipe-actions {
-                justify-content: flex-start;
-                flex-wrap: wrap;
+                min-width: 760px;
             }
 
         }
@@ -282,13 +325,14 @@
             <a href="retete.html" class="active">
                 Rețete
             </a>
-<a href="calculator.html">
-    Calculator
-</a>
+
+            <a href="calculator.html">
+                Calculator
+            </a>
 
             <a href="fise.html">
-    Fișe tehnologice
-</a>
+                Fișe tehnologice
+            </a>
 
         </nav>
 
@@ -302,7 +346,7 @@
             <h1>Rețete</h1>
 
             <p>
-                Creează, editează și calculează automat costul rețetelor.
+                Creează rețete, componente și produse complexe.
             </p>
 
         </div>
@@ -325,12 +369,11 @@
         </div>
 
 
-        <!-- FORMULAR -->
-
         <div
             id="recipeForm"
             class="form-card"
             style="display:none;">
+
 
             <h2
                 id="recipeFormTitle"
@@ -347,7 +390,17 @@
                 style="display:none;">
 
                 Editezi o rețetă existentă.
-                Modificările vor fi salvate peste versiunea actuală.
+
+            </div>
+
+
+            <div class="yield-notice">
+
+                <strong>Randamentul</strong> reprezintă cantitatea finală obținută din această rețetă.
+                Este necesar pentru ca rețeta să poată fi folosită ulterior ca sub-rețetă.
+
+                Exemplu: dacă obții 500 g de ganache, introduci
+                <strong>500 g</strong>.
 
             </div>
 
@@ -363,7 +416,7 @@
                     <input
                         type="text"
                         id="recipeName"
-                        placeholder="Ex: Mousse de ciocolată">
+                        placeholder="Ex: Ganache ciocolată">
 
                 </div>
 
@@ -383,10 +436,60 @@
 
                 </div>
 
+
+                <div>
+
+                    <label>
+                        Randament final
+                    </label>
+
+                    <input
+                        type="number"
+                        id="recipeYield"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="Ex: 500">
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        U.M. randament
+                    </label>
+
+                    <select id="recipeYieldUnit">
+
+                        <option value="g">
+                            g
+                        </option>
+
+                        <option value="ml">
+                            ml
+                        </option>
+
+                        <option value="buc">
+                            buc
+                        </option>
+
+                    </select>
+
+                </div>
+
             </div>
 
 
-            <!-- ADAUGARE INGREDIENT -->
+            <!-- INGREDIENTE -->
+
+            <div class="builder-title">
+                Ingrediente
+            </div>
+
+            <div class="builder-description">
+                Materii prime din baza de ingrediente.
+            </div>
+
 
             <div class="ingredient-builder">
 
@@ -411,7 +514,7 @@
                     <input
                         type="number"
                         id="recipeIngredientQuantity"
-                        min="0"
+                        min="0.01"
                         step="0.01"
                         placeholder="100">
 
@@ -424,7 +527,7 @@
                         class="button"
                         onclick="addIngredientToRecipe()">
 
-                        + Adaugă
+                        + Adaugă ingredient
 
                     </button>
 
@@ -432,6 +535,68 @@
 
             </div>
 
+
+            <!-- SUBRETETE -->
+
+            <div class="builder-title">
+                Componente / Sub-rețete
+            </div>
+
+            <div class="builder-description">
+                Folosește o altă rețetă deja salvată ca ingredient compus.
+            </div>
+
+
+            <div class="component-builder">
+
+                <div>
+
+                    <label>
+                        Sub-rețetă
+                    </label>
+
+                    <select id="componentRecipe">
+                    </select>
+
+                </div>
+
+
+                <div>
+
+                    <label id="componentQuantityLabel">
+                        Cantitate
+                    </label>
+
+                    <input
+                        type="number"
+                        id="componentQuantity"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="100">
+
+                </div>
+
+
+                <div>
+
+                    <button
+                        class="button"
+                        onclick="addComponentToRecipe()">
+
+                        + Adaugă componentă
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div id="componentWarning">
+            </div>
+
+
+            <!-- RETETA CURENTA -->
 
             <div id="currentRecipeArea">
             </div>
@@ -448,6 +613,7 @@
 
                 </button>
 
+
                 <button
                     class="button button-secondary"
                     onclick="cancelRecipe()">
@@ -461,8 +627,6 @@
         </div>
 
 
-        <!-- LISTA RETETE -->
-
         <div id="recipeList">
         </div>
 
@@ -471,30 +635,29 @@
 </div>
 
 
-<script src="app.js?v=3"></script>
+<script src="app.js?v=9"></script>
 
 
 <script>
 
 let currentRecipeLines = [];
-
+let currentComponents = [];
 let editingRecipeId = null;
 
 
-/* =========================
+/* ==================================================
    RETETA NOUA
-========================= */
+================================================== */
 
 function showNewRecipeForm() {
 
-    const ingredients =
-        getIngredients();
-
-
-    if (ingredients.length === 0) {
+    if (
+        getIngredients().length === 0 &&
+        getRecipes().length === 0
+    ) {
 
         alert(
-            "Mai întâi trebuie să introduci cel puțin un ingredient."
+            "Introdu mai întâi cel puțin un ingredient."
         );
 
         return;
@@ -504,6 +667,7 @@ function showNewRecipeForm() {
     editingRecipeId = null;
 
     currentRecipeLines = [];
+    currentComponents = [];
 
 
     document.getElementById(
@@ -517,7 +681,22 @@ function showNewRecipeForm() {
 
 
     document.getElementById(
+        "recipeYield"
+    ).value = "";
+
+
+    document.getElementById(
+        "recipeYieldUnit"
+    ).value = "g";
+
+
+    document.getElementById(
         "recipeIngredientQuantity"
+    ).value = "";
+
+
+    document.getElementById(
+        "componentQuantity"
     ).value = "";
 
 
@@ -541,6 +720,8 @@ function showNewRecipeForm() {
 
     populateIngredientSelect();
 
+    populateComponentSelect();
+
     renderCurrentRecipe();
 
 
@@ -556,22 +737,14 @@ function showNewRecipeForm() {
 }
 
 
-/* =========================
+/* ==================================================
    EDITARE RETETA
-========================= */
+================================================== */
 
 function editRecipe(id) {
 
-    const recipes =
-        getRecipes();
-
-
     const recipe =
-        recipes.find(
-            recipe =>
-                Number(recipe.id) ===
-                Number(id)
-        );
+        getRecipeById(id);
 
 
     if (!recipe) {
@@ -589,21 +762,47 @@ function editRecipe(id) {
 
 
     currentRecipeLines =
-        recipe.ingredients.map(
-            line => ({
+        Array.isArray(
+            recipe.ingredients
+        )
+            ? recipe.ingredients.map(
+                line => ({
 
-                ingredientId:
-                    Number(
-                        line.ingredientId
-                    ),
+                    ingredientId:
+                        Number(
+                            line.ingredientId
+                        ),
 
-                quantity:
-                    Number(
-                        line.quantity
-                    )
+                    quantity:
+                        Number(
+                            line.quantity
+                        )
 
-            })
-        );
+                })
+              )
+            : [];
+
+
+    currentComponents =
+        Array.isArray(
+            recipe.components
+        )
+            ? recipe.components.map(
+                component => ({
+
+                    recipeId:
+                        Number(
+                            component.recipeId
+                        ),
+
+                    quantity:
+                        Number(
+                            component.quantity
+                        )
+
+                })
+              )
+            : [];
 
 
     document.getElementById(
@@ -615,13 +814,21 @@ function editRecipe(id) {
     document.getElementById(
         "recipePortions"
     ).value =
-        recipe.portions;
+        recipe.portions || 1;
 
 
     document.getElementById(
-        "recipeIngredientQuantity"
+        "recipeYield"
     ).value =
+        recipe.yieldQuantity ||
         "";
+
+
+    document.getElementById(
+        "recipeYieldUnit"
+    ).value =
+        recipe.yieldUnit ||
+        "g";
 
 
     document.getElementById(
@@ -644,6 +851,8 @@ function editRecipe(id) {
 
     populateIngredientSelect();
 
+    populateComponentSelect();
+
     renderCurrentRecipe();
 
 
@@ -660,30 +869,16 @@ function editRecipe(id) {
 }
 
 
-/* =========================
+/* ==================================================
    ANULARE
-========================= */
+================================================== */
 
 function cancelRecipe() {
 
     editingRecipeId = null;
 
     currentRecipeLines = [];
-
-
-    document.getElementById(
-        "recipeName"
-    ).value = "";
-
-
-    document.getElementById(
-        "recipePortions"
-    ).value = "1";
-
-
-    document.getElementById(
-        "recipeIngredientQuantity"
-    ).value = "";
+    currentComponents = [];
 
 
     document.getElementById(
@@ -692,25 +887,15 @@ function cancelRecipe() {
         "none";
 
 
-    document.getElementById(
-        "editNotice"
-    ).style.display =
-        "none";
-
-
     renderCurrentRecipe();
 }
 
 
-/* =========================
-   SELECT INGREDIENT
-========================= */
+/* ==================================================
+   INGREDIENT SELECT
+================================================== */
 
 function populateIngredientSelect() {
-
-    const ingredients =
-        getIngredients();
-
 
     const select =
         document.getElementById(
@@ -721,43 +906,37 @@ function populateIngredientSelect() {
     select.innerHTML = "";
 
 
-    const sortedIngredients =
-        [...ingredients].sort(
+    [...getIngredients()]
+        .sort(
             (a, b) =>
                 a.name.localeCompare(
                     b.name,
                     "ro"
                 )
+        )
+        .forEach(
+            ingredient => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    ingredient.id;
+
+
+                option.textContent =
+                    ingredient.name;
+
+
+                select.appendChild(
+                    option
+                );
+
+            }
         );
-
-
-    sortedIngredients.forEach(
-        ingredient => {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                ingredient.id;
-
-
-            option.textContent =
-                ingredient.name +
-                " — " +
-                formatMoney(
-                    ingredient.price
-                );
-
-
-            select.appendChild(
-                option
-            );
-
-        }
-    );
 
 
     updateQuantityLabel();
@@ -774,43 +953,28 @@ document.getElementById(
 
 function updateQuantityLabel() {
 
-    const ingredientId =
-        document.getElementById(
-            "recipeIngredient"
-        ).value;
-
-
     const ingredient =
         getIngredientById(
-            ingredientId
+            document.getElementById(
+                "recipeIngredient"
+            ).value
         );
 
 
-    const label =
-        document.getElementById(
-            "quantityLabel"
-        );
-
-
-    if (!ingredient) {
-
-        label.textContent =
-            "Cantitate";
-
-        return;
-    }
-
-
-    label.textContent =
-        "Cantitate (" +
-        ingredient.unit +
-        ")";
+    document.getElementById(
+        "quantityLabel"
+    ).textContent =
+        ingredient
+            ? "Cantitate (" +
+              ingredient.unit +
+              ")"
+            : "Cantitate";
 }
 
 
-/* =========================
+/* ==================================================
    ADAUGARE INGREDIENT
-========================= */
+================================================== */
 
 function addIngredientToRecipe() {
 
@@ -859,21 +1023,19 @@ function addIngredientToRecipe() {
     }
 
 
-    const existingLine =
+    const existing =
         currentRecipeLines.find(
             line =>
                 Number(
                     line.ingredientId
                 ) ===
-                Number(
-                    ingredientId
-                )
+                ingredientId
         );
 
 
-    if (existingLine) {
+    if (existing) {
 
-        existingLine.quantity +=
+        existing.quantity +=
             quantity;
 
     } else {
@@ -900,35 +1062,318 @@ function addIngredientToRecipe() {
 }
 
 
-/* =========================
-   STERGERE INGREDIENT DIN RETETA
-========================= */
+/* ==================================================
+   SUBRETETE DISPONIBILE
+================================================== */
 
-function removeRecipeLine(
-    ingredientId
-) {
+function populateComponentSelect() {
 
-    currentRecipeLines =
-        currentRecipeLines.filter(
-            line =>
-                Number(
-                    line.ingredientId
-                ) !==
-                Number(
-                    ingredientId
-                )
+    const select =
+        document.getElementById(
+            "componentRecipe"
         );
+
+
+    const warning =
+        document.getElementById(
+            "componentWarning"
+        );
+
+
+    select.innerHTML = "";
+
+
+    let available =
+        getRecipes().filter(
+            recipe => {
+
+                /*
+                    Nu putem introduce
+                    rețeta în ea însăși.
+                */
+
+                if (
+                    editingRecipeId !== null &&
+                    Number(recipe.id) ===
+                    Number(editingRecipeId)
+                ) {
+
+                    return false;
+                }
+
+
+                /*
+                    Sub-rețeta trebuie
+                    să aibă randament.
+                */
+
+                if (
+                    !getRecipeYield(
+                        recipe
+                    )
+                ) {
+
+                    return false;
+                }
+
+
+                /*
+                    Evităm buclele:
+                    dacă sub-rețeta
+                    depinde deja de
+                    rețeta editată,
+                    nu o permitem.
+                */
+
+                if (
+                    editingRecipeId !== null &&
+                    recipeDependsOn(
+                        recipe.id,
+                        editingRecipeId
+                    )
+                ) {
+
+                    return false;
+                }
+
+
+                return true;
+
+            }
+        );
+
+
+    available.sort(
+        (a, b) =>
+            a.name.localeCompare(
+                b.name,
+                "ro"
+            )
+    );
+
+
+    if (
+        available.length === 0
+    ) {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value = "";
+
+        option.textContent =
+            "Nu există sub-rețete disponibile";
+
+
+        select.appendChild(
+            option
+        );
+
+
+        warning.innerHTML = `
+
+            <div class="warning">
+
+                Pentru a folosi o rețetă ca
+                sub-rețetă, aceasta trebuie să
+                aibă completat
+                <strong>Randamentul final</strong>.
+
+            </div>
+
+        `;
+
+
+        updateComponentQuantityLabel();
+
+        return;
+
+    }
+
+
+    warning.innerHTML = "";
+
+
+    available.forEach(
+        recipe => {
+
+            const yieldData =
+                getRecipeYield(
+                    recipe
+                );
+
+
+            const unitCost =
+                calculateRecipeUnitCost(
+                    recipe
+                );
+
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                recipe.id;
+
+
+            option.textContent =
+                recipe.name +
+                " — " +
+                formatUnitCost(
+                    unitCost
+                ) +
+                "/" +
+                yieldData.unit;
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    updateComponentQuantityLabel();
+}
+
+
+document.getElementById(
+    "componentRecipe"
+).addEventListener(
+    "change",
+    updateComponentQuantityLabel
+);
+
+
+function updateComponentQuantityLabel() {
+
+    const recipe =
+        getRecipeById(
+            document.getElementById(
+                "componentRecipe"
+            ).value
+        );
+
+
+    const yieldData =
+        getRecipeYield(
+            recipe
+        );
+
+
+    document.getElementById(
+        "componentQuantityLabel"
+    ).textContent =
+        yieldData
+            ? "Cantitate (" +
+              yieldData.unit +
+              ")"
+            : "Cantitate";
+}
+
+
+/* ==================================================
+   ADAUGARE COMPONENTA
+================================================== */
+
+function addComponentToRecipe() {
+
+    const recipeId =
+        Number(
+            document.getElementById(
+                "componentRecipe"
+            ).value
+        );
+
+
+    const quantity =
+        Number(
+            document.getElementById(
+                "componentQuantity"
+            ).value
+        );
+
+
+    const componentRecipe =
+        getRecipeById(
+            recipeId
+        );
+
+
+    if (!componentRecipe) {
+
+        alert(
+            "Nu există nicio sub-rețetă disponibilă."
+        );
+
+        return;
+    }
+
+
+    if (
+        !quantity ||
+        quantity <= 0
+    ) {
+
+        alert(
+            "Introdu cantitatea de sub-rețetă folosită."
+        );
+
+        return;
+    }
+
+
+    const existing =
+        currentComponents.find(
+            component =>
+                Number(
+                    component.recipeId
+                ) ===
+                recipeId
+        );
+
+
+    if (existing) {
+
+        existing.quantity +=
+            quantity;
+
+    } else {
+
+        currentComponents.push({
+
+            recipeId:
+                recipeId,
+
+            quantity:
+                quantity
+
+        });
+
+    }
+
+
+    document.getElementById(
+        "componentQuantity"
+    ).value = "";
 
 
     renderCurrentRecipe();
 }
 
 
-/* =========================
-   MODIFICARE CANTITATE DIRECT
-========================= */
+/* ==================================================
+   MODIFICARI DIRECTE
+================================================== */
 
-function updateRecipeLineQuantity(
+function updateIngredientQuantity(
     ingredientId,
     value
 ) {
@@ -938,7 +1383,7 @@ function updateRecipeLineQuantity(
 
 
     if (
-        isNaN(quantity) ||
+        !quantity ||
         quantity <= 0
     ) {
 
@@ -958,24 +1403,105 @@ function updateRecipeLineQuantity(
         );
 
 
-    if (!line) {
-        return;
+    if (line) {
+
+        line.quantity =
+            quantity;
+
     }
-
-
-    line.quantity =
-        quantity;
 
 
     renderCurrentRecipe();
 }
 
 
-/* =========================
-   COST RETETA CURENTA
-========================= */
+function updateComponentQuantity(
+    recipeId,
+    value
+) {
 
-function calculateCurrentRecipeTotal() {
+    const quantity =
+        Number(value);
+
+
+    if (
+        !quantity ||
+        quantity <= 0
+    ) {
+
+        return;
+    }
+
+
+    const component =
+        currentComponents.find(
+            component =>
+                Number(
+                    component.recipeId
+                ) ===
+                Number(
+                    recipeId
+                )
+        );
+
+
+    if (component) {
+
+        component.quantity =
+            quantity;
+
+    }
+
+
+    renderCurrentRecipe();
+}
+
+
+function removeIngredient(
+    ingredientId
+) {
+
+    currentRecipeLines =
+        currentRecipeLines.filter(
+            line =>
+                Number(
+                    line.ingredientId
+                ) !==
+                Number(
+                    ingredientId
+                )
+        );
+
+
+    renderCurrentRecipe();
+}
+
+
+function removeComponent(
+    recipeId
+) {
+
+    currentComponents =
+        currentComponents.filter(
+            component =>
+                Number(
+                    component.recipeId
+                ) !==
+                Number(
+                    recipeId
+                )
+        );
+
+
+    renderCurrentRecipe();
+}
+
+
+/* ==================================================
+   COST RETETA AFLATA IN EDITOR
+================================================== */
+
+function calculateEditorCost() {
 
     let total = 0;
 
@@ -1006,13 +1532,53 @@ function calculateCurrentRecipeTotal() {
     );
 
 
+    currentComponents.forEach(
+        component => {
+
+            const recipe =
+                getRecipeById(
+                    component.recipeId
+                );
+
+
+            const yieldData =
+                getRecipeYield(
+                    recipe
+                );
+
+
+            const unitCost =
+                calculateRecipeUnitCost(
+                    recipe
+                );
+
+
+            if (
+                !yieldData ||
+                unitCost === null
+            ) {
+
+                return;
+            }
+
+
+            total +=
+                unitCost *
+                Number(
+                    component.quantity
+                );
+
+        }
+    );
+
+
     return total;
 }
 
 
-/* =========================
-   AFISARE RETETA CURENTA
-========================= */
+/* ==================================================
+   AFISARE RETETA DIN EDITOR
+================================================== */
 
 function renderCurrentRecipe() {
 
@@ -1023,7 +1589,8 @@ function renderCurrentRecipe() {
 
 
     if (
-        currentRecipeLines.length === 0
+        currentRecipeLines.length === 0 &&
+        currentComponents.length === 0
     ) {
 
         container.innerHTML = "";
@@ -1043,7 +1610,7 @@ function renderCurrentRecipe() {
                 <tr>
 
                     <th>
-                        Ingredient
+                        Element
                     </th>
 
                     <th>
@@ -1051,7 +1618,7 @@ function renderCurrentRecipe() {
                     </th>
 
                     <th>
-                        Cost/unitate
+                        Cost / unitate
                     </th>
 
                     <th>
@@ -1069,6 +1636,26 @@ function renderCurrentRecipe() {
     `;
 
 
+    if (
+        currentRecipeLines.length >
+        0
+    ) {
+
+        html += `
+
+            <tr class="section-label-row">
+
+                <td colspan="5">
+                    INGREDIENTE
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
     currentRecipeLines.forEach(
         line => {
 
@@ -1083,7 +1670,7 @@ function renderCurrentRecipe() {
             }
 
 
-            const lineCost =
+            const cost =
                 Number(
                     ingredient.unitCost
                 ) *
@@ -1099,11 +1686,9 @@ function renderCurrentRecipe() {
                     <td>
 
                         <strong>
-
                             ${escapeHtml(
                                 ingredient.name
                             )}
-
                         </strong>
 
                     </td>
@@ -1111,20 +1696,19 @@ function renderCurrentRecipe() {
 
                     <td>
 
-                        <div
-                            style="
-                                display:flex;
-                                align-items:center;
-                                gap:8px;
-                                max-width:160px;
-                            ">
+                        <div style="
+                            display:flex;
+                            gap:8px;
+                            align-items:center;
+                            max-width:170px;
+                        ">
 
                             <input
                                 type="number"
                                 min="0.01"
                                 step="0.01"
                                 value="${line.quantity}"
-                                onchange="updateRecipeLineQuantity(
+                                onchange="updateIngredientQuantity(
                                     ${ingredient.id},
                                     this.value
                                 )">
@@ -1154,7 +1738,7 @@ function renderCurrentRecipe() {
                         <strong>
 
                             ${formatMoney(
-                                lineCost
+                                cost
                             )}
 
                         </strong>
@@ -1166,7 +1750,7 @@ function renderCurrentRecipe() {
 
                         <button
                             class="button button-danger"
-                            onclick="removeRecipeLine(
+                            onclick="removeIngredient(
                                 ${ingredient.id}
                             )">
 
@@ -1184,8 +1768,165 @@ function renderCurrentRecipe() {
     );
 
 
+    if (
+        currentComponents.length >
+        0
+    ) {
+
+        html += `
+
+            <tr class="section-label-row">
+
+                <td colspan="5">
+                    COMPONENTE / SUB-REȚETE
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    currentComponents.forEach(
+        component => {
+
+            const recipe =
+                getRecipeById(
+                    component.recipeId
+                );
+
+
+            if (!recipe) {
+                return;
+            }
+
+
+            const yieldData =
+                getRecipeYield(
+                    recipe
+                );
+
+
+            const unitCost =
+                calculateRecipeUnitCost(
+                    recipe
+                );
+
+
+            if (
+                !yieldData ||
+                unitCost === null
+            ) {
+
+                return;
+            }
+
+
+            const cost =
+                unitCost *
+                Number(
+                    component.quantity
+                );
+
+
+            html += `
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+
+                            ${escapeHtml(
+                                recipe.name
+                            )}
+
+                        </strong>
+
+                        <span class="component-badge">
+                            Sub-rețetă
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div style="
+                            display:flex;
+                            gap:8px;
+                            align-items:center;
+                            max-width:170px;
+                        ">
+
+                            <input
+                                type="number"
+                                min="0.01"
+                                step="0.01"
+                                value="${component.quantity}"
+                                onchange="updateComponentQuantity(
+                                    ${recipe.id},
+                                    this.value
+                                )">
+
+                            <span>
+                                ${yieldData.unit}
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+
+                        ${formatUnitCost(
+                            unitCost
+                        )}
+
+                        / ${yieldData.unit}
+
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+
+                            ${formatMoney(
+                                cost
+                            )}
+
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            class="button button-danger"
+                            onclick="removeComponent(
+                                ${recipe.id}
+                            )">
+
+                            Șterge
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
     const total =
-        calculateCurrentRecipeTotal();
+        calculateEditorCost();
 
 
     const portions =
@@ -1197,7 +1938,8 @@ function renderCurrentRecipe() {
 
 
     const costPerPortion =
-        total / portions;
+        total /
+        portions;
 
 
     html += `
@@ -1233,9 +1975,11 @@ function renderCurrentRecipe() {
                     </span>
 
                     <strong>
+
                         ${formatMoney(
                             costPerPortion
                         )}
+
                     </strong>
 
                 </div>
@@ -1260,9 +2004,9 @@ document.getElementById(
 );
 
 
-/* =========================
+/* ==================================================
    SALVARE
-========================= */
+================================================== */
 
 function saveCurrentRecipe() {
 
@@ -1278,6 +2022,20 @@ function saveCurrentRecipe() {
                 "recipePortions"
             ).value
         );
+
+
+    const yieldQuantity =
+        Number(
+            document.getElementById(
+                "recipeYield"
+            ).value
+        );
+
+
+    const yieldUnit =
+        document.getElementById(
+            "recipeYieldUnit"
+        ).value;
 
 
     if (!name) {
@@ -1304,11 +2062,30 @@ function saveCurrentRecipe() {
 
 
     if (
-        currentRecipeLines.length === 0
+        currentRecipeLines.length === 0 &&
+        currentComponents.length === 0
     ) {
 
         alert(
-            "Adaugă cel puțin un ingredient."
+            "Adaugă cel puțin un ingredient sau o sub-rețetă."
+        );
+
+        return;
+    }
+
+
+    if (
+        document.getElementById(
+            "recipeYield"
+        ).value !== "" &&
+        (
+            !yieldQuantity ||
+            yieldQuantity <= 0
+        )
+    ) {
+
+        alert(
+            "Randamentul trebuie să fie mai mare decât 0."
         );
 
         return;
@@ -1319,7 +2096,61 @@ function saveCurrentRecipe() {
         getRecipes();
 
 
-    /* EDITARE */
+    const recipeData = {
+
+        name:
+            name,
+
+        portions:
+            portions,
+
+        yieldQuantity:
+            yieldQuantity > 0
+                ? yieldQuantity
+                : null,
+
+        yieldUnit:
+            yieldUnit,
+
+        ingredients:
+            currentRecipeLines.map(
+                line => ({
+
+                    ingredientId:
+                        Number(
+                            line.ingredientId
+                        ),
+
+                    quantity:
+                        Number(
+                            line.quantity
+                        )
+
+                })
+            ),
+
+        components:
+            currentComponents.map(
+                component => ({
+
+                    recipeId:
+                        Number(
+                            component.recipeId
+                        ),
+
+                    quantity:
+                        Number(
+                            component.quantity
+                        )
+
+                })
+            ),
+
+        updatedAt:
+            new Date().toISOString()
+
+    };
+
 
     if (
         editingRecipeId !== null
@@ -1347,85 +2178,27 @@ function saveCurrentRecipe() {
         }
 
 
-        const oldRecipe =
-            recipes[index];
-
-
         recipes[index] = {
 
-            ...oldRecipe,
+            ...recipes[index],
 
-            name:
-                name,
-
-            portions:
-                portions,
-
-            ingredients:
-                currentRecipeLines.map(
-                    line => ({
-
-                        ingredientId:
-                            Number(
-                                line.ingredientId
-                            ),
-
-                        quantity:
-                            Number(
-                                line.quantity
-                            )
-
-                    })
-                ),
-
-            updatedAt:
-                new Date().toISOString()
+            ...recipeData
 
         };
 
-    }
+    } else {
 
-    /* RETETA NOUA */
-
-    else {
-
-        const recipe = {
+        recipes.push({
 
             id:
                 Date.now(),
 
-            name:
-                name,
-
-            portions:
-                portions,
-
-            ingredients:
-                currentRecipeLines.map(
-                    line => ({
-
-                        ingredientId:
-                            Number(
-                                line.ingredientId
-                            ),
-
-                        quantity:
-                            Number(
-                                line.quantity
-                            )
-
-                    })
-                ),
+            ...recipeData,
 
             createdAt:
                 new Date().toISOString()
 
-        };
-
-
-        recipes.push(
-            recipe
-        );
+        });
 
     }
 
@@ -1441,52 +2214,44 @@ function saveCurrentRecipe() {
 }
 
 
-/* =========================
-   COST RETETA SALVATA
-========================= */
-
-function calculateRecipeTotal(
-    recipe
-) {
-
-    let total = 0;
-
-
-    recipe.ingredients.forEach(
-        line => {
-
-            const ingredient =
-                getIngredientById(
-                    line.ingredientId
-                );
-
-
-            if (!ingredient) {
-                return;
-            }
-
-
-            total +=
-                Number(
-                    ingredient.unitCost
-                ) *
-                Number(
-                    line.quantity
-                );
-
-        }
-    );
-
-
-    return total;
-}
-
-
-/* =========================
+/* ==================================================
    STERGERE RETETA
-========================= */
+================================================== */
 
 function deleteRecipe(id) {
+
+    /*
+        Nu ștergem o rețetă dacă
+        este folosită ca sub-rețetă.
+    */
+
+    const usedBy =
+        getRecipes().find(
+            recipe =>
+                Array.isArray(
+                    recipe.components
+                ) &&
+                recipe.components.some(
+                    component =>
+                        Number(
+                            component.recipeId
+                        ) ===
+                        Number(id)
+                )
+        );
+
+
+    if (usedBy) {
+
+        alert(
+            "Această rețetă este folosită ca sub-rețetă în „" +
+            usedBy.name +
+            "” și nu poate fi ștearsă."
+        );
+
+        return;
+    }
+
 
     const confirmed =
         confirm(
@@ -1499,12 +2264,8 @@ function deleteRecipe(id) {
     }
 
 
-    let recipes =
-        getRecipes();
-
-
-    recipes =
-        recipes.filter(
+    const recipes =
+        getRecipes().filter(
             recipe =>
                 Number(
                     recipe.id
@@ -1522,9 +2283,9 @@ function deleteRecipe(id) {
 }
 
 
-/* =========================
-   AFISARE RETETE
-========================= */
+/* ==================================================
+   AFISARE RETETE SALVATE
+================================================== */
 
 function renderRecipes() {
 
@@ -1548,12 +2309,6 @@ function renderRecipes() {
 
                 Nu ai creat încă nicio rețetă.
 
-                <br><br>
-
-                Apasă
-                <strong>+ Rețetă nouă</strong>
-                pentru a începe.
-
             </div>
 
         `;
@@ -1572,21 +2327,52 @@ function renderRecipes() {
             recipe => {
 
                 const total =
-                    calculateRecipeTotal(
+                    calculateRecipeTotalCost(
                         recipe
                     );
 
 
+                const safeTotal =
+                    total === null
+                        ? 0
+                        : total;
+
+
                 const costPerPortion =
-                    total /
-                    Number(
-                        recipe.portions
+                    safeTotal /
+                    (
+                        Number(
+                            recipe.portions
+                        ) || 1
+                    );
+
+
+                const ingredients =
+                    Array.isArray(
+                        recipe.ingredients
+                    )
+                        ? recipe.ingredients
+                        : [];
+
+
+                const components =
+                    Array.isArray(
+                        recipe.components
+                    )
+                        ? recipe.components
+                        : [];
+
+
+                const yieldData =
+                    getRecipeYield(
+                        recipe
                     );
 
 
                 html += `
 
                     <div class="recipe-card">
+
 
                         <div class="recipe-header">
 
@@ -1600,10 +2386,10 @@ function renderRecipes() {
 
                                 </h3>
 
+
                                 <div class="recipe-meta">
 
                                     ${recipe.portions}
-
                                     ${
                                         Number(
                                             recipe.portions
@@ -1614,17 +2400,51 @@ function renderRecipes() {
 
                                     ·
 
-                                    ${
-                                        recipe.ingredients.length
-                                    }
+                                    ${ingredients.length}
+                                    ingrediente
 
-                                    ${
-                                        recipe.ingredients.length === 1
-                                            ? "ingredient"
-                                            : "ingrediente"
-                                    }
+                                    ·
+
+                                    ${components.length}
+                                    componente
 
                                 </div>
+
+
+                                ${
+                                    yieldData
+                                        ? `
+                                            <div
+                                                class="recipe-meta"
+                                                style="margin-top:5px;">
+
+                                                Randament:
+                                                ${formatQuantity(
+                                                    yieldData.quantity
+                                                )}
+                                                ${yieldData.unit}
+
+                                                ·
+
+                                                ${formatUnitCost(
+                                                    calculateRecipeUnitCost(
+                                                        recipe
+                                                    )
+                                                )}
+                                                / ${yieldData.unit}
+
+                                            </div>
+                                          `
+                                        : `
+                                            <div
+                                                class="recipe-meta"
+                                                style="margin-top:5px;">
+
+                                                Randament necompletat
+
+                                            </div>
+                                          `
+                                }
 
                             </div>
 
@@ -1634,7 +2454,7 @@ function renderRecipes() {
                                 <div class="recipe-total">
 
                                     ${formatMoney(
-                                        total
+                                        safeTotal
                                     )}
 
                                 </div>
@@ -1644,7 +2464,6 @@ function renderRecipes() {
                                     ${formatMoney(
                                         costPerPortion
                                     )}
-
                                     / porție
 
                                 </div>
@@ -1659,7 +2478,7 @@ function renderRecipes() {
                 `;
 
 
-                recipe.ingredients.forEach(
+                ingredients.forEach(
                     line => {
 
                         const ingredient =
@@ -1669,23 +2488,6 @@ function renderRecipes() {
 
 
                         if (!ingredient) {
-
-                            html += `
-
-                                <tr>
-
-                                    <td>
-                                        Ingredient indisponibil
-                                    </td>
-
-                                    <td>
-                                        -
-                                    </td>
-
-                                </tr>
-
-                            `;
-
                             return;
                         }
 
@@ -1708,14 +2510,92 @@ function renderRecipes() {
                                     ${escapeHtml(
                                         ingredient.name
                                     )}
+                                    —
+                                    ${formatQuantity(
+                                        line.quantity
+                                    )}
+                                    ${ingredient.unit}
+
+                                </td>
+
+                                <td>
+
+                                    ${formatMoney(
+                                        cost
+                                    )}
+
+                                </td>
+
+                            </tr>
+
+                        `;
+
+                    }
+                );
+
+
+                components.forEach(
+                    component => {
+
+                        const child =
+                            getRecipeById(
+                                component.recipeId
+                            );
+
+
+                        if (!child) {
+                            return;
+                        }
+
+
+                        const childYield =
+                            getRecipeYield(
+                                child
+                            );
+
+
+                        const unitCost =
+                            calculateRecipeUnitCost(
+                                child
+                            );
+
+
+                        if (
+                            !childYield ||
+                            unitCost === null
+                        ) {
+                            return;
+                        }
+
+
+                        const cost =
+                            unitCost *
+                            Number(
+                                component.quantity
+                            );
+
+
+                        html += `
+
+                            <tr>
+
+                                <td>
+
+                                    ${escapeHtml(
+                                        child.name
+                                    )}
+
+                                    <span class="component-badge">
+                                        Sub-rețetă
+                                    </span>
 
                                     —
 
                                     ${formatQuantity(
-                                        line.quantity
+                                        component.quantity
                                     )}
 
-                                    ${ingredient.unit}
+                                    ${childYield.unit}
 
                                 </td>
 
@@ -1777,6 +2657,10 @@ function renderRecipes() {
         html;
 }
 
+
+/* ==================================================
+   START
+================================================== */
 
 renderRecipes();
 
