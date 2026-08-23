@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Ingrediente | Recipe Lab</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-top: 35px;
+            margin-bottom: 25px;
+        }
+
+        .button {
+            border: 0;
+            background: #1c1c1c;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .button:hover {
+            background: #333;
+        }
+
+        .button-secondary {
+            background: #ece7de;
+            color: #222;
+        }
+
+        .form-card {
+            background: white;
+            padding: 28px;
+            border-radius: 14px;
+            border: 1px solid #e8e3da;
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d8d4cc;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+        }
+
+        .form-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .ingredient-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #e8e3da;
+        }
+
+        .ingredient-table th,
+        .ingredient-table td {
+            padding: 16px;
+            border-bottom: 1px solid #eeeae3;
+            text-align: left;
+        }
+
+        .ingredient-table th {
+            font-size: 13px;
+            color: #777;
+            background: #fbfaf7;
+        }
+
+        .delete-button {
+            border: 0;
+            background: transparent;
+            color: #a44040;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .empty-state {
+            background: white;
+            padding: 45px;
+            text-align: center;
+            border: 1px solid #e8e3da;
+            border-radius: 14px;
+            color: #777;
+        }
+
+        .summary {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 800px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .table-wrapper {
+                overflow-x: auto;
+            }
+
+            .ingredient-table {
+                min-width: 720px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            Recipe Lab
+        </div>
+
+        <div class="subtitle">
+            by Costin Licu
+        </div>
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Dashboard
+            </a>
+
+            <a href="ingrediente.html" class="active">
+                Ingrediente
+            </a>
+
+            <a href="#">
+                Rețete
+            </a>
+
+            <a href="#">
+                Calculator
+            </a>
+
+            <a href="#">
+                Fișe tehnologice
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Ingrediente</h1>
+
+            <p>
+                Gestionează ingredientele și prețurile de achiziție.
+            </p>
+
+        </div>
+
+
+        <div class="toolbar">
+
+            <div>
+                <strong>Baza de ingrediente</strong>
+            </div>
+
+            <button class="button"
+                    onclick="showIngredientForm()">
+                + Ingredient nou
+            </button>
+
+        </div>
+
+
+        <div id="ingredientForm"
+             class="form-card"
+             style="display:none;">
+
+            <h2 style="margin-top:0;">
+                Ingredient nou
+            </h2>
+
+            <div class="form-grid">
+
+                <div>
+
+                    <label>
+                        Denumire ingredient
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ingredientName"
+                        placeholder="Ex: Ciocolată neagră 70%">
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Cantitate cumpărată
+                    </label>
+
+                    <input
+                        type="number"
+                        id="ingredientQuantity"
+                        min="0"
+                        step="0.01"
+                        placeholder="1000">
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Unitate
+                    </label>
+
+                    <select id="ingredientUnit">
+
+                        <option value="g">
+                            grame
+                        </option>
+
+                        <option value="ml">
+                            mililitri
+                        </option>
+
+                        <option value="buc">
+                            bucăți
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Preț achiziție (lei)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="ingredientPrice"
+                        min="0"
+                        step="0.01"
+                        placeholder="85">
+
+                </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button class="button"
+                        onclick="addIngredient()">
+                    Salvează ingredient
+                </button>
+
+                <button
+                    class="button button-secondary"
+                    onclick="hideIngredientForm()">
+
+                    Anulează
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div id="summary"
+             class="summary">
+        </div>
+
+
+        <div id="ingredientList">
+        </div>
+
+
+    </main>
+
+</div>
+
+
+<script src="app.js"></script>
+
+<script>
+
+function showIngredientForm() {
+
+    document.getElementById(
+        "ingredientForm"
+    ).style.display = "block";
+
+    document.getElementById(
+        "ingredientName"
+    ).focus();
+}
+
+
+function hideIngredientForm() {
+
+    document.getElementById(
+        "ingredientForm"
+    ).style.display = "none";
+
+    clearIngredientForm();
+}
+
+
+function clearIngredientForm() {
+
+    document.getElementById(
+        "ingredientName"
+    ).value = "";
+
+    document.getElementById(
+        "ingredientQuantity"
+    ).value = "";
+
+    document.getElementById(
+        "ingredientPrice"
+    ).value = "";
+
+    document.getElementById(
+        "ingredientUnit"
+    ).value = "g";
+}
+
+
+function addIngredient() {
+
+    const name =
+        document.getElementById(
+            "ingredientName"
+        ).value.trim();
+
+    const quantity =
+        parseFloat(
+            document.getElementById(
+                "ingredientQuantity"
+            ).value
+        );
+
+    const unit =
+        document.getElementById(
+            "ingredientUnit"
+        ).value;
+
+    const price =
+        parseFloat(
+            document.getElementById(
+                "ingredientPrice"
+            ).value
+        );
+
+
+    if (
+        !name ||
+        !quantity ||
+        quantity <= 0 ||
+        isNaN(price) ||
+        price < 0
+    ) {
+
+        alert(
+            "Completează corect toate câmpurile."
+        );
+
+        return;
+    }
+
+
+    const unitCost =
+        price / quantity;
+
+
+    const ingredient = {
+
+        id: Date.now(),
+
+        name: name,
+
+        quantity: quantity,
+
+        unit: unit,
+
+        price: price,
+
+        unitCost: unitCost,
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    const ingredients =
+        getIngredients();
+
+
+    ingredients.push(
+        ingredient
+    );
+
+
+    saveIngredients(
+        ingredients
+    );
+
+
+    hideIngredientForm();
+
+    renderIngredients();
+}
+
+
+function deleteIngredient(id) {
+
+    const confirmDelete =
+        confirm(
+            "Ștergi acest ingredient?"
+        );
+
+
+    if (!confirmDelete) {
+        return;
+    }
+
+
+    let ingredients =
+        getIngredients();
+
+
+    ingredients =
+        ingredients.filter(
+            ingredient =>
+                ingredient.id !== id
+        );
+
+
+    saveIngredients(
+        ingredients
+    );
+
+
+    renderIngredients();
+}
+
+
+function renderIngredients() {
+
+    const ingredients =
+        getIngredients();
+
+
+    const container =
+        document.getElementById(
+            "ingredientList"
+        );
+
+
+    const summary =
+        document.getElementById(
+            "summary"
+        );
+
+
+    summary.textContent =
+        ingredients.length +
+        (
+            ingredients.length === 1
+                ? " ingredient"
+                : " ingrediente"
+        );
+
+
+    if (
+        ingredients.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                Nu ai introdus încă niciun ingredient.
+
+                <br><br>
+
+                Apasă <strong>+ Ingredient nou</strong>
+                pentru a începe.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    let html = `
+
+        <div class="table-wrapper">
+
+        <table class="ingredient-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Ingredient
+                    </th>
+
+                    <th>
+                        Cantitate
+                    </th>
+
+                    <th>
+                        Preț
+                    </th>
+
+                    <th>
+                        Cost / unitate
+                    </th>
+
+                    <th>
+                        Acțiuni
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
+
+
+    ingredients.forEach(
+        ingredient => {
+
+            html += `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${ingredient.name}
+                        </strong>
+                    </td>
+
+                    <td>
+
+                        ${ingredient.quantity}
+
+                        ${ingredient.unit}
+
+                    </td>
+
+                    <td>
+
+                        ${formatMoney(
+                            ingredient.price
+                        )}
+
+                    </td>
+
+                    <td>
+
+                        ${formatUnitCost(
+                            ingredient.unitCost
+                        )}
+
+                        /
+                        ${ingredient.unit}
+
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="delete-button"
+                            onclick="deleteIngredient(
+                                ${ingredient.id}
+                            )">
+
+                            Șterge
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+
+        </div>
+
+    `;
+
+
+    container.innerHTML =
+        html;
+}
+
+
+renderIngredients();
+
+</script>
+
+
+</body>
+
+</html>
