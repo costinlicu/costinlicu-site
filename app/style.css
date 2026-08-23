@@ -1,0 +1,180 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f4ee;
+    color: #222;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* MENIU LATERAL */
+
+.sidebar {
+    width: 250px;
+    background: #1c1c1c;
+    color: white;
+    padding: 30px 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 40px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav a {
+    color: #ddd;
+    text-decoration: none;
+    padding: 13px 15px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.nav a:hover,
+.nav a.active {
+    background: #333;
+    color: white;
+}
+
+/* CONȚINUT */
+
+.main {
+    flex: 1;
+    padding: 45px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+.header p {
+    color: #777;
+    margin-top: 8px;
+}
+
+/* CARDURI */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid #e8e3da;
+}
+
+.card-title {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.card-value {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* ACȚIUNI */
+
+.section {
+    margin-top: 45px;
+}
+
+.section h2 {
+    font-size: 21px;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.action {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid #e8e3da;
+    text-decoration: none;
+    color: #222;
+    transition: 0.2s;
+}
+
+.action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+}
+
+.action strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+.action span {
+    color: #777;
+    font-size: 14px;
+}
+
+/* TELEFON */
+
+@media (max-width: 900px) {
+
+    .app {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .nav {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .main {
+        padding: 25px 18px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
