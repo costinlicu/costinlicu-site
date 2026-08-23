@@ -45,7 +45,12 @@
         .button-danger {
             background: transparent;
             color: #a44040;
-            padding: 7px;
+            padding: 8px 5px;
+        }
+
+        .button-edit {
+            background: #ece7de;
+            color: #222;
         }
 
         .form-card,
@@ -118,7 +123,7 @@
             background: #f7f4ee;
             padding: 20px 25px;
             border-radius: 12px;
-            min-width: 260px;
+            min-width: 270px;
         }
 
         .cost-line {
@@ -140,6 +145,7 @@
             display: flex;
             gap: 10px;
             margin-top: 25px;
+            flex-wrap: wrap;
         }
 
         .empty-state {
@@ -188,6 +194,23 @@
             text-align: right;
         }
 
+        .recipe-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .edit-notice {
+            background: #f7f4ee;
+            border-radius: 9px;
+            padding: 12px 15px;
+            margin-bottom: 22px;
+            font-size: 14px;
+            color: #555;
+        }
+
         @media (max-width: 800px) {
 
             .recipe-info-grid,
@@ -220,11 +243,17 @@
                 min-width: 650px;
             }
 
+            .recipe-actions {
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
         }
 
     </style>
 
 </head>
+
 
 <body>
 
@@ -274,7 +303,7 @@
             <h1>Rețete</h1>
 
             <p>
-                Creează rețete și calculează automat costul ingredientelor.
+                Creează, editează și calculează automat costul rețetelor.
             </p>
 
         </div>
@@ -288,7 +317,7 @@
 
             <button
                 class="button"
-                onclick="showRecipeForm()">
+                onclick="showNewRecipeForm()">
 
                 + Rețetă nouă
 
@@ -297,16 +326,31 @@
         </div>
 
 
-        <!-- FORMULAR RETETA -->
+        <!-- FORMULAR -->
 
         <div
             id="recipeForm"
             class="form-card"
             style="display:none;">
 
-            <h2 style="margin-top:0;">
+            <h2
+                id="recipeFormTitle"
+                style="margin-top:0;">
+
                 Rețetă nouă
+
             </h2>
+
+
+            <div
+                id="editNotice"
+                class="edit-notice"
+                style="display:none;">
+
+                Editezi o rețetă existentă.
+                Modificările vor fi salvate peste versiunea actuală.
+
+            </div>
 
 
             <div class="recipe-info-grid">
@@ -390,8 +434,6 @@
             </div>
 
 
-            <!-- INGREDIENTELE RETETEI -->
-
             <div id="currentRecipeArea">
             </div>
 
@@ -399,6 +441,7 @@
             <div class="form-actions">
 
                 <button
+                    id="saveRecipeButton"
                     class="button"
                     onclick="saveCurrentRecipe()">
 
@@ -424,26 +467,30 @@
         <div id="recipeList">
         </div>
 
-
     </main>
 
 </div>
 
 
-<script src="app.js?v=2"></script>
+<script src="app.js?v=3"></script>
+
 
 <script>
 
 let currentRecipeLines = [];
 
+let editingRecipeId = null;
+
 
 /* =========================
-   FORMULAR
+   RETETA NOUA
 ========================= */
 
-function showRecipeForm() {
+function showNewRecipeForm() {
 
-    const ingredients = getIngredients();
+    const ingredients =
+        getIngredients();
+
 
     if (ingredients.length === 0) {
 
@@ -454,11 +501,55 @@ function showRecipeForm() {
         return;
     }
 
+
+    editingRecipeId = null;
+
+    currentRecipeLines = [];
+
+
     document.getElementById(
-        "recipeForm"
-    ).style.display = "block";
+        "recipeName"
+    ).value = "";
+
+
+    document.getElementById(
+        "recipePortions"
+    ).value = "1";
+
+
+    document.getElementById(
+        "recipeIngredientQuantity"
+    ).value = "";
+
+
+    document.getElementById(
+        "recipeFormTitle"
+    ).textContent =
+        "Rețetă nouă";
+
+
+    document.getElementById(
+        "saveRecipeButton"
+    ).textContent =
+        "Salvează rețeta";
+
+
+    document.getElementById(
+        "editNotice"
+    ).style.display =
+        "none";
+
 
     populateIngredientSelect();
+
+    renderCurrentRecipe();
+
+
+    document.getElementById(
+        "recipeForm"
+    ).style.display =
+        "block";
+
 
     document.getElementById(
         "recipeName"
@@ -466,25 +557,147 @@ function showRecipeForm() {
 }
 
 
+/* =========================
+   EDITARE RETETA
+========================= */
+
+function editRecipe(id) {
+
+    const recipes =
+        getRecipes();
+
+
+    const recipe =
+        recipes.find(
+            recipe =>
+                Number(recipe.id) ===
+                Number(id)
+        );
+
+
+    if (!recipe) {
+
+        alert(
+            "Rețeta nu a fost găsită."
+        );
+
+        return;
+    }
+
+
+    editingRecipeId =
+        Number(id);
+
+
+    currentRecipeLines =
+        recipe.ingredients.map(
+            line => ({
+
+                ingredientId:
+                    Number(
+                        line.ingredientId
+                    ),
+
+                quantity:
+                    Number(
+                        line.quantity
+                    )
+
+            })
+        );
+
+
+    document.getElementById(
+        "recipeName"
+    ).value =
+        recipe.name;
+
+
+    document.getElementById(
+        "recipePortions"
+    ).value =
+        recipe.portions;
+
+
+    document.getElementById(
+        "recipeIngredientQuantity"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "recipeFormTitle"
+    ).textContent =
+        "Editează rețeta";
+
+
+    document.getElementById(
+        "saveRecipeButton"
+    ).textContent =
+        "Salvează modificările";
+
+
+    document.getElementById(
+        "editNotice"
+    ).style.display =
+        "block";
+
+
+    populateIngredientSelect();
+
+    renderCurrentRecipe();
+
+
+    document.getElementById(
+        "recipeForm"
+    ).style.display =
+        "block";
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================
+   ANULARE
+========================= */
+
 function cancelRecipe() {
 
+    editingRecipeId = null;
+
     currentRecipeLines = [];
+
 
     document.getElementById(
         "recipeName"
     ).value = "";
 
+
     document.getElementById(
         "recipePortions"
     ).value = "1";
+
 
     document.getElementById(
         "recipeIngredientQuantity"
     ).value = "";
 
+
     document.getElementById(
         "recipeForm"
-    ).style.display = "none";
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "editNotice"
+    ).style.display =
+        "none";
+
 
     renderCurrentRecipe();
 }
@@ -496,14 +709,18 @@ function cancelRecipe() {
 
 function populateIngredientSelect() {
 
-    const ingredients = getIngredients();
+    const ingredients =
+        getIngredients();
+
 
     const select =
         document.getElementById(
             "recipeIngredient"
         );
 
+
     select.innerHTML = "";
+
 
     const sortedIngredients =
         [...ingredients].sort(
@@ -514,6 +731,7 @@ function populateIngredientSelect() {
                 )
         );
 
+
     sortedIngredients.forEach(
         ingredient => {
 
@@ -522,8 +740,10 @@ function populateIngredientSelect() {
                     "option"
                 );
 
+
             option.value =
                 ingredient.id;
+
 
             option.textContent =
                 ingredient.name +
@@ -532,11 +752,14 @@ function populateIngredientSelect() {
                     ingredient.price
                 );
 
+
             select.appendChild(
                 option
             );
+
         }
     );
+
 
     updateQuantityLabel();
 }
@@ -557,15 +780,18 @@ function updateQuantityLabel() {
             "recipeIngredient"
         ).value;
 
+
     const ingredient =
         getIngredientById(
             ingredientId
         );
 
+
     const label =
         document.getElementById(
             "quantityLabel"
         );
+
 
     if (!ingredient) {
 
@@ -574,6 +800,7 @@ function updateQuantityLabel() {
 
         return;
     }
+
 
     label.textContent =
         "Cantitate (" +
@@ -595,12 +822,14 @@ function addIngredientToRecipe() {
             ).value
         );
 
+
     const quantity =
         Number(
             document.getElementById(
                 "recipeIngredientQuantity"
             ).value
         );
+
 
     const ingredient =
         getIngredientById(
@@ -634,8 +863,12 @@ function addIngredientToRecipe() {
     const existingLine =
         currentRecipeLines.find(
             line =>
-                Number(line.ingredientId) ===
-                Number(ingredientId)
+                Number(
+                    line.ingredientId
+                ) ===
+                Number(
+                    ingredientId
+                )
         );
 
 
@@ -669,7 +902,7 @@ function addIngredientToRecipe() {
 
 
 /* =========================
-   STERGERE LINIE
+   STERGERE INGREDIENT DIN RETETA
 ========================= */
 
 function removeRecipeLine(
@@ -687,6 +920,54 @@ function removeRecipeLine(
                 )
         );
 
+
+    renderCurrentRecipe();
+}
+
+
+/* =========================
+   MODIFICARE CANTITATE DIRECT
+========================= */
+
+function updateRecipeLineQuantity(
+    ingredientId,
+    value
+) {
+
+    const quantity =
+        Number(value);
+
+
+    if (
+        isNaN(quantity) ||
+        quantity <= 0
+    ) {
+
+        return;
+    }
+
+
+    const line =
+        currentRecipeLines.find(
+            line =>
+                Number(
+                    line.ingredientId
+                ) ===
+                Number(
+                    ingredientId
+                )
+        );
+
+
+    if (!line) {
+        return;
+    }
+
+
+    line.quantity =
+        quantity;
+
+
     renderCurrentRecipe();
 }
 
@@ -699,6 +980,7 @@ function calculateCurrentRecipeTotal() {
 
     let total = 0;
 
+
     currentRecipeLines.forEach(
         line => {
 
@@ -707,9 +989,11 @@ function calculateCurrentRecipeTotal() {
                     line.ingredientId
                 );
 
+
             if (!ingredient) {
                 return;
             }
+
 
             total +=
                 Number(
@@ -718,8 +1002,10 @@ function calculateCurrentRecipeTotal() {
                 Number(
                     line.quantity
                 );
+
         }
     );
+
 
     return total;
 }
@@ -757,13 +1043,21 @@ function renderCurrentRecipe() {
 
                 <tr>
 
-                    <th>Ingredient</th>
+                    <th>
+                        Ingredient
+                    </th>
 
-                    <th>Cantitate</th>
+                    <th>
+                        Cantitate
+                    </th>
 
-                    <th>Cost/unitate</th>
+                    <th>
+                        Cost/unitate
+                    </th>
 
-                    <th>Cost</th>
+                    <th>
+                        Cost
+                    </th>
 
                     <th></th>
 
@@ -783,6 +1077,7 @@ function renderCurrentRecipe() {
                 getIngredientById(
                     line.ingredientId
                 );
+
 
             if (!ingredient) {
                 return;
@@ -805,22 +1100,44 @@ function renderCurrentRecipe() {
                     <td>
 
                         <strong>
+
                             ${escapeHtml(
                                 ingredient.name
                             )}
+
                         </strong>
 
                     </td>
 
+
                     <td>
 
-                        ${formatQuantity(
-                            line.quantity
-                        )}
+                        <div
+                            style="
+                                display:flex;
+                                align-items:center;
+                                gap:8px;
+                                max-width:160px;
+                            ">
 
-                        ${ingredient.unit}
+                            <input
+                                type="number"
+                                min="0.01"
+                                step="0.01"
+                                value="${line.quantity}"
+                                onchange="updateRecipeLineQuantity(
+                                    ${ingredient.id},
+                                    this.value
+                                )">
+
+                            <span>
+                                ${ingredient.unit}
+                            </span>
+
+                        </div>
 
                     </td>
+
 
                     <td>
 
@@ -831,6 +1148,7 @@ function renderCurrentRecipe() {
                         / ${ingredient.unit}
 
                     </td>
+
 
                     <td>
 
@@ -843,6 +1161,7 @@ function renderCurrentRecipe() {
                         </strong>
 
                     </td>
+
 
                     <td>
 
@@ -943,7 +1262,7 @@ document.getElementById(
 
 
 /* =========================
-   SALVARE RETETA
+   SALVARE
 ========================= */
 
 function saveCurrentRecipe() {
@@ -997,47 +1316,119 @@ function saveCurrentRecipe() {
     }
 
 
-    const recipe = {
-
-        id:
-            Date.now(),
-
-        name:
-            name,
-
-        portions:
-            portions,
-
-        ingredients:
-            currentRecipeLines.map(
-                line => ({
-
-                    ingredientId:
-                        Number(
-                            line.ingredientId
-                        ),
-
-                    quantity:
-                        Number(
-                            line.quantity
-                        )
-
-                })
-            ),
-
-        createdAt:
-            new Date().toISOString()
-
-    };
-
-
-    const recipes =
+    let recipes =
         getRecipes();
 
 
-    recipes.push(
-        recipe
-    );
+    /* EDITARE */
+
+    if (
+        editingRecipeId !== null
+    ) {
+
+        const index =
+            recipes.findIndex(
+                recipe =>
+                    Number(
+                        recipe.id
+                    ) ===
+                    Number(
+                        editingRecipeId
+                    )
+            );
+
+
+        if (index === -1) {
+
+            alert(
+                "Rețeta nu a fost găsită."
+            );
+
+            return;
+        }
+
+
+        const oldRecipe =
+            recipes[index];
+
+
+        recipes[index] = {
+
+            ...oldRecipe,
+
+            name:
+                name,
+
+            portions:
+                portions,
+
+            ingredients:
+                currentRecipeLines.map(
+                    line => ({
+
+                        ingredientId:
+                            Number(
+                                line.ingredientId
+                            ),
+
+                        quantity:
+                            Number(
+                                line.quantity
+                            )
+
+                    })
+                ),
+
+            updatedAt:
+                new Date().toISOString()
+
+        };
+
+    }
+
+    /* RETETA NOUA */
+
+    else {
+
+        const recipe = {
+
+            id:
+                Date.now(),
+
+            name:
+                name,
+
+            portions:
+                portions,
+
+            ingredients:
+                currentRecipeLines.map(
+                    line => ({
+
+                        ingredientId:
+                            Number(
+                                line.ingredientId
+                            ),
+
+                        quantity:
+                            Number(
+                                line.quantity
+                            )
+
+                    })
+                ),
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        recipes.push(
+            recipe
+        );
+
+    }
 
 
     saveRecipes(
@@ -1052,7 +1443,7 @@ function saveCurrentRecipe() {
 
 
 /* =========================
-   CALCUL COST RETETA SALVATA
+   COST RETETA SALVATA
 ========================= */
 
 function calculateRecipeTotal(
@@ -1116,7 +1507,9 @@ function deleteRecipe(id) {
     recipes =
         recipes.filter(
             recipe =>
-                Number(recipe.id) !==
+                Number(
+                    recipe.id
+                ) !==
                 Number(id)
         );
 
@@ -1131,7 +1524,7 @@ function deleteRecipe(id) {
 
 
 /* =========================
-   AFISARE RETETE SALVATE
+   AFISARE RETETE
 ========================= */
 
 function renderRecipes() {
@@ -1211,12 +1604,13 @@ function renderRecipes() {
                                 <div class="recipe-meta">
 
                                     ${recipe.portions}
+
                                     ${
                                         Number(
                                             recipe.portions
                                         ) === 1
-                                        ? "porție"
-                                        : "porții"
+                                            ? "porție"
+                                            : "porții"
                                     }
 
                                     ·
@@ -1225,7 +1619,11 @@ function renderRecipes() {
                                         recipe.ingredients.length
                                     }
 
-                                    ingrediente
+                                    ${
+                                        recipe.ingredients.length === 1
+                                            ? "ingredient"
+                                            : "ingrediente"
+                                    }
 
                                 </div>
 
@@ -1343,11 +1741,18 @@ function renderRecipes() {
                         </table>
 
 
-                        <div
-                            style="
-                                margin-top:20px;
-                                text-align:right;
-                            ">
+                        <div class="recipe-actions">
+
+                            <button
+                                class="button button-edit"
+                                onclick="editRecipe(
+                                    ${recipe.id}
+                                )">
+
+                                Editează
+
+                            </button>
+
 
                             <button
                                 class="button button-danger"
@@ -1377,6 +1782,7 @@ function renderRecipes() {
 renderRecipes();
 
 </script>
+
 
 </body>
 
