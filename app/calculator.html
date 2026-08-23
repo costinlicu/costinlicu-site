@@ -50,12 +50,6 @@
             gap: 18px;
         }
 
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
         .mode-tabs {
             display: flex;
             gap: 10px;
@@ -101,10 +95,6 @@
             font-size: 18px;
         }
 
-        .dimension-group {
-            margin-top: 15px;
-        }
-
         .height-option {
             margin-top: 25px;
             padding-top: 25px;
@@ -128,20 +118,6 @@
             color: #222;
             font-size: 14px;
             cursor: pointer;
-        }
-
-        .button {
-            border: 0;
-            background: #1c1c1c;
-            color: white;
-            padding: 13px 20px;
-            border-radius: 9px;
-            cursor: pointer;
-            font-size: 15px;
-        }
-
-        .button:hover {
-            background: #333;
         }
 
         .factor-box {
@@ -227,9 +203,27 @@
             text-align: right;
         }
 
+        .section-row td {
+            background: #f7f4ee;
+            color: #555;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.3px;
+        }
+
         .scaled-quantity {
             font-weight: bold;
             font-size: 16px;
+        }
+
+        .component-badge {
+            display: inline-block;
+            margin-left: 7px;
+            padding: 3px 7px;
+            border-radius: 10px;
+            background: #f1ede6;
+            color: #666;
+            font-size: 11px;
         }
 
         .summary-grid {
@@ -306,11 +300,7 @@
         @media (max-width: 800px) {
 
             .grid-2,
-            .grid-3,
-            .shape-summary-grid {
-                grid-template-columns: 1fr;
-            }
-
+            .shape-summary-grid,
             .summary-grid {
                 grid-template-columns: 1fr;
             }
@@ -328,7 +318,7 @@
             }
 
             .scale-table {
-                min-width: 720px;
+                min-width: 760px;
             }
 
         }
@@ -366,13 +356,14 @@
                 Rețete
             </a>
 
-            <a href="calculator.html" class="active">
+            <a href="calculator.html"
+               class="active">
                 Calculator
             </a>
 
             <a href="fise.html">
-    Fișe tehnologice
-</a>
+                Fișe tehnologice
+            </a>
 
         </nav>
 
@@ -386,7 +377,7 @@
             <h1>Calculator</h1>
 
             <p>
-                Scalează rețete după porții, forme, dimensiuni și volum.
+                Scalează rețete, sub-rețete, porții și forme.
             </p>
 
         </div>
@@ -395,6 +386,7 @@
         <div id="calculatorArea">
 
             <div class="calculator-card">
+
 
                 <!-- RETETA -->
 
@@ -500,14 +492,13 @@
                     <div class="grid-2">
 
 
-                        <!-- FORMA ORIGINALA -->
+                        <!-- ORIGINAL -->
 
                         <div class="shape-panel">
 
                             <h3>
                                 Forma originală
                             </h3>
-
 
                             <div class="field">
 
@@ -535,23 +526,19 @@
 
                             </div>
 
-
-                            <div
-                                id="originalDimensions"
-                                class="dimension-group">
+                            <div id="originalDimensions">
                             </div>
 
                         </div>
 
 
-                        <!-- FORMA DORITA -->
+                        <!-- TINTA -->
 
                         <div class="shape-panel">
 
                             <h3>
                                 Forma dorită
                             </h3>
-
 
                             <div class="field">
 
@@ -579,10 +566,7 @@
 
                             </div>
 
-
-                            <div
-                                id="targetDimensions"
-                                class="dimension-group">
+                            <div id="targetDimensions">
                             </div>
 
                         </div>
@@ -615,7 +599,6 @@
                             id="heightFields"
                             class="grid-2"
                             style="display:none;">
-
 
                             <div class="field">
 
@@ -657,12 +640,11 @@
 
                     <div class="info">
 
-                        Dacă înălțimea rămâne aceeași,
-                        calculatorul compară suprafețele formelor.
+                        Cu aceeași înălțime, calculul se face
+                        după suprafață.
 
                         Dacă modifici și înălțimea,
-                        calculatorul compară volumele și
-                        ajustează întreaga rețetă proporțional.
+                        scalarea se face după volum.
 
                     </div>
 
@@ -718,7 +700,7 @@
                         id="factorValue"
                         class="factor-value">
 
-                        × 1,00
+                        × 1,000
 
                     </div>
 
@@ -744,7 +726,7 @@
 </div>
 
 
-<script src="app.js?v=5"></script>
+<script src="app.js?v=11"></script>
 
 
 <script>
@@ -762,7 +744,9 @@ function initCalculator() {
         getRecipes();
 
 
-    if (recipes.length === 0) {
+    if (
+        recipes.length === 0
+    ) {
 
         document.getElementById(
             "calculatorArea"
@@ -774,14 +758,14 @@ function initCalculator() {
 
                 <br><br>
 
-                Creează mai întâi o rețetă
-                pentru a folosi calculatorul.
+                Creează mai întâi o rețetă.
 
             </div>
 
         `;
 
         return;
+
     }
 
 
@@ -855,11 +839,8 @@ function getSelectedRecipe() {
         );
 
 
-    return getRecipes().find(
-        recipe =>
-            Number(
-                recipe.id
-            ) === id
+    return getRecipeById(
+        id
     );
 }
 
@@ -892,7 +873,7 @@ function recipeChanged() {
 
 
 /* ==================================================
-   MOD CALCULATOR
+   MOD CALCUL
 ================================================== */
 
 function setMode(
@@ -967,7 +948,9 @@ function renderShapeFields(
     let html = "";
 
 
-    if (shape === "round") {
+    if (
+        shape === "round"
+    ) {
 
         html = `
 
@@ -992,7 +975,9 @@ function renderShapeFields(
     }
 
 
-    if (shape === "square") {
+    if (
+        shape === "square"
+    ) {
 
         html = `
 
@@ -1017,7 +1002,9 @@ function renderShapeFields(
     }
 
 
-    if (shape === "rectangle") {
+    if (
+        shape === "rectangle"
+    ) {
 
         html = `
 
@@ -1077,7 +1064,7 @@ function renderShapeFields(
 
 function toggleHeightFields() {
 
-    const same =
+    const sameHeight =
         document.getElementById(
             "sameHeight"
         ).checked;
@@ -1086,7 +1073,7 @@ function toggleHeightFields() {
     document.getElementById(
         "heightFields"
     ).style.display =
-        same
+        sameHeight
             ? "none"
             : "grid";
 
@@ -1096,7 +1083,7 @@ function toggleHeightFields() {
 
 
 /* ==================================================
-   SUPRAFATA FORMA
+   SUPRAFATA
 ================================================== */
 
 function getShapeArea(
@@ -1109,9 +1096,9 @@ function getShapeArea(
         ).value;
 
 
-    /* ROTUND */
-
-    if (shape === "round") {
+    if (
+        shape === "round"
+    ) {
 
         const input =
             document.getElementById(
@@ -1152,9 +1139,9 @@ function getShapeArea(
     }
 
 
-    /* PATRAT */
-
-    if (shape === "square") {
+    if (
+        shape === "square"
+    ) {
 
         const input =
             document.getElementById(
@@ -1190,9 +1177,9 @@ function getShapeArea(
     }
 
 
-    /* DREPTUNGHI */
-
-    if (shape === "rectangle") {
+    if (
+        shape === "rectangle"
+    ) {
 
         const widthInput =
             document.getElementById(
@@ -1258,17 +1245,23 @@ function getShapeName(
     shape
 ) {
 
-    if (shape === "round") {
+    if (
+        shape === "round"
+    ) {
         return "Rotundă";
     }
 
 
-    if (shape === "square") {
+    if (
+        shape === "square"
+    ) {
         return "Pătrată";
     }
 
 
-    if (shape === "rectangle") {
+    if (
+        shape === "rectangle"
+    ) {
         return "Dreptunghiulară";
     }
 
@@ -1292,7 +1285,7 @@ function getScaleFactor() {
     }
 
 
-    /* PORȚII */
+    /* PORTII */
 
     if (
         currentMode ===
@@ -1482,43 +1475,22 @@ function formatVolume(
 
 
 /* ==================================================
-   COST ORIGINAL
+   COST ORIGINAL COMPLET
 ================================================== */
 
 function calculateOriginalCost(
     recipe
 ) {
 
-    let total = 0;
+    const total =
+        calculateRecipeTotalCost(
+            recipe
+        );
 
 
-    recipe.ingredients.forEach(
-        line => {
-
-            const ingredient =
-                getIngredientById(
-                    line.ingredientId
-                );
-
-
-            if (!ingredient) {
-                return;
-            }
-
-
-            total +=
-                Number(
-                    ingredient.unitCost
-                ) *
-                Number(
-                    line.quantity
-                );
-
-        }
-    );
-
-
-    return total;
+    return total === null
+        ? 0
+        : total;
 }
 
 
@@ -1577,7 +1549,7 @@ function calculateScale() {
 
             <div class="empty-state">
 
-                Completează dimensiunile pentru
+                Completează valorile pentru
                 a vedea rezultatul scalării.
 
             </div>
@@ -1670,11 +1642,27 @@ function renderScaledRecipe(
         factor;
 
 
-    const scaledCostPerPortion =
+    const costPerPortion =
         equivalentPortions > 0
             ? scaledCost /
               equivalentPortions
             : 0;
+
+
+    const ingredients =
+        Array.isArray(
+            recipe.ingredients
+        )
+            ? recipe.ingredients
+            : [];
+
+
+    const components =
+        Array.isArray(
+            recipe.components
+        )
+            ? recipe.components
+            : [];
 
 
     let html = `
@@ -1733,7 +1721,7 @@ function renderScaledRecipe(
                         <tr>
 
                             <th>
-                                Ingredient
+                                Element
                             </th>
 
                             <th>
@@ -1757,7 +1745,30 @@ function renderScaledRecipe(
     `;
 
 
-    recipe.ingredients.forEach(
+    /* =========================
+       INGREDIENTE DIRECTE
+    ========================= */
+
+    if (
+        ingredients.length > 0
+    ) {
+
+        html += `
+
+            <tr class="section-row">
+
+                <td colspan="4">
+                    INGREDIENTE
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    ingredients.forEach(
         line => {
 
             const ingredient =
@@ -1767,27 +1778,7 @@ function renderScaledRecipe(
 
 
             if (!ingredient) {
-
-                html += `
-
-                    <tr>
-
-                        <td>
-                            Ingredient indisponibil
-                        </td>
-
-                        <td>-</td>
-
-                        <td>-</td>
-
-                        <td>-</td>
-
-                    </tr>
-
-                `;
-
                 return;
-
             }
 
 
@@ -1864,6 +1855,141 @@ function renderScaledRecipe(
     );
 
 
+    /* =========================
+       SUB-RETETE
+    ========================= */
+
+    if (
+        components.length > 0
+    ) {
+
+        html += `
+
+            <tr class="section-row">
+
+                <td colspan="4">
+                    COMPONENTE / SUB-REȚETE
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    components.forEach(
+        component => {
+
+            const childRecipe =
+                getRecipeById(
+                    component.recipeId
+                );
+
+
+            if (!childRecipe) {
+                return;
+            }
+
+
+            const yieldData =
+                getRecipeYield(
+                    childRecipe
+                );
+
+
+            const unitCost =
+                calculateRecipeUnitCost(
+                    childRecipe
+                );
+
+
+            if (
+                !yieldData ||
+                unitCost === null
+            ) {
+
+                return;
+            }
+
+
+            const originalQuantity =
+                Number(
+                    component.quantity
+                );
+
+
+            const scaledQuantity =
+                originalQuantity *
+                factor;
+
+
+            const scaledComponentCost =
+                scaledQuantity *
+                unitCost;
+
+
+            html += `
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+
+                            ${escapeHtml(
+                                childRecipe.name
+                            )}
+
+                        </strong>
+
+                        <span class="component-badge">
+
+                            Sub-rețetă
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        ${formatQuantity(
+                            originalQuantity
+                        )}
+
+                        ${yieldData.unit}
+
+                    </td>
+
+
+                    <td class="scaled-quantity">
+
+                        ${formatQuantity(
+                            scaledQuantity
+                        )}
+
+                        ${yieldData.unit}
+
+                    </td>
+
+
+                    <td>
+
+                        ${formatMoney(
+                            scaledComponentCost
+                        )}
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
     html += `
 
                     </tbody>
@@ -1895,7 +2021,7 @@ function renderScaledRecipe(
                 <div class="summary-box">
 
                     <div class="summary-label">
-                        Cost nou
+                        Cost după scalare
                     </div>
 
                     <div class="summary-value">
@@ -1935,7 +2061,7 @@ function renderScaledRecipe(
                     <div class="summary-value">
 
                         ${formatMoney(
-                            scaledCostPerPortion
+                            costPerPortion
                         )}
 
                     </div>
@@ -1947,7 +2073,9 @@ function renderScaledRecipe(
     `;
 
 
-    /* REZUMAT FORME */
+    /* =========================
+       DETALII FORMA
+    ========================= */
 
     if (
         currentMode ===
