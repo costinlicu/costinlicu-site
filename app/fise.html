@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fișe tehnologice | Recipe Lab</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .sheet-card {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            border: 1px solid #e8e3da;
+            margin-top: 30px;
+        }
+
+        .selector-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #e8e3da;
+            margin-top: 30px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d8d4cc;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .sheet-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .sheet-title-row h2 {
+            margin: 0 0 7px 0;
+            font-size: 26px;
+        }
+
+        .sheet-subtitle {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .status {
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: #f1ede6;
+            color: #666;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .status.saved {
+            background: #e8efe8;
+            color: #425a42;
+        }
+
+        .section-title {
+            margin-top: 35px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eeeae3;
+            font-size: 18px;
+        }
+
+        .recipe-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .recipe-table th,
+        .recipe-table td {
+            padding: 14px;
+            border-bottom: 1px solid #eeeae3;
+            text-align: left;
+        }
+
+        .recipe-table th {
+            font-size: 13px;
+            color: #777;
+            background: #fbfaf7;
+        }
+
+        .recipe-table td:last-child,
+        .recipe-table th:last-child {
+            text-align: right;
+        }
+
+        .cost-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .summary-box {
+            background: #f7f4ee;
+            border-radius: 11px;
+            padding: 18px;
+        }
+
+        .summary-label {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .summary-value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .button {
+            border: 0;
+            background: #1c1c1c;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .button:hover {
+            background: #333;
+        }
+
+        .button-secondary {
+            background: #ece7de;
+            color: #222;
+        }
+
+        .empty-state {
+            background: white;
+            padding: 45px;
+            text-align: center;
+            border: 1px solid #e8e3da;
+            border-radius: 14px;
+            color: #777;
+            margin-top: 30px;
+        }
+
+        .print-header {
+            display: none;
+        }
+
+        @media (max-width: 800px) {
+
+            .grid-2,
+            .grid-3,
+            .cost-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .sheet-title-row {
+                flex-direction: column;
+            }
+
+            .table-wrapper {
+                overflow-x: auto;
+            }
+
+            .recipe-table {
+                min-width: 650px;
+            }
+
+        }
+
+
+        /* =========================
+           PRINT / PDF
+        ========================= */
+
+        @media print {
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .sidebar,
+            .header,
+            .selector-card,
+            .button-row,
+            .status {
+                display: none !important;
+            }
+
+            .app {
+                display: block;
+            }
+
+            .main {
+                padding: 0;
+            }
+
+            .sheet-card {
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .print-header {
+                display: block;
+                margin-bottom: 25px;
+                border-bottom: 2px solid #222;
+                padding-bottom: 15px;
+            }
+
+            .print-header h1 {
+                margin: 0;
+                font-size: 24px;
+            }
+
+            .print-header p {
+                margin: 5px 0 0;
+                font-size: 12px;
+            }
+
+            input,
+            select,
+            textarea {
+                border: none;
+                padding: 0;
+                background: transparent;
+                resize: none;
+            }
+
+            textarea {
+                min-height: auto;
+            }
+
+            .summary-box {
+                border: 1px solid #ddd;
+                background: white;
+            }
+
+            .recipe-table th {
+                background: white;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            Recipe Lab
+        </div>
+
+        <div class="subtitle">
+            by Costin Licu
+        </div>
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Dashboard
+            </a>
+
+            <a href="ingrediente.html">
+                Ingrediente
+            </a>
+
+            <a href="retete.html">
+                Rețete
+            </a>
+
+            <a href="calculator.html">
+                Calculator
+            </a>
+
+            <a href="fise.html" class="active">
+                Fișe tehnologice
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Fișe tehnologice</h1>
+
+            <p>
+                Creează și actualizează fișele tehnologice ale produselor.
+            </p>
+
+        </div>
+
+
+        <div id="mainArea">
+
+            <div class="selector-card">
+
+                <div class="field"
+                     style="margin-bottom:0;">
+
+                    <label>
+                        Selectează rețeta
+                    </label>
+
+                    <select
+                        id="recipeSelect"
+                        onchange="loadSelectedRecipe()">
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="sheetArea"
+                class="sheet-card">
+
+                <div class="print-header">
+
+                    <h1>
+                        FIȘĂ TEHNOLOGICĂ
+                    </h1>
+
+                    <p>
+                        Recipe Lab — Costin Licu
+                    </p>
+
+                </div>
+
+
+                <div class="sheet-title-row">
+
+                    <div>
+
+                        <h2 id="recipeTitle">
+                            Rețetă
+                        </h2>
+
+                        <div
+                            id="recipeSubtitle"
+                            class="sheet-subtitle">
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="sheetStatus"
+                        class="status">
+
+                        Fișă nesalvată
+
+                    </div>
+
+                </div>
+
+
+                <!-- DATE GENERALE -->
+
+                <h3 class="section-title">
+                    Date generale
+                </h3>
+
+
+                <div class="grid-3">
+
+                    <div class="field">
+
+                        <label>
+                            Categoria produsului
+                        </label>
+
+                        <select id="category">
+
+                            <option value="">
+                                Selectează
+                            </option>
+
+                            <option value="Cofetărie">
+                                Cofetărie
+                            </option>
+
+                            <option value="Patiserie">
+                                Patiserie
+                            </option>
+
+                            <option value="Panificație">
+                                Panificație
+                            </option>
+
+                            <option value="Ciocolaterie">
+                                Ciocolaterie
+                            </option>
+
+                            <option value="Desert sous-vide">
+                                Desert sous-vide
+                            </option>
+
+                            <option value="Altele">
+                                Altele
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Gramaj / porție (g)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="portionWeight"
+                            min="0"
+                            step="0.1"
+                            placeholder="Ex: 120">
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Timp de preparare
+                        </label>
+
+                        <input
+                            type="text"
+                            id="preparationTime"
+                            placeholder="Ex: 2 ore 30 min">
+
+                    </div>
+
+                </div>
+
+
+                <div class="grid-2">
+
+                    <div class="field">
+
+                        <label>
+                            Termen de valabilitate
+                        </label>
+
+                        <input
+                            type="text"
+                            id="shelfLife"
+                            placeholder="Ex: 3 zile">
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label>
+                            Condiții de păstrare
+                        </label>
+
+                        <input
+                            type="text"
+                            id="storageConditions"
+                            placeholder="Ex: 2–4°C">
+
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Alergeni
+                    </label>
+
+                    <input
+                        type="text"
+                        id="allergens"
+                        placeholder="Ex: gluten, lapte, ouă, fructe cu coajă lemnoasă">
+
+                </div>
+
+
+                <!-- INGREDIENTE -->
+
+                <h3 class="section-title">
+                    Materii prime și ingrediente
+                </h3>
+
+
+                <div
+                    id="ingredientsArea">
+                </div>
+
+
+                <!-- COSTURI -->
+
+                <div
+                    id="costArea"
+                    class="cost-summary">
+                </div>
+
+
+                <!-- PROCES -->
+
+                <h3 class="section-title">
+                    Proces tehnologic
+                </h3>
+
+
+                <div class="field">
+
+                    <label>
+                        Mod de preparare / flux tehnologic
+                    </label>
+
+                    <textarea
+                        id="process"
+                        placeholder="Descrie etapele tehnologice în ordinea realizării..."></textarea>
+
+                </div>
+
+
+                <!-- OBSERVATII -->
+
+                <h3 class="section-title">
+                    Observații
+                </h3>
+
+
+                <div class="field">
+
+                    <label>
+                        Observații tehnologice
+                    </label>
+
+                    <textarea
+                        id="observations"
+                        placeholder="Temperaturi, timpi, puncte critice, indicații de montaj, finisare etc."></textarea>
+
+                </div>
+
+
+                <div class="button-row">
+
+                    <button
+                        class="button"
+                        onclick="saveCurrentSheet()">
+
+                        Salvează fișa
+
+                    </button>
+
+
+                    <button
+                        class="button button-secondary"
+                        onclick="window.print()">
+
+                        Print / Salvează PDF
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="app.js?v=6"></script>
+
+
+<script>
+
+let currentRecipe = null;
+
+
+/* =========================
+   INITIALIZARE
+========================= */
+
+function initTechnologySheets() {
+
+    const recipes =
+        getRecipes();
+
+
+    if (recipes.length === 0) {
+
+        document.getElementById(
+            "mainArea"
+        ).innerHTML = `
+
+            <div class="empty-state">
+
+                Nu există încă nicio rețetă.
+
+                <br><br>
+
+                Creează mai întâi o rețetă
+                pentru a genera o fișă tehnologică.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const select =
+        document.getElementById(
+            "recipeSelect"
+        );
+
+
+    select.innerHTML = "";
+
+
+    [...recipes]
+        .sort(
+            (a, b) =>
+                a.name.localeCompare(
+                    b.name,
+                    "ro"
+                )
+        )
+        .forEach(
+            recipe => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    recipe.id;
+
+                option.textContent =
+                    recipe.name;
+
+                select.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+    loadSelectedRecipe();
+}
+
+
+/* =========================
+   RETETA
+========================= */
+
+function getRecipeById(id) {
+
+    return getRecipes().find(
+        recipe =>
+            Number(recipe.id) ===
+            Number(id)
+    );
+}
+
+
+function loadSelectedRecipe() {
+
+    const recipeId =
+        document.getElementById(
+            "recipeSelect"
+        ).value;
+
+
+    currentRecipe =
+        getRecipeById(
+            recipeId
+        );
+
+
+    if (!currentRecipe) {
+        return;
+    }
+
+
+    document.getElementById(
+        "recipeTitle"
+    ).textContent =
+        currentRecipe.name;
+
+
+    document.getElementById(
+        "recipeSubtitle"
+    ).textContent =
+        currentRecipe.portions +
+        (
+            Number(currentRecipe.portions) === 1
+                ? " porție"
+                : " porții"
+        );
+
+
+    renderIngredients();
+
+    renderCosts();
+
+    loadSavedSheet();
+}
+
+
+/* =========================
+   INGREDIENTE
+========================= */
+
+function renderIngredients() {
+
+    let html = `
+
+        <div class="table-wrapper">
+
+            <table class="recipe-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Ingredient
+                        </th>
+
+                        <th>
+                            U.M.
+                        </th>
+
+                        <th>
+                            Cantitate
+                        </th>
+
+                        <th>
+                            Cost
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+    `;
+
+
+    currentRecipe.ingredients.forEach(
+        line => {
+
+            const ingredient =
+                getIngredientById(
+                    line.ingredientId
+                );
+
+
+            if (!ingredient) {
+
+                html += `
+
+                    <tr>
+
+                        <td>
+                            Ingredient indisponibil
+                        </td>
+
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            const cost =
+                Number(
+                    ingredient.unitCost
+                ) *
+                Number(
+                    line.quantity
+                );
+
+
+            html += `
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+
+                            ${escapeHtml(
+                                ingredient.name
+                            )}
+
+                        </strong>
+
+                    </td>
+
+                    <td>
+                        ${ingredient.unit}
+                    </td>
+
+                    <td>
+
+                        ${formatQuantity(
+                            line.quantity
+                        )}
+
+                    </td>
+
+                    <td>
+
+                        ${formatMoney(
+                            cost
+                        )}
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "ingredientsArea"
+    ).innerHTML =
+        html;
+}
+
+
+/* =========================
+   COSTURI
+========================= */
+
+function calculateRecipeCost() {
+
+    let total = 0;
+
+
+    currentRecipe.ingredients.forEach(
+        line => {
+
+            const ingredient =
+                getIngredientById(
+                    line.ingredientId
+                );
+
+
+            if (!ingredient) {
+                return;
+            }
+
+
+            total +=
+                Number(
+                    ingredient.unitCost
+                ) *
+                Number(
+                    line.quantity
+                );
+
+        }
+    );
+
+
+    return total;
+}
+
+
+function renderCosts() {
+
+    const total =
+        calculateRecipeCost();
+
+
+    const portions =
+        Number(
+            currentRecipe.portions
+        ) || 1;
+
+
+    const costPerPortion =
+        total /
+        portions;
+
+
+    document.getElementById(
+        "costArea"
+    ).innerHTML = `
+
+        <div class="summary-box">
+
+            <div class="summary-label">
+                Număr porții
+            </div>
+
+            <div class="summary-value">
+
+                ${formatQuantity(
+                    portions
+                )}
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-box">
+
+            <div class="summary-label">
+                Cost total materii prime
+            </div>
+
+            <div class="summary-value">
+
+                ${formatMoney(
+                    total
+                )}
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-box">
+
+            <div class="summary-label">
+                Cost materii prime / porție
+            </div>
+
+            <div class="summary-value">
+
+                ${formatMoney(
+                    costPerPortion
+                )}
+
+            </div>
+
+        </div>
+
+    `;
+}
+
+
+/* =========================
+   INCARCARE FISA EXISTENTA
+========================= */
+
+function clearSheetFields() {
+
+    document.getElementById(
+        "category"
+    ).value = "";
+
+    document.getElementById(
+        "portionWeight"
+    ).value = "";
+
+    document.getElementById(
+        "preparationTime"
+    ).value = "";
+
+    document.getElementById(
+        "shelfLife"
+    ).value = "";
+
+    document.getElementById(
+        "storageConditions"
+    ).value = "";
+
+    document.getElementById(
+        "allergens"
+    ).value = "";
+
+    document.getElementById(
+        "process"
+    ).value = "";
+
+    document.getElementById(
+        "observations"
+    ).value = "";
+}
+
+
+function loadSavedSheet() {
+
+    clearSheetFields();
+
+
+    const sheet =
+        getTechnologySheetByRecipeId(
+            currentRecipe.id
+        );
+
+
+    const status =
+        document.getElementById(
+            "sheetStatus"
+        );
+
+
+    if (!sheet) {
+
+        status.textContent =
+            "Fișă nesalvată";
+
+        status.classList.remove(
+            "saved"
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "category"
+    ).value =
+        sheet.category || "";
+
+
+    document.getElementById(
+        "portionWeight"
+    ).value =
+        sheet.portionWeight || "";
+
+
+    document.getElementById(
+        "preparationTime"
+    ).value =
+        sheet.preparationTime || "";
+
+
+    document.getElementById(
+        "shelfLife"
+    ).value =
+        sheet.shelfLife || "";
+
+
+    document.getElementById(
+        "storageConditions"
+    ).value =
+        sheet.storageConditions || "";
+
+
+    document.getElementById(
+        "allergens"
+    ).value =
+        sheet.allergens || "";
+
+
+    document.getElementById(
+        "process"
+    ).value =
+        sheet.process || "";
+
+
+    document.getElementById(
+        "observations"
+    ).value =
+        sheet.observations || "";
+
+
+    status.textContent =
+        "Fișă salvată";
+
+    status.classList.add(
+        "saved"
+    );
+}
+
+
+/* =========================
+   SALVARE FISA
+========================= */
+
+function saveCurrentSheet() {
+
+    if (!currentRecipe) {
+
+        alert(
+            "Selectează o rețetă."
+        );
+
+        return;
+
+    }
+
+
+    let sheets =
+        getTechnologySheets();
+
+
+    const existingIndex =
+        sheets.findIndex(
+            sheet =>
+                Number(
+                    sheet.recipeId
+                ) ===
+                Number(
+                    currentRecipe.id
+                )
+        );
+
+
+    const sheetData = {
+
+        recipeId:
+            Number(
+                currentRecipe.id
+            ),
+
+        category:
+            document.getElementById(
+                "category"
+            ).value,
+
+        portionWeight:
+            document.getElementById(
+                "portionWeight"
+            ).value,
+
+        preparationTime:
+            document.getElementById(
+                "preparationTime"
+            ).value.trim(),
+
+        shelfLife:
+            document.getElementById(
+                "shelfLife"
+            ).value.trim(),
+
+        storageConditions:
+            document.getElementById(
+                "storageConditions"
+            ).value.trim(),
+
+        allergens:
+            document.getElementById(
+                "allergens"
+            ).value.trim(),
+
+        process:
+            document.getElementById(
+                "process"
+            ).value.trim(),
+
+        observations:
+            document.getElementById(
+                "observations"
+            ).value.trim(),
+
+        updatedAt:
+            new Date().toISOString()
+
+    };
+
+
+    if (existingIndex >= 0) {
+
+        sheetData.id =
+            sheets[existingIndex].id;
+
+        sheetData.createdAt =
+            sheets[existingIndex].createdAt;
+
+
+        sheets[existingIndex] =
+            sheetData;
+
+    } else {
+
+        sheetData.id =
+            Date.now();
+
+        sheetData.createdAt =
+            new Date().toISOString();
+
+
+        sheets.push(
+            sheetData
+        );
+
+    }
+
+
+    saveTechnologySheets(
+        sheets
+    );
+
+
+    const status =
+        document.getElementById(
+            "sheetStatus"
+        );
+
+
+    status.textContent =
+        "Fișă salvată";
+
+    status.classList.add(
+        "saved"
+    );
+
+
+    alert(
+        "Fișa tehnologică a fost salvată."
+    );
+}
+
+
+/* =========================
+   START
+========================= */
+
+initTechnologySheets();
+
+</script>
+
+
+</body>
+
+</html>
