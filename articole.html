@@ -14,7 +14,7 @@
 
   <meta
     name="description"
-    content="Articole și instrumente practice de Costin Licu despre cofetărie, patiserie, tehnologia alimentelor, siguranță alimentară, sous-vide și adaptarea rețetelor."
+    content="Articole de Costin Licu despre cofetărie, patiserie, tehnologia alimentelor, siguranță alimentară, reologie, sous-vide și știința din spatele produselor."
   >
 
   <meta name="robots" content="index, follow">
@@ -28,15 +28,9 @@
   <!-- OPEN GRAPH -->
 
   <meta property="og:type" content="website">
-
   <meta property="og:locale" content="ro_RO">
-
   <meta property="og:site_name" content="Costin Licu">
-
-  <meta
-    property="og:url"
-    content="https://costinlicu.ro/articole.html"
-  >
+  <meta property="og:url" content="https://costinlicu.ro/articole.html">
 
   <meta
     property="og:title"
@@ -45,16 +39,13 @@
 
   <meta
     property="og:description"
-    content="Articole și instrumente practice despre cofetărie, patiserie, ingrediente, procese, siguranță alimentară și tehnologia alimentelor."
+    content="Știința din spatele produsului: cofetărie, patiserie, tehnologia alimentelor, siguranță alimentară, reologie și sous-vide."
   >
 
 
   <!-- TWITTER / SOCIAL -->
 
-  <meta
-    name="twitter:card"
-    content="summary"
-  >
+  <meta name="twitter:card" content="summary">
 
   <meta
     name="twitter:title"
@@ -63,13 +54,10 @@
 
   <meta
     name="twitter:description"
-    content="Cofetărie, patiserie și știința alimentelor explicate prin ingrediente, procese, siguranță, tehnologie și instrumente practice."
+    content="Cofetărie, patiserie și știința alimentelor explicate prin ingrediente, procese, textură, siguranță și tehnologie."
   >
 
-  <meta
-    name="theme-color"
-    content="#16120f"
-  >
+  <meta name="theme-color" content="#16120f">
 
 
   <style>
@@ -86,203 +74,118 @@
       --max-width: 1180px;
     }
 
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-
     html {
       scroll-behavior: smooth;
     }
 
-
     body {
-
       background:
-
         radial-gradient(
           circle at 75% 10%,
           rgba(215, 164, 91, 0.12),
           transparent 28rem
         ),
-
         var(--background);
 
       color: var(--text);
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+      font-family: Arial, Helvetica, sans-serif;
       line-height: 1.6;
     }
-
 
     a {
       color: inherit;
       text-decoration: none;
     }
 
-
     .container {
-
-      width:
-        min(
-          calc(100% - 40px),
-          var(--max-width)
-        );
-
+      width: min(calc(100% - 40px), var(--max-width));
       margin: 0 auto;
     }
-
 
 
     /* ========================================
        HEADER
     ======================================== */
 
-
     header {
-
       position: sticky;
-
       top: 0;
-
       z-index: 100;
-
-      border-bottom:
-        1px solid
-        var(--border);
-
-      background:
-        rgba(14, 12, 10, 0.92);
-
-      backdrop-filter:
-        blur(14px);
+      border-bottom: 1px solid var(--border);
+      background: rgba(14, 12, 10, 0.92);
+      backdrop-filter: blur(14px);
     }
 
-
     nav {
-
       position: relative;
-
       min-height: 76px;
-
       display: flex;
-
-      justify-content:
-        space-between;
-
+      justify-content: space-between;
       align-items: center;
-
       gap: 24px;
     }
 
-
     .logo {
-
       font-size: 1.15rem;
-
       font-weight: 700;
-
-      letter-spacing:
-        0.08em;
-
-      text-transform:
-        uppercase;
-
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       white-space: nowrap;
     }
 
-
     .logo span {
-
-      color:
-        var(--accent);
+      color: var(--accent);
     }
 
-
     .nav-links {
-
       display: flex;
-
       align-items: center;
-
       gap: 28px;
-
-      color:
-        var(--muted);
-
+      color: var(--muted);
       font-size: 0.95rem;
     }
 
-
     .nav-links a {
-
-      transition:
-        0.2s ease;
+      transition: 0.2s ease;
     }
-
 
     .nav-links a:hover {
-
-      color:
-        var(--accent-light);
+      color: var(--accent-light);
     }
-
 
     .menu-toggle {
-
       display: none;
-
-      background:
-        transparent;
-
+      background: transparent;
       border: 0;
-
-      color:
-        var(--text);
-
+      color: var(--text);
       font-size: 1.8rem;
-
       line-height: 1;
-
       cursor: pointer;
     }
-
 
 
     /* ========================================
        SECȚIUNI
     ======================================== */
 
-
     section {
-
-      padding:
-        90px 0;
+      padding: 90px 0;
     }
-
 
     .section-heading {
-
-      max-width:
-        760px;
-
-      margin-bottom:
-        48px;
+      max-width: 760px;
+      margin-bottom: 48px;
     }
-
 
     .section-heading h1,
     .section-heading h2 {
-
-      margin-bottom:
-        16px;
+      margin-bottom: 16px;
 
       font-family:
         Georgia,
@@ -290,88 +193,46 @@
         serif;
 
       font-size:
-        clamp(
-          1.8rem,
-          3vw,
-          2.7rem
-        );
+        clamp(1.8rem, 3vw, 2.7rem);
 
       font-weight: 400;
-
       line-height: 1.08;
     }
 
-
     .section-heading p {
-
-      color:
-        var(--muted);
-
-      font-size:
-        1.08rem;
+      color: var(--muted);
+      font-size: 1.08rem;
     }
-
 
     .eyebrow {
-
-      margin-bottom:
-        20px !important;
-
-      color:
-        var(--accent-light) !important;
-
-      font-size:
-        0.8rem !important;
-
+      margin-bottom: 20px !important;
+      color: var(--accent-light) !important;
+      font-size: 0.8rem !important;
       font-weight: 700;
-
-      letter-spacing:
-        0.19em;
-
-      text-transform:
-        uppercase;
+      letter-spacing: 0.19em;
+      text-transform: uppercase;
     }
-
 
 
     /* ========================================
-       CARDURI
+       CARDURI ARTICOLE
     ======================================== */
 
-
     .cards {
-
       display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
+      grid-template-columns: repeat(3, 1fr);
       gap: 22px;
     }
 
-
     .service-card {
-
       display: flex;
-
-      flex-direction:
-        column;
-
-      min-height:
-        360px;
-
-      padding:
-        30px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        22px;
+      flex-direction: column;
+      min-height: 360px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
 
       background:
-
         linear-gradient(
           145deg,
           var(--surface-light),
@@ -379,343 +240,192 @@
         );
 
       transition:
-
-        transform
-        0.25s ease,
-
-        border-color
-        0.25s ease;
+        transform 0.25s ease,
+        border-color 0.25s ease;
     }
-
 
     .service-card:hover {
-
-      transform:
-        translateY(-4px);
-
-      border-color:
-        rgba(215, 164, 91, 0.35);
+      transform: translateY(-4px);
+      border-color: rgba(215, 164, 91, 0.35);
     }
-
 
     .number {
-
       display: block;
-
-      margin-bottom:
-        26px;
-
-      color:
-        var(--accent);
+      margin-bottom: 26px;
+      color: var(--accent);
 
       font-family:
         Georgia,
         "Times New Roman",
         serif;
 
-      font-size:
-        2rem;
+      font-size: 2rem;
     }
-
 
     .service-card h3 {
-
-      margin-bottom:
-        14px;
+      margin-bottom: 14px;
 
       font-family:
         Georgia,
         "Times New Roman",
         serif;
 
-      font-size:
-        1.45rem;
-
-      font-weight:
-        400;
-
-      line-height:
-        1.2;
+      font-size: 1.45rem;
+      font-weight: 400;
+      line-height: 1.2;
     }
-
 
     .service-card > p:not(.eyebrow) {
-
-      color:
-        var(--muted);
+      color: var(--muted);
     }
-
 
     .service-card .button-wrapper {
-
-      margin-top:
-        auto;
-
-      padding-top:
-        25px;
+      margin-top: auto;
+      padding-top: 25px;
     }
-
 
 
     /* ========================================
        BUTOANE
     ======================================== */
 
-
     .button {
-
-      display:
-        inline-flex;
-
-      justify-content:
-        center;
-
-      align-items:
-        center;
-
-      min-height:
-        50px;
-
-      padding:
-        0 24px;
-
-      border:
-        1px solid
-        var(--accent);
-
-      border-radius:
-        999px;
-
-      font-weight:
-        700;
-
-      transition:
-        0.25s ease;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      padding: 0 24px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.25s ease;
     }
-
 
     .button-secondary {
-
-      color:
-        var(--text);
+      color: var(--text);
     }
-
 
     .button-secondary:hover {
-
-      background:
-        rgba(215, 164, 91, 0.12);
-
-      transform:
-        translateY(-2px);
+      background: rgba(215, 164, 91, 0.12);
+      transform: translateY(-2px);
     }
-
 
 
     /* ========================================
        FOOTER
     ======================================== */
 
-
     footer {
-
-      padding:
-        30px 0;
-
-      border-top:
-        1px solid
-        var(--border);
-
-      color:
-        var(--muted);
-
-      font-size:
-        0.9rem;
+      padding: 30px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
     }
-
 
     .footer-content {
-
-      display:
-        flex;
-
-      justify-content:
-        space-between;
-
-      gap:
-        20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
     }
-
 
 
     /* ========================================
        TABLETĂ / MOBIL
     ======================================== */
 
-
     @media (max-width: 850px) {
 
-
       .menu-toggle {
-
-        display:
-          block;
+        display: block;
       }
 
-
       .nav-links {
-
-        display:
-          none;
-
-        position:
-          absolute;
-
-        top:
-          76px;
-
-        left:
-          -20px;
-
-        right:
-          -20px;
-
-        flex-direction:
-          column;
-
-        align-items:
-          flex-start;
-
-        gap:
-          0;
-
-        padding:
-          10px 20px 20px;
-
-        border-bottom:
-          1px solid
-          var(--border);
-
-        background:
-          rgba(14, 12, 10, 0.99);
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: -20px;
+        right: -20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 10px 20px 20px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(14, 12, 10, 0.99);
 
         box-shadow:
           0 25px 60px
           rgba(0, 0, 0, 0.4);
       }
 
-
       .nav-links.active {
-
-        display:
-          flex;
+        display: flex;
       }
 
-
       .nav-links a {
-
-        width:
-          100%;
-
-        padding:
-          14px 0;
+        width: 100%;
+        padding: 14px 0;
 
         border-bottom:
           1px solid
           rgba(255, 255, 255, 0.07);
       }
 
-
       .nav-links a:last-child {
-
-        border-bottom:
-          0;
+        border-bottom: 0;
       }
-
 
       .cards {
-
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
       }
-
 
       .service-card {
-
-        min-height:
-          auto;
+        min-height: auto;
       }
 
-
       .footer-content {
-
-        flex-direction:
-          column;
+        flex-direction: column;
       }
 
     }
-
 
 
     /* ========================================
        TELEFOANE MICI
     ======================================== */
 
-
     @media (max-width: 600px) {
 
-
       .container {
-
         width:
-
           min(
             calc(100% - 30px),
             var(--max-width)
           );
       }
 
-
       nav {
-
-        min-height:
-          68px;
+        min-height: 68px;
       }
-
 
       .logo {
-
-        font-size:
-          1rem;
+        font-size: 1rem;
       }
-
 
       .nav-links {
-
-        top:
-          68px;
+        top: 68px;
       }
-
 
       section {
-
-        padding:
-          65px 0;
+        padding: 65px 0;
       }
-
 
       .section-heading {
-
-        margin-bottom:
-          34px;
+        margin-bottom: 34px;
       }
-
 
       .section-heading h1,
       .section-heading h2 {
-
         font-size:
-
           clamp(
             1.7rem,
             8vw,
@@ -723,42 +433,25 @@
           );
       }
 
-
       .section-heading p {
-
-        font-size:
-          1rem;
+        font-size: 1rem;
       }
-
 
       .service-card {
-
-        padding:
-          24px;
+        padding: 24px;
       }
-
 
       .number {
-
-        margin-bottom:
-          18px;
-
-        font-size:
-          1.8rem;
+        margin-bottom: 18px;
+        font-size: 1.8rem;
       }
-
 
       .service-card h3 {
-
-        font-size:
-          1.3rem;
+        font-size: 1.3rem;
       }
 
-
       .button {
-
-        width:
-          100%;
+        width: 100%;
       }
 
     }
@@ -766,74 +459,54 @@
   </style>
 
 
-
   <!-- ========================================
        STRUCTURED DATA
   ======================================== -->
 
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-
     "@type": "CollectionPage",
-
     "@id": "https://costinlicu.ro/articole.html#articles",
-
     "name": "Articole — Costin Licu",
-
     "url": "https://costinlicu.ro/articole.html",
-
-    "description": "Articole și instrumente practice despre cofetărie, patiserie, tehnologia alimentelor, siguranță alimentară și sous-vide.",
-
+    "description": "Articole despre cofetărie, patiserie, tehnologia alimentelor, siguranță alimentară, reologie și sous-vide.",
     "inLanguage": "ro",
-
     "author": {
-
       "@type": "Person",
-
       "@id": "https://costinlicu.ro/#person",
-
       "name": "Costin Licu",
-
       "url": "https://costinlicu.ro/",
-
       "jobTitle": [
         "Pastry Chef",
         "Formator",
         "Inginer în industria alimentară"
       ],
-
       "sameAs": [
         "https://www.instagram.com/costinlicu/",
         "https://www.facebook.com/chefcostinlicu"
       ]
     },
-
     "about": [
       "Cofetărie",
       "Patiserie",
       "Tehnologia alimentelor",
       "Siguranța alimentelor",
       "Sous-vide",
-      "Instrumente pentru rețete"
+      "Reologie"
     ]
   }
   </script>
 
-
 </head>
-
 
 
 <body>
 
 
-
   <!-- ========================================
        HEADER
   ======================================== -->
-
 
   <header>
 
@@ -842,16 +515,12 @@
       aria-label="Navigare principală"
     >
 
-
       <a
         class="logo"
         href="index.html"
       >
-
         Costin <span>Licu</span>
-
       </a>
-
 
 
       <button
@@ -860,64 +529,25 @@
         aria-label="Deschide meniul"
         aria-expanded="false"
       >
-
         ☰
-
       </button>
-
 
 
       <div class="nav-links">
 
+        <a href="index.html">Acasă</a>
 
-        <a href="index.html">
+        <a href="despre.html">Despre</a>
 
-          Acasă
+        <a href="portofoliu.html">Portofoliu</a>
 
-        </a>
+        <a href="experienta.html">Experiență</a>
 
+        <a href="retete.html">Rețete</a>
 
-        <a href="despre.html">
+        <a href="articole.html">Articole</a>
 
-          Despre
-
-        </a>
-
-
-        <a href="portofoliu.html">
-
-          Portofoliu
-
-        </a>
-
-
-        <a href="experienta.html">
-
-          Experiență
-
-        </a>
-
-
-        <a href="retete.html">
-
-          Rețete
-
-        </a>
-
-
-        <a href="articole.html">
-
-          Articole
-
-        </a>
-
-
-        <a href="contact.html">
-
-          Contact
-
-        </a>
-
+        <a href="contact.html">Contact</a>
 
       </div>
 
@@ -926,551 +556,354 @@
   </header>
 
 
-
   <!-- ========================================
        CONȚINUT
   ======================================== -->
 
-
   <main>
 
-
     <section>
-
 
       <div class="container">
 
 
-
         <!-- INTRODUCERE -->
-
 
         <div class="section-heading">
 
-
           <p class="eyebrow">
-
             Articole
-
           </p>
 
-
           <h1>
-
             Știința din spatele<br>
             produsului.
-
           </h1>
 
-
           <p>
-
             Articole despre cofetărie, patiserie,
             tehnologia alimentelor și procesele care
             influențează textura, gustul, stabilitatea
             și siguranța produselor.
-
           </p>
 
-
         </div>
-
 
 
         <!-- ========================================
              ARTICOLE / CATEGORII
         ======================================== -->
 
-
         <div class="cards">
-
 
 
           <!-- 01 -->
 
-
           <article class="service-card">
 
-
             <span class="number">
-
               01
-
             </span>
 
-
             <p class="eyebrow">
-
               Tehnologia ingredientelor
-
             </p>
 
-
             <h3>
-
               Ingredientul înțeles,
               nu doar folosit.
-
             </h3>
 
-
             <p>
-
               Rolul ingredientelor, interacțiunile dintre ele
               și modul în care compoziția influențează
               structura și comportamentul produsului final.
-
             </p>
-
 
             <div class="button-wrapper">
 
-
               <a
                 class="button button-secondary"
-                href="#"
+                href="/articole/faina-pentru-croissante-w-pl/"
               >
-
-                Citește articolele
-
+                Citește articolul
               </a>
-
 
             </div>
 
-
           </article>
-
 
 
           <!-- 02 -->
 
-
           <article class="service-card">
 
-
             <span class="number">
-
               02
-
             </span>
 
-
             <p class="eyebrow">
-
               Procese &amp; tehnici
-
             </p>
 
-
             <h3>
-
               Ce se întâmplă
               în timpul procesării.
-
             </h3>
 
-
             <p>
-
               Emulsii, gelifiere, cristalizare,
               coagulare, fermentație, laminare și
               alte procese esențiale în cofetărie
               și patiserie.
-
             </p>
 
-
             <div class="button-wrapper">
-
 
               <a
                 class="button button-secondary"
                 href="#"
               >
-
                 Citește articolele
-
               </a>
-
 
             </div>
 
-
           </article>
-
 
 
           <!-- 03 -->
 
-
           <article class="service-card">
 
-
             <span class="number">
-
               03
-
             </span>
 
-
             <p class="eyebrow">
-
               Instrumente practice
-
             </p>
 
-
             <h3>
-
               Calculator rețete
               cofetărie &amp; patiserie.
-
             </h3>
 
-
             <p>
-
               Adaptează rapid cantitățile unei rețete
               la o altă dimensiune de formă, inel sau tavă
               și recalculează automat ingredientele.
-
             </p>
-
 
             <div class="button-wrapper">
 
-
               <a
                 class="button button-secondary"
-                href="articole/calculator-retete-cofetarie-patiserie/"
+                href="/articole/calculator-retete-cofetarie-patiserie/"
               >
-
                 Deschide calculatorul
-
               </a>
-
 
             </div>
 
-
           </article>
-
 
 
           <!-- 04 -->
 
-
           <article class="service-card">
 
-
             <span class="number">
-
               04
-
             </span>
 
-
             <p class="eyebrow">
-
               Siguranță alimentară
-
             </p>
 
-
             <h3>
-
               Calitatea începe
               cu controlul procesului.
-
             </h3>
 
-
             <p>
-
               Temperatură, timp, pasteurizare,
               activitatea apei, microbiologie și
               principii de siguranță aplicate
               produselor de cofetărie și patiserie.
-
             </p>
 
-
             <div class="button-wrapper">
-
 
               <a
                 class="button button-secondary"
                 href="#"
               >
-
                 Citește articolele
-
               </a>
-
 
             </div>
 
-
           </article>
-
 
 
           <!-- 05 -->
 
-
           <article class="service-card">
 
-
             <span class="number">
-
               05
-
             </span>
 
-
             <p class="eyebrow">
-
               Sous-vide
-
             </p>
 
-
             <h3>
-
               Temperatura ca
               instrument de precizie.
-
             </h3>
 
-
             <p>
-
               Aplicarea procesării sous-vide în deserturi,
               controlul texturii, stabilitatea produsului
               și implicațiile tehnologice și de siguranță.
-
             </p>
 
-
             <div class="button-wrapper">
-
 
               <a
                 class="button button-secondary"
                 href="#"
               >
-
                 Citește articolele
-
               </a>
 
-
             </div>
-
 
           </article>
 
 
-
           <!-- 06 -->
-
 
           <article class="service-card">
 
-
             <span class="number">
-
               06
-
             </span>
 
-
             <p class="eyebrow">
-
               Industria alimentară
-
             </p>
 
-
             <h3>
-
               Din laborator
               către producție.
-
             </h3>
 
-
             <p>
-
               Procese tehnologice, calitate,
               standardizare, reproductibilitate
               și dezvoltarea produselor alimentare.
-
             </p>
 
-
             <div class="button-wrapper">
-
 
               <a
                 class="button button-secondary"
                 href="#"
               >
-
                 Citește articolele
-
               </a>
 
-
             </div>
-
 
           </article>
 
 
         </div>
 
-
       </div>
-
 
     </section>
 
-
   </main>
-
 
 
   <!-- ========================================
        FOOTER
   ======================================== -->
 
-
   <footer>
-
 
     <div class="container footer-content">
 
-
       <p>
-
         © 2026 Costin Licu. Toate drepturile rezervate.
-
       </p>
-
 
       <p>
-
         Pastry Chef · Formator · Inginer în industria alimentară
-
       </p>
-
 
     </div>
 
-
   </footer>
-
 
 
   <!-- ========================================
        MENIU MOBIL
   ======================================== -->
 
-
   <script>
 
-
     const menuToggle =
-      document.querySelector(
-        ".menu-toggle"
-      );
-
+      document.querySelector(".menu-toggle");
 
     const navLinks =
-      document.querySelector(
-        ".nav-links"
-      );
+      document.querySelector(".nav-links");
 
 
     menuToggle.addEventListener(
-
       "click",
-
       () => {
 
-
         const isOpen =
-          navLinks
-            .classList
-            .toggle(
-              "active"
-            );
-
+          navLinks.classList.toggle("active");
 
         menuToggle.setAttribute(
-
           "aria-expanded",
-
           isOpen
-
         );
 
-
         menuToggle.textContent =
-          isOpen
-            ? "✕"
-            : "☰";
-
+          isOpen ? "✕" : "☰";
 
       }
-
     );
 
 
-
     navLinks
-
       .querySelectorAll("a")
-
       .forEach(link => {
 
-
         link.addEventListener(
-
           "click",
-
           () => {
 
-
-            navLinks
-              .classList
-              .remove(
-                "active"
-              );
-
+            navLinks.classList.remove("active");
 
             menuToggle.setAttribute(
-
               "aria-expanded",
-
               "false"
-
             );
 
-
-            menuToggle.textContent =
-              "☰";
-
+            menuToggle.textContent = "☰";
 
           }
-
         );
 
-
       });
-
 
   </script>
 
