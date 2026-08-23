@@ -40,22 +40,31 @@
             font-size: 14px;
         }
 
-        .sheet-table {
+        .sheet-table,
+        .recipe-table {
             width: 100%;
             border-collapse: collapse;
         }
 
         .sheet-table th,
-        .sheet-table td {
-            padding: 15px;
+        .sheet-table td,
+        .recipe-table th,
+        .recipe-table td {
+            padding: 14px;
             border-bottom: 1px solid #eeeae3;
             text-align: left;
         }
 
-        .sheet-table th {
+        .sheet-table th,
+        .recipe-table th {
             font-size: 13px;
             color: #777;
             background: #fbfaf7;
+        }
+
+        .recipe-table td:last-child,
+        .recipe-table th:last-child {
+            text-align: right;
         }
 
         .sheet-actions {
@@ -86,8 +95,6 @@
         .button-danger {
             background: transparent;
             color: #a44040;
-            padding-left: 4px;
-            padding-right: 4px;
         }
 
         .status {
@@ -97,7 +104,6 @@
             background: #f1ede6;
             color: #666;
             font-size: 12px;
-            white-space: nowrap;
         }
 
         .status.saved {
@@ -109,7 +115,6 @@
             display: flex;
             justify-content: space-between;
             gap: 20px;
-            align-items: center;
             margin-bottom: 25px;
         }
 
@@ -120,10 +125,6 @@
             cursor: pointer;
             padding: 5px 0;
             font-size: 14px;
-        }
-
-        .back-button:hover {
-            text-decoration: underline;
         }
 
         .sheet-title-row {
@@ -188,27 +189,21 @@
             font-size: 18px;
         }
 
-        .recipe-table {
-            width: 100%;
-            border-collapse: collapse;
+        .section-row td {
+            background: #f7f4ee;
+            font-weight: bold;
+            font-size: 12px;
+            color: #555;
         }
 
-        .recipe-table th,
-        .recipe-table td {
-            padding: 14px;
-            border-bottom: 1px solid #eeeae3;
-            text-align: left;
-        }
-
-        .recipe-table th {
-            font-size: 13px;
-            color: #777;
-            background: #fbfaf7;
-        }
-
-        .recipe-table td:last-child,
-        .recipe-table th:last-child {
-            text-align: right;
+        .component-badge {
+            display: inline-block;
+            margin-left: 7px;
+            padding: 3px 7px;
+            border-radius: 10px;
+            background: #f1ede6;
+            color: #666;
+            font-size: 11px;
         }
 
         .cost-summary {
@@ -268,7 +263,6 @@
             .sheet-toolbar,
             .library-top {
                 flex-direction: column;
-                align-items: flex-start;
             }
 
             .table-wrapper {
@@ -280,13 +274,10 @@
             }
 
             .recipe-table {
-                min-width: 650px;
+                min-width: 700px;
             }
 
         }
-
-
-        /* PRINT / PDF */
 
         @media print {
 
@@ -329,27 +320,12 @@
                 padding-bottom: 15px;
             }
 
-            .print-header h1 {
-                margin: 0;
-                font-size: 24px;
-            }
-
-            .print-header p {
-                margin: 5px 0 0;
-                font-size: 12px;
-            }
-
             input,
             select,
             textarea {
                 border: none;
                 padding: 0;
                 background: transparent;
-                resize: none;
-            }
-
-            textarea {
-                min-height: auto;
             }
 
             .summary-box {
@@ -362,7 +338,6 @@
     </style>
 
 </head>
-
 
 <body>
 
@@ -418,9 +393,7 @@
         </div>
 
 
-        <!-- =========================
-             BIBLIOTECA DE FISE
-        ========================== -->
+        <!-- BIBLIOTECA -->
 
         <div id="libraryView">
 
@@ -435,10 +408,7 @@
                         </h2>
 
                         <div class="muted">
-
-                            Fiecare rețetă poate avea propria
-                            fișă tehnologică editabilă.
-
+                            Fiecare rețetă poate avea propria fișă tehnologică.
                         </div>
 
                     </div>
@@ -459,9 +429,7 @@
         </div>
 
 
-        <!-- =========================
-             EDITOR FISA
-        ========================== -->
+        <!-- EDITOR -->
 
         <div
             id="editorView"
@@ -523,8 +491,6 @@
                 </div>
 
 
-                <!-- DATE GENERALE -->
-
                 <h3 class="section-title">
                     Date generale
                 </h3>
@@ -583,8 +549,7 @@
                             type="number"
                             id="portionWeight"
                             min="0"
-                            step="0.1"
-                            placeholder="Ex: 120">
+                            step="0.1">
 
                     </div>
 
@@ -598,7 +563,7 @@
                         <input
                             type="text"
                             id="preparationTime"
-                            placeholder="Ex: 2 ore 30 min">
+                            placeholder="Ex: 2 ore">
 
                     </div>
 
@@ -646,15 +611,13 @@
                     <input
                         type="text"
                         id="allergens"
-                        placeholder="Ex: gluten, lapte, ouă, fructe cu coajă lemnoasă">
+                        placeholder="Ex: lapte, ouă, gluten">
 
                 </div>
 
 
-                <!-- INGREDIENTE -->
-
                 <h3 class="section-title">
-                    Materii prime și ingrediente
+                    Materii prime și componente
                 </h3>
 
 
@@ -668,8 +631,6 @@
                 </div>
 
 
-                <!-- PROCES -->
-
                 <h3 class="section-title">
                     Proces tehnologic
                 </h3>
@@ -677,18 +638,12 @@
 
                 <div class="field">
 
-                    <label>
-                        Mod de preparare / flux tehnologic
-                    </label>
-
                     <textarea
                         id="process"
-                        placeholder="Descrie etapele tehnologice în ordinea realizării..."></textarea>
+                        placeholder="Descrie etapele tehnologice..."></textarea>
 
                 </div>
 
-
-                <!-- OBSERVATII -->
 
                 <h3 class="section-title">
                     Observații
@@ -697,13 +652,9 @@
 
                 <div class="field">
 
-                    <label>
-                        Observații tehnologice
-                    </label>
-
                     <textarea
                         id="observations"
-                        placeholder="Temperaturi, timpi, puncte critice, montaj, finisare etc."></textarea>
+                        placeholder="Temperaturi, timpi, montaj, finisare etc."></textarea>
 
                 </div>
 
@@ -749,12 +700,39 @@
 </div>
 
 
-<script src="app.js?v=7"></script>
+<script src="app.js?v=12"></script>
 
 
 <script>
 
 let currentRecipe = null;
+
+
+/* ==================================================
+   COST COMPLET
+================================================== */
+
+function calculateRecipeCost(recipe) {
+
+    const total =
+        calculateRecipeTotalCost(
+            recipe
+        );
+
+    return total === null
+        ? 0
+        : total;
+}
+
+
+/* ==================================================
+   RETETA DUPA ID
+================================================== */
+
+function getCurrentRecipeById(id) {
+
+    return getRecipeById(id);
+}
 
 
 /* ==================================================
@@ -767,7 +745,9 @@ function initTechnologyLibrary() {
         getRecipes();
 
 
-    if (recipes.length === 0) {
+    if (
+        recipes.length === 0
+    ) {
 
         document.getElementById(
             "libraryArea"
@@ -777,79 +757,15 @@ function initTechnologyLibrary() {
 
                 Nu există încă nicio rețetă.
 
-                <br><br>
-
-                Creează mai întâi o rețetă,
-                apoi vei putea genera fișa tehnologică.
-
             </div>
 
         `;
 
-
-        document.getElementById(
-            "libraryCounter"
-        ).textContent = "";
-
         return;
-
     }
 
 
     renderLibrary();
-}
-
-
-/* ==================================================
-   RETETA DUPA ID
-================================================== */
-
-function getRecipeById(id) {
-
-    return getRecipes().find(
-        recipe =>
-            Number(recipe.id) ===
-            Number(id)
-    );
-}
-
-
-/* ==================================================
-   COST RETETA
-================================================== */
-
-function calculateRecipeCost(recipe) {
-
-    let total = 0;
-
-
-    recipe.ingredients.forEach(
-        line => {
-
-            const ingredient =
-                getIngredientById(
-                    line.ingredientId
-                );
-
-
-            if (!ingredient) {
-                return;
-            }
-
-
-            total +=
-                Number(
-                    ingredient.unitCost
-                ) *
-                Number(
-                    line.quantity
-                );
-
-        }
-    );
-
-
-    return total;
 }
 
 
@@ -878,8 +794,12 @@ function renderLibrary() {
             sheet =>
                 recipes.some(
                     recipe =>
-                        Number(recipe.id) ===
-                        Number(sheet.recipeId)
+                        Number(
+                            recipe.id
+                        ) ===
+                        Number(
+                            sheet.recipeId
+                        )
                 )
         ).length;
 
@@ -903,29 +823,12 @@ function renderLibrary() {
 
                 <tr>
 
-                    <th>
-                        Produs / Rețetă
-                    </th>
-
-                    <th>
-                        Categorie
-                    </th>
-
-                    <th>
-                        Porții
-                    </th>
-
-                    <th>
-                        Cost materii prime
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
-
-                    <th>
-                        Acțiuni
-                    </th>
+                    <th>Produs / Rețetă</th>
+                    <th>Categorie</th>
+                    <th>Porții</th>
+                    <th>Cost total</th>
+                    <th>Status</th>
+                    <th>Acțiuni</th>
 
                 </tr>
 
@@ -958,11 +861,9 @@ function renderLibrary() {
                     <td>
 
                         <strong>
-
                             ${escapeHtml(
                                 recipe.name
                             )}
-
                         </strong>
 
                     </td>
@@ -1008,16 +909,16 @@ function renderLibrary() {
 
                         ${
                             sheet
-                            ? `
-                                <span class="status saved">
-                                    Salvată
-                                </span>
-                              `
-                            : `
-                                <span class="status">
-                                    Nesalvată
-                                </span>
-                              `
+                                ? `
+                                    <span class="status saved">
+                                        Salvată
+                                    </span>
+                                  `
+                                : `
+                                    <span class="status">
+                                        Nesalvată
+                                    </span>
+                                  `
                         }
 
                     </td>
@@ -1030,8 +931,8 @@ function renderLibrary() {
                             <button
                                 class="button ${
                                     sheet
-                                    ? "button-secondary"
-                                    : ""
+                                        ? "button-secondary"
+                                        : ""
                                 }"
                                 onclick="openSheet(
                                     ${recipe.id}
@@ -1039,8 +940,8 @@ function renderLibrary() {
 
                                 ${
                                     sheet
-                                    ? "Deschide / Editează"
-                                    : "Creează fișa"
+                                        ? "Deschide / Editează"
+                                        : "Creează fișa"
                                 }
 
                             </button>
@@ -1048,18 +949,18 @@ function renderLibrary() {
 
                             ${
                                 sheet
-                                ? `
-                                    <button
-                                        class="button button-danger"
-                                        onclick="deleteSheet(
-                                            ${recipe.id}
-                                        )">
+                                    ? `
+                                        <button
+                                            class="button button-danger"
+                                            onclick="deleteSheet(
+                                                ${recipe.id}
+                                            )">
 
-                                        Șterge
+                                            Șterge
 
-                                    </button>
-                                  `
-                                : ""
+                                        </button>
+                                      `
+                                    : ""
                             }
 
                         </div>
@@ -1093,25 +994,19 @@ function renderLibrary() {
 
 
 /* ==================================================
-   DESCHIDE FISA
+   DESCHIDERE FISA
 ================================================== */
 
 function openSheet(recipeId) {
 
     currentRecipe =
-        getRecipeById(
+        getCurrentRecipeById(
             recipeId
         );
 
 
     if (!currentRecipe) {
-
-        alert(
-            "Rețeta nu a fost găsită."
-        );
-
         return;
-
     }
 
 
@@ -1133,15 +1028,40 @@ function openSheet(recipeId) {
         currentRecipe.name;
 
 
-    document.getElementById(
-        "recipeSubtitle"
-    ).textContent =
+    let subtitle =
         currentRecipe.portions +
         (
-            Number(currentRecipe.portions) === 1
+            Number(
+                currentRecipe.portions
+            ) === 1
                 ? " porție"
                 : " porții"
         );
+
+
+    const yieldData =
+        getRecipeYield(
+            currentRecipe
+        );
+
+
+    if (yieldData) {
+
+        subtitle +=
+            " · Randament " +
+            formatQuantity(
+                yieldData.quantity
+            ) +
+            " " +
+            yieldData.unit;
+
+    }
+
+
+    document.getElementById(
+        "recipeSubtitle"
+    ).textContent =
+        subtitle;
 
 
     renderIngredients();
@@ -1159,78 +1079,82 @@ function openSheet(recipeId) {
 
 
 /* ==================================================
-   INAPOI
-================================================== */
-
-function backToLibrary() {
-
-    currentRecipe = null;
-
-
-    document.getElementById(
-        "editorView"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "libraryView"
-    ).style.display =
-        "block";
-
-
-    renderLibrary();
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-/* ==================================================
-   INGREDIENTE
+   INGREDIENTE + SUBRETETE
 ================================================== */
 
 function renderIngredients() {
+
+    const ingredients =
+        Array.isArray(
+            currentRecipe.ingredients
+        )
+            ? currentRecipe.ingredients
+            : [];
+
+
+    const components =
+        Array.isArray(
+            currentRecipe.components
+        )
+            ? currentRecipe.components
+            : [];
+
 
     let html = `
 
         <div class="table-wrapper">
 
-            <table class="recipe-table">
+        <table class="recipe-table">
 
-                <thead>
+            <thead>
 
-                    <tr>
+                <tr>
 
-                        <th>
-                            Ingredient
-                        </th>
+                    <th>
+                        Materie primă / Componentă
+                    </th>
 
-                        <th>
-                            U.M.
-                        </th>
+                    <th>
+                        U.M.
+                    </th>
 
-                        <th>
-                            Cantitate
-                        </th>
+                    <th>
+                        Cantitate
+                    </th>
 
-                        <th>
-                            Cost
-                        </th>
+                    <th>
+                        Cost
+                    </th>
 
-                    </tr>
+                </tr>
 
-                </thead>
+            </thead>
 
-                <tbody>
+            <tbody>
 
     `;
 
 
-    currentRecipe.ingredients.forEach(
+    if (
+        ingredients.length > 0
+    ) {
+
+        html += `
+
+            <tr class="section-row">
+
+                <td colspan="4">
+                    INGREDIENTE
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    ingredients.forEach(
         line => {
 
             const ingredient =
@@ -1240,25 +1164,7 @@ function renderIngredients() {
 
 
             if (!ingredient) {
-
-                html += `
-
-                    <tr>
-
-                        <td>
-                            Ingredient indisponibil
-                        </td>
-
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-
-                    </tr>
-
-                `;
-
                 return;
-
             }
 
 
@@ -1278,25 +1184,131 @@ function renderIngredients() {
                     <td>
 
                         <strong>
-
                             ${escapeHtml(
                                 ingredient.name
                             )}
+                        </strong>
+
+                    </td>
+
+                    <td>
+                        ${ingredient.unit}
+                    </td>
+
+                    <td>
+
+                        ${formatQuantity(
+                            line.quantity
+                        )}
+
+                    </td>
+
+                    <td>
+
+                        ${formatMoney(
+                            cost
+                        )}
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    if (
+        components.length > 0
+    ) {
+
+        html += `
+
+            <tr class="section-row">
+
+                <td colspan="4">
+                    COMPONENTE / SUB-REȚETE
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    components.forEach(
+        component => {
+
+            const childRecipe =
+                getRecipeById(
+                    component.recipeId
+                );
+
+
+            if (!childRecipe) {
+                return;
+            }
+
+
+            const yieldData =
+                getRecipeYield(
+                    childRecipe
+                );
+
+
+            const unitCost =
+                calculateRecipeUnitCost(
+                    childRecipe
+                );
+
+
+            if (
+                !yieldData ||
+                unitCost === null
+            ) {
+                return;
+            }
+
+
+            const cost =
+                Number(
+                    component.quantity
+                ) *
+                unitCost;
+
+
+            html += `
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+
+                            ${escapeHtml(
+                                childRecipe.name
+                            )}
 
                         </strong>
+
+                        <span class="component-badge">
+                            Sub-rețetă
+                        </span>
 
                     </td>
 
 
                     <td>
-                        ${ingredient.unit}
+                        ${yieldData.unit}
                     </td>
 
 
                     <td>
 
                         ${formatQuantity(
-                            line.quantity
+                            component.quantity
                         )}
 
                     </td>
@@ -1320,9 +1332,9 @@ function renderIngredients() {
 
     html += `
 
-                </tbody>
+            </tbody>
 
-            </table>
+        </table>
 
         </div>
 
@@ -1383,7 +1395,7 @@ function renderCosts() {
         <div class="summary-box">
 
             <div class="summary-label">
-                Cost total materii prime
+                Cost total
             </div>
 
             <div class="summary-value">
@@ -1400,7 +1412,7 @@ function renderCosts() {
         <div class="summary-box">
 
             <div class="summary-label">
-                Cost materii prime / porție
+                Cost / porție
             </div>
 
             <div class="summary-value">
@@ -1418,7 +1430,7 @@ function renderCosts() {
 
 
 /* ==================================================
-   CURATA CAMPURILE
+   CAMPURI FISA
 ================================================== */
 
 function clearSheetFields() {
@@ -1427,36 +1439,29 @@ function clearSheetFields() {
         "category"
     ).value = "";
 
-
     document.getElementById(
         "portionWeight"
     ).value = "";
-
 
     document.getElementById(
         "preparationTime"
     ).value = "";
 
-
     document.getElementById(
         "shelfLife"
     ).value = "";
-
 
     document.getElementById(
         "storageConditions"
     ).value = "";
 
-
     document.getElementById(
         "allergens"
     ).value = "";
 
-
     document.getElementById(
         "process"
     ).value = "";
-
 
     document.getElementById(
         "observations"
@@ -1465,7 +1470,7 @@ function clearSheetFields() {
 
 
 /* ==================================================
-   INCARCA FISA
+   INCARCARE FISA SALVATA
 ================================================== */
 
 function loadSavedSheet() {
@@ -1496,18 +1501,14 @@ function loadSavedSheet() {
         status.textContent =
             "Fișă nesalvată";
 
-
         status.classList.remove(
             "saved"
         );
 
-
         deleteButton.style.display =
             "none";
 
-
         return;
-
     }
 
 
@@ -1562,7 +1563,6 @@ function loadSavedSheet() {
     status.textContent =
         "Fișă salvată";
 
-
     status.classList.add(
         "saved"
     );
@@ -1574,19 +1574,13 @@ function loadSavedSheet() {
 
 
 /* ==================================================
-   SALVARE
+   SALVARE FISA
 ================================================== */
 
 function saveCurrentSheet() {
 
     if (!currentRecipe) {
-
-        alert(
-            "Nu există nicio rețetă selectată."
-        );
-
         return;
-
     }
 
 
@@ -1594,7 +1588,7 @@ function saveCurrentSheet() {
         getTechnologySheets();
 
 
-    const existingIndex =
+    const index =
         sheets.findIndex(
             sheet =>
                 Number(
@@ -1606,7 +1600,7 @@ function saveCurrentSheet() {
         );
 
 
-    const sheetData = {
+    const data = {
 
         recipeId:
             Number(
@@ -1659,31 +1653,33 @@ function saveCurrentSheet() {
     };
 
 
-    if (existingIndex >= 0) {
+    if (
+        index >= 0
+    ) {
 
-        sheetData.id =
-            sheets[existingIndex].id;
-
-
-        sheetData.createdAt =
-            sheets[existingIndex].createdAt;
+        data.id =
+            sheets[index].id;
 
 
-        sheets[existingIndex] =
-            sheetData;
+        data.createdAt =
+            sheets[index].createdAt;
+
+
+        sheets[index] =
+            data;
 
     } else {
 
-        sheetData.id =
+        data.id =
             Date.now();
 
 
-        sheetData.createdAt =
+        data.createdAt =
             new Date().toISOString();
 
 
         sheets.push(
-            sheetData
+            data
         );
 
     }
@@ -1720,27 +1716,16 @@ function saveCurrentSheet() {
 
 
 /* ==================================================
-   STERGERE DIN BIBLIOTECA
+   STERGERE
 ================================================== */
 
-function deleteSheet(recipeId) {
-
-    const recipe =
-        getRecipeById(
-            recipeId
-        );
-
-
-    if (!recipe) {
-        return;
-    }
-
+function deleteSheet(
+    recipeId
+) {
 
     const confirmed =
         confirm(
-            "Ștergi fișa tehnologică pentru „" +
-            recipe.name +
-            "”? Rețeta nu va fi ștearsă."
+            "Ștergi această fișă tehnologică? Rețeta rămâne salvată."
         );
 
 
@@ -1749,12 +1734,8 @@ function deleteSheet(recipeId) {
     }
 
 
-    let sheets =
-        getTechnologySheets();
-
-
-    sheets =
-        sheets.filter(
+    const sheets =
+        getTechnologySheets().filter(
             sheet =>
                 Number(
                     sheet.recipeId
@@ -1774,10 +1755,6 @@ function deleteSheet(recipeId) {
 }
 
 
-/* ==================================================
-   STERGERE DIN EDITOR
-================================================== */
-
 function deleteCurrentSheet() {
 
     if (!currentRecipe) {
@@ -1789,39 +1766,43 @@ function deleteCurrentSheet() {
         currentRecipe.id;
 
 
-    const confirmed =
-        confirm(
-            "Ștergi această fișă tehnologică? Rețeta va rămâne salvată."
-        );
-
-
-    if (!confirmed) {
-        return;
-    }
-
-
-    let sheets =
-        getTechnologySheets();
-
-
-    sheets =
-        sheets.filter(
-            sheet =>
-                Number(
-                    sheet.recipeId
-                ) !==
-                Number(
-                    recipeId
-                )
-        );
-
-
-    saveTechnologySheets(
-        sheets
+    deleteSheet(
+        recipeId
     );
 
 
     backToLibrary();
+}
+
+
+/* ==================================================
+   INAPOI
+================================================== */
+
+function backToLibrary() {
+
+    currentRecipe = null;
+
+
+    document.getElementById(
+        "editorView"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "libraryView"
+    ).style.display =
+        "block";
+
+
+    renderLibrary();
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
@@ -1832,7 +1813,6 @@ function deleteCurrentSheet() {
 initTechnologyLibrary();
 
 </script>
-
 
 </body>
 
