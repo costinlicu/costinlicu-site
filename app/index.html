@@ -1,57 +1,194 @@
 <!DOCTYPE html>
 <html lang="ro">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Recipe Lab | Costin Licu</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f7f4ee;
-            margin: 0;
-            padding: 40px 20px;
-            color: #222;
-        }
+    <meta name="description"
+          content="Instrument profesional pentru gestionarea rețetelor, costurilor și producției.">
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-        }
-
-        h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 18px;
-        }
-
-        .card {
-            margin-top: 40px;
-            padding: 30px;
-            background: white;
-            border-radius: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 
 <body>
 
-<div class="container">
+<div class="app">
 
-    <h1>Recipe Lab</h1>
+    <!-- MENIU -->
 
-    <p>Instrument profesional pentru rețete, costuri și producție.</p>
+    <aside class="sidebar">
 
-    <div class="card">
-        <h2>Aplicația este în construcție</h2>
-        <p>Costin Licu — Pastry & Bakery Recipe Lab</p>
-    </div>
+        <div class="logo">
+            Recipe Lab
+        </div>
+
+        <div class="subtitle">
+            by Costin Licu
+        </div>
+
+        <nav class="nav">
+
+            <a href="index.html" class="active">
+                Dashboard
+            </a>
+
+            <a href="#">
+                Ingrediente
+            </a>
+
+            <a href="#">
+                Rețete
+            </a>
+
+            <a href="#">
+                Calculator
+            </a>
+
+            <a href="#">
+                Fișe tehnologice
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- CONȚINUT -->
+
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Gestionează rețetele, ingredientele și costurile într-un singur loc.
+            </p>
+
+        </div>
+
+
+        <!-- STATISTICI -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-title">
+                    Ingrediente
+                </div>
+
+                <div class="card-value">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Rețete
+                </div>
+
+                <div class="card-value">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Fișe tehnologice
+                </div>
+
+                <div class="card-value">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-title">
+                    Cost producție
+                </div>
+
+                <div class="card-value">
+                    0 lei
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACȚIUNI -->
+
+        <section class="section">
+
+            <h2>Acces rapid</h2>
+
+            <div class="actions">
+
+
+                <a href="#" class="action">
+
+                    <strong>
+                        + Ingredient nou
+                    </strong>
+
+                    <span>
+                        Adaugă ingrediente și prețurile de achiziție.
+                    </span>
+
+                </a>
+
+
+                <a href="#" class="action">
+
+                    <strong>
+                        + Rețetă nouă
+                    </strong>
+
+                    <span>
+                        Construiește și calculează automat o rețetă.
+                    </span>
+
+                </a>
+
+
+                <a href="#" class="action">
+
+                    <strong>
+                        Calculator
+                    </strong>
+
+                    <span>
+                        Scalează rețete și calculează costul produsului.
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
 
 </div>
 
 </body>
+
 </html>
