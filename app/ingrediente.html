@@ -77,6 +77,7 @@
             margin-top: 20px;
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .ingredient-table {
@@ -101,12 +102,37 @@
             background: #fbfaf7;
         }
 
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .edit-button {
+            border: 0;
+            background: transparent;
+            color: #222;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 5px 0;
+        }
+
+        .edit-button:hover {
+            text-decoration: underline;
+        }
+
         .delete-button {
             border: 0;
             background: transparent;
             color: #a44040;
             cursor: pointer;
             font-size: 14px;
+            padding: 5px 0;
+        }
+
+        .delete-button:hover {
+            text-decoration: underline;
         }
 
         .empty-state {
@@ -122,6 +148,15 @@
             font-size: 14px;
             color: #777;
             margin-bottom: 15px;
+        }
+
+        .edit-notice {
+            background: #f7f4ee;
+            border-radius: 9px;
+            padding: 12px 15px;
+            margin-bottom: 22px;
+            font-size: 14px;
+            color: #555;
         }
 
         @media (max-width: 800px) {
@@ -140,8 +175,9 @@
             }
 
             .ingredient-table {
-                min-width: 720px;
+                min-width: 760px;
             }
+
         }
 
     </style>
@@ -169,13 +205,14 @@
                 Dashboard
             </a>
 
-            <a href="ingrediente.html" class="active">
+            <a href="ingrediente.html"
+               class="active">
                 Ingrediente
             </a>
 
-           <a href="retete.html">
-    Rețete
-</a>
+            <a href="retete.html">
+                Rețete
+            </a>
 
             <a href="#">
                 Calculator
@@ -209,21 +246,43 @@
                 <strong>Baza de ingrediente</strong>
             </div>
 
-            <button class="button"
-                    onclick="showIngredientForm()">
+            <button
+                class="button"
+                onclick="showNewIngredientForm()">
+
                 + Ingredient nou
+
             </button>
 
         </div>
 
 
-        <div id="ingredientForm"
-             class="form-card"
-             style="display:none;">
+        <!-- FORMULAR -->
 
-            <h2 style="margin-top:0;">
+        <div
+            id="ingredientForm"
+            class="form-card"
+            style="display:none;">
+
+            <h2
+                id="ingredientFormTitle"
+                style="margin-top:0;">
+
                 Ingredient nou
+
             </h2>
+
+
+            <div
+                id="editNotice"
+                class="edit-notice"
+                style="display:none;">
+
+                Modificările de preț vor actualiza automat
+                costurile rețetelor care folosesc acest ingredient.
+
+            </div>
+
 
             <div class="form-grid">
 
@@ -302,14 +361,18 @@
 
             <div class="form-actions">
 
-                <button class="button"
-                        onclick="addIngredient()">
+                <button
+                    id="saveIngredientButton"
+                    class="button"
+                    onclick="saveIngredient()">
+
                     Salvează ingredient
+
                 </button>
 
                 <button
                     class="button button-secondary"
-                    onclick="hideIngredientForm()">
+                    onclick="cancelIngredientForm()">
 
                     Anulează
 
@@ -320,25 +383,49 @@
         </div>
 
 
-        <div id="summary"
-             class="summary">
+        <div
+            id="summary"
+            class="summary">
         </div>
 
 
         <div id="ingredientList">
         </div>
 
-
     </main>
 
 </div>
 
 
-<script src="app.js"></script>
+<script src="app.js?v=3"></script>
+
 
 <script>
 
-function showIngredientForm() {
+let editingIngredientId = null;
+
+
+/* =========================
+   INGREDIENT NOU
+========================= */
+
+function showNewIngredientForm() {
+
+    editingIngredientId = null;
+
+    clearIngredientForm();
+
+    document.getElementById(
+        "ingredientFormTitle"
+    ).textContent = "Ingredient nou";
+
+    document.getElementById(
+        "saveIngredientButton"
+    ).textContent = "Salvează ingredient";
+
+    document.getElementById(
+        "editNotice"
+    ).style.display = "none";
 
     document.getElementById(
         "ingredientForm"
@@ -350,13 +437,271 @@ function showIngredientForm() {
 }
 
 
-function hideIngredientForm() {
+/* =========================
+   EDITARE INGREDIENT
+========================= */
+
+function editIngredient(id) {
+
+    const ingredient =
+        getIngredientById(id);
+
+    if (!ingredient) {
+
+        alert(
+            "Ingredientul nu a fost găsit."
+        );
+
+        return;
+    }
+
+
+    editingIngredientId =
+        Number(id);
+
+
+    document.getElementById(
+        "ingredientName"
+    ).value =
+        ingredient.name;
+
+
+    document.getElementById(
+        "ingredientQuantity"
+    ).value =
+        ingredient.quantity;
+
+
+    document.getElementById(
+        "ingredientUnit"
+    ).value =
+        ingredient.unit;
+
+
+    document.getElementById(
+        "ingredientPrice"
+    ).value =
+        ingredient.price;
+
+
+    document.getElementById(
+        "ingredientFormTitle"
+    ).textContent =
+        "Editează ingredient";
+
+
+    document.getElementById(
+        "saveIngredientButton"
+    ).textContent =
+        "Salvează modificările";
+
+
+    document.getElementById(
+        "editNotice"
+    ).style.display =
+        "block";
+
 
     document.getElementById(
         "ingredientForm"
-    ).style.display = "none";
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "ingredientName"
+    ).focus();
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================
+   SALVARE
+========================= */
+
+function saveIngredient() {
+
+    const name =
+        document.getElementById(
+            "ingredientName"
+        ).value.trim();
+
+
+    const quantity =
+        parseFloat(
+            document.getElementById(
+                "ingredientQuantity"
+            ).value
+        );
+
+
+    const unit =
+        document.getElementById(
+            "ingredientUnit"
+        ).value;
+
+
+    const price =
+        parseFloat(
+            document.getElementById(
+                "ingredientPrice"
+            ).value
+        );
+
+
+    if (
+        !name ||
+        isNaN(quantity) ||
+        quantity <= 0 ||
+        isNaN(price) ||
+        price < 0
+    ) {
+
+        alert(
+            "Completează corect toate câmpurile."
+        );
+
+        return;
+    }
+
+
+    const unitCost =
+        price / quantity;
+
+
+    let ingredients =
+        getIngredients();
+
+
+    /* EDITARE */
+
+    if (editingIngredientId !== null) {
+
+        const index =
+            ingredients.findIndex(
+                ingredient =>
+                    Number(
+                        ingredient.id
+                    ) ===
+                    Number(
+                        editingIngredientId
+                    )
+            );
+
+
+        if (index === -1) {
+
+            alert(
+                "Ingredientul nu a fost găsit."
+            );
+
+            return;
+        }
+
+
+        const oldIngredient =
+            ingredients[index];
+
+
+        ingredients[index] = {
+
+            ...oldIngredient,
+
+            name:
+                name,
+
+            quantity:
+                quantity,
+
+            unit:
+                unit,
+
+            price:
+                price,
+
+            unitCost:
+                unitCost,
+
+            updatedAt:
+                new Date().toISOString()
+
+        };
+
+    }
+
+    /* INGREDIENT NOU */
+
+    else {
+
+        const ingredient = {
+
+            id:
+                Date.now(),
+
+            name:
+                name,
+
+            quantity:
+                quantity,
+
+            unit:
+                unit,
+
+            price:
+                price,
+
+            unitCost:
+                unitCost,
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        ingredients.push(
+            ingredient
+        );
+
+    }
+
+
+    saveIngredients(
+        ingredients
+    );
+
+
+    cancelIngredientForm();
+
+    renderIngredients();
+}
+
+
+/* =========================
+   ANULARE
+========================= */
+
+function cancelIngredientForm() {
+
+    editingIngredientId = null;
 
     clearIngredientForm();
+
+    document.getElementById(
+        "ingredientForm"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "editNotice"
+    ).style.display =
+        "none";
 }
 
 
@@ -380,94 +725,38 @@ function clearIngredientForm() {
 }
 
 
-function addIngredient() {
+/* =========================
+   STERGERE
+========================= */
 
-    const name =
-        document.getElementById(
-            "ingredientName"
-        ).value.trim();
+function deleteIngredient(id) {
 
-    const quantity =
-        parseFloat(
-            document.getElementById(
-                "ingredientQuantity"
-            ).value
-        );
+    const recipes =
+        getRecipes();
 
-    const unit =
-        document.getElementById(
-            "ingredientUnit"
-        ).value;
 
-    const price =
-        parseFloat(
-            document.getElementById(
-                "ingredientPrice"
-            ).value
+    const isUsed =
+        recipes.some(
+            recipe =>
+                recipe.ingredients.some(
+                    line =>
+                        Number(
+                            line.ingredientId
+                        ) ===
+                        Number(id)
+                )
         );
 
 
-    if (
-        !name ||
-        !quantity ||
-        quantity <= 0 ||
-        isNaN(price) ||
-        price < 0
-    ) {
+    if (isUsed) {
 
         alert(
-            "Completează corect toate câmpurile."
+            "Acest ingredient este folosit într-o rețetă și nu poate fi șters. Îl poți edita oricând."
         );
 
         return;
     }
 
-
-    const unitCost =
-        price / quantity;
-
-
-    const ingredient = {
-
-        id: Date.now(),
-
-        name: name,
-
-        quantity: quantity,
-
-        unit: unit,
-
-        price: price,
-
-        unitCost: unitCost,
-
-        createdAt:
-            new Date().toISOString()
-
-    };
-
-
-    const ingredients =
-        getIngredients();
-
-
-    ingredients.push(
-        ingredient
-    );
-
-
-    saveIngredients(
-        ingredients
-    );
-
-
-    hideIngredientForm();
-
-    renderIngredients();
-}
-
-
-function deleteIngredient(id) {
 
     const confirmDelete =
         confirm(
@@ -487,7 +776,10 @@ function deleteIngredient(id) {
     ingredients =
         ingredients.filter(
             ingredient =>
-                ingredient.id !== id
+                Number(
+                    ingredient.id
+                ) !==
+                Number(id)
         );
 
 
@@ -499,6 +791,10 @@ function deleteIngredient(id) {
     renderIngredients();
 }
 
+
+/* =========================
+   AFISARE
+========================= */
 
 function renderIngredients() {
 
@@ -539,7 +835,8 @@ function renderIngredients() {
 
                 <br><br>
 
-                Apasă <strong>+ Ingredient nou</strong>
+                Apasă
+                <strong>+ Ingredient nou</strong>
                 pentru a începe.
 
             </div>
@@ -548,6 +845,16 @@ function renderIngredients() {
 
         return;
     }
+
+
+    const sortedIngredients =
+        [...ingredients].sort(
+            (a, b) =>
+                a.name.localeCompare(
+                    b.name,
+                    "ro"
+                )
+        );
 
 
     let html = `
@@ -565,7 +872,7 @@ function renderIngredients() {
                     </th>
 
                     <th>
-                        Cantitate
+                        Cantitate achiziție
                     </th>
 
                     <th>
@@ -589,26 +896,37 @@ function renderIngredients() {
     `;
 
 
-    ingredients.forEach(
+    sortedIngredients.forEach(
         ingredient => {
+
 
             html += `
 
                 <tr>
 
                     <td>
+
                         <strong>
-                            ${ingredient.name}
+
+                            ${escapeHtml(
+                                ingredient.name
+                            )}
+
                         </strong>
+
                     </td>
+
 
                     <td>
 
-                        ${ingredient.quantity}
+                        ${formatQuantity(
+                            ingredient.quantity
+                        )}
 
                         ${ingredient.unit}
 
                     </td>
+
 
                     <td>
 
@@ -618,28 +936,49 @@ function renderIngredients() {
 
                     </td>
 
+
                     <td>
 
-                        ${formatUnitCost(
-                            ingredient.unitCost
-                        )}
+                        <strong>
+
+                            ${formatUnitCost(
+                                ingredient.unitCost
+                            )}
+
+                        </strong>
 
                         /
                         ${ingredient.unit}
 
                     </td>
 
+
                     <td>
 
-                        <button
-                            class="delete-button"
-                            onclick="deleteIngredient(
-                                ${ingredient.id}
-                            )">
+                        <div class="action-buttons">
 
-                            Șterge
+                            <button
+                                class="edit-button"
+                                onclick="editIngredient(
+                                    ${ingredient.id}
+                                )">
 
-                        </button>
+                                Editează
+
+                            </button>
+
+
+                            <button
+                                class="delete-button"
+                                onclick="deleteIngredient(
+                                    ${ingredient.id}
+                                )">
+
+                                Șterge
+
+                            </button>
+
+                        </div>
 
                     </td>
 
