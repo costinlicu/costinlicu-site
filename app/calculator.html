@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Calculator | Recipe Lab</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .calculator-card,
+        .result-card {
+            background: white;
+            padding: 28px;
+            border-radius: 14px;
+            border: 1px solid #e8e3da;
+            margin-top: 30px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d8d4cc;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .mode-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            margin-bottom: 28px;
+        }
+
+        .mode-button {
+            border: 1px solid #d8d4cc;
+            background: white;
+            color: #222;
+            padding: 11px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .mode-button.active {
+            background: #1c1c1c;
+            color: white;
+            border-color: #1c1c1c;
+        }
+
+        .scale-section {
+            display: none;
+        }
+
+        .scale-section.active {
+            display: block;
+        }
+
+        .button {
+            border: 0;
+            background: #1c1c1c;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .button:hover {
+            background: #333;
+        }
+
+        .factor-box {
+            background: #f7f4ee;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .factor-label {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .factor-value {
+            font-size: 31px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .result-header h2 {
+            margin: 0 0 7px 0;
+        }
+
+        .result-meta {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .result-cost {
+            text-align: right;
+        }
+
+        .result-cost strong {
+            display: block;
+            font-size: 26px;
+        }
+
+        .scale-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .scale-table th,
+        .scale-table td {
+            padding: 14px;
+            border-bottom: 1px solid #eeeae3;
+            text-align: left;
+        }
+
+        .scale-table th {
+            font-size: 13px;
+            color: #777;
+            background: #fbfaf7;
+        }
+
+        .scale-table td:last-child,
+        .scale-table th:last-child {
+            text-align: right;
+        }
+
+        .scaled-quantity {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .summary-box {
+            background: #f7f4ee;
+            padding: 18px;
+            border-radius: 11px;
+        }
+
+        .summary-label {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .summary-value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 14px 16px;
+            background: #f7f4ee;
+            border-radius: 9px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .empty-state {
+            background: white;
+            padding: 45px;
+            text-align: center;
+            border: 1px solid #e8e3da;
+            border-radius: 14px;
+            color: #777;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 900px) {
+
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .grid-2,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .result-header {
+                flex-direction: column;
+            }
+
+            .result-cost {
+                text-align: left;
+            }
+
+            .table-wrapper {
+                overflow-x: auto;
+            }
+
+            .scale-table {
+                min-width: 700px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            Recipe Lab
+        </div>
+
+        <div class="subtitle">
+            by Costin Licu
+        </div>
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Dashboard
+            </a>
+
+            <a href="ingrediente.html">
+                Ingrediente
+            </a>
+
+            <a href="retete.html">
+                Rețete
+            </a>
+
+            <a href="calculator.html" class="active">
+                Calculator
+            </a>
+
+            <a href="#">
+                Fișe tehnologice
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Calculator</h1>
+
+            <p>
+                Scalează automat rețetele după porții sau dimensiunea formei.
+            </p>
+
+        </div>
+
+
+        <div id="calculatorArea">
+
+            <div class="calculator-card">
+
+                <div class="field">
+
+                    <label>
+                        Selectează rețeta
+                    </label>
+
+                    <select
+                        id="recipeSelect"
+                        onchange="recipeChanged()">
+                    </select>
+
+                </div>
+
+
+                <div class="mode-tabs">
+
+                    <button
+                        class="mode-button active"
+                        data-mode="portions"
+                        onclick="setMode('portions', this)">
+
+                        Porții
+
+                    </button>
+
+
+                    <button
+                        class="mode-button"
+                        data-mode="round"
+                        onclick="setMode('round', this)">
+
+                        Formă rotundă
+
+                    </button>
+
+
+                    <button
+                        class="mode-button"
+                        data-mode="rectangle"
+                        onclick="setMode('rectangle', this)">
+
+                        Tavă dreptunghiulară
+
+                    </button>
+
+
+                    <button
+                        class="mode-button"
+                        data-mode="factor"
+                        onclick="setMode('factor', this)">
+
+                        Factor manual
+
+                    </button>
+
+                </div>
+
+
+                <!-- PORTII -->
+
+                <div
+                    id="mode-portions"
+                    class="scale-section active">
+
+                    <div class="grid-2">
+
+                        <div class="field">
+
+                            <label>
+                                Porții rețetă originală
+                            </label>
+
+                            <input
+                                type="number"
+                                id="originalPortions"
+                                readonly>
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Porții dorite
+                            </label>
+
+                            <input
+                                type="number"
+                                id="targetPortions"
+                                min="1"
+                                step="1"
+                                oninput="calculateScale()">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORMA ROTUNDA -->
+
+                <div
+                    id="mode-round"
+                    class="scale-section">
+
+                    <div class="grid-2">
+
+                        <div class="field">
+
+                            <label>
+                                Diametru original (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="originalDiameter"
+                                min="1"
+                                step="0.1"
+                                placeholder="16"
+                                oninput="calculateScale()">
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Diametru dorit (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="targetDiameter"
+                                min="1"
+                                step="0.1"
+                                placeholder="20"
+                                oninput="calculateScale()">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info">
+                        Calculul se face după raportul suprafețelor.
+                        Exemplu: 16 cm → 20 cm nu înseamnă ×1,25,
+                        ci aproximativ ×1,56. Se presupune aceeași înălțime a produsului.
+                    </div>
+
+                </div>
+
+
+                <!-- TAVA DREPTUNGHIULARA -->
+
+                <div
+                    id="mode-rectangle"
+                    class="scale-section">
+
+                    <div class="grid-4">
+
+                        <div class="field">
+
+                            <label>
+                                Lățime originală (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="originalWidth"
+                                min="1"
+                                step="0.1"
+                                placeholder="30"
+                                oninput="calculateScale()">
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Lungime originală (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="originalLength"
+                                min="1"
+                                step="0.1"
+                                placeholder="40"
+                                oninput="calculateScale()">
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Lățime dorită (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="targetWidth"
+                                min="1"
+                                step="0.1"
+                                placeholder="40"
+                                oninput="calculateScale()">
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label>
+                                Lungime dorită (cm)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="targetLength"
+                                min="1"
+                                step="0.1"
+                                placeholder="60"
+                                oninput="calculateScale()">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info">
+                        Calculul folosește raportul dintre suprafața tăvii noi
+                        și suprafața tăvii originale și presupune aceeași grosime
+                        a produsului.
+                    </div>
+
+                </div>
+
+
+                <!-- FACTOR -->
+
+                <div
+                    id="mode-factor"
+                    class="scale-section">
+
+                    <div class="field">
+
+                        <label>
+                            Factor de multiplicare
+                        </label>
+
+                        <input
+                            type="number"
+                            id="manualFactor"
+                            min="0.01"
+                            step="0.01"
+                            value="1"
+                            placeholder="Ex: 1.5"
+                            oninput="calculateScale()">
+
+                    </div>
+
+                    <div class="info">
+                        Exemple: 0,5 = jumătate de rețetă,
+                        1,5 = o rețetă și jumătate,
+                        2 = rețetă dublă.
+                    </div>
+
+                </div>
+
+
+                <div class="factor-box">
+
+                    <div class="factor-label">
+                        Factor calculat
+                    </div>
+
+                    <div
+                        id="factorValue"
+                        class="factor-value">
+
+                        × 1,00
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="resultArea">
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="app.js?v=4"></script>
+
+
+<script>
+
+let currentMode = "portions";
+
+
+/* =========================
+   INITIALIZARE
+========================= */
+
+function initCalculator() {
+
+    const recipes =
+        getRecipes();
+
+
+    const select =
+        document.getElementById(
+            "recipeSelect"
+        );
+
+
+    if (
+        recipes.length === 0
+    ) {
+
+        document.getElementById(
+            "calculatorArea"
+        ).innerHTML = `
+
+            <div class="empty-state">
+
+                Nu există încă nicio rețetă.
+
+                <br><br>
+
+                Creează mai întâi o rețetă
+                pentru a putea folosi calculatorul.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    select.innerHTML = "";
+
+
+    const sorted =
+        [...recipes].sort(
+            (a, b) =>
+                a.name.localeCompare(
+                    b.name,
+                    "ro"
+                )
+        );
+
+
+    sorted.forEach(
+        recipe => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                recipe.id;
+
+
+            option.textContent =
+                recipe.name;
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    recipeChanged();
+}
+
+
+/* =========================
+   RETETA SELECTATA
+========================= */
+
+function getSelectedRecipe() {
+
+    const id =
+        Number(
+            document.getElementById(
+                "recipeSelect"
+            ).value
+        );
+
+
+    return getRecipes().find(
+        recipe =>
+            Number(recipe.id) === id
+    );
+}
+
+
+function recipeChanged() {
+
+    const recipe =
+        getSelectedRecipe();
+
+
+    if (!recipe) {
+        return;
+    }
+
+
+    document.getElementById(
+        "originalPortions"
+    ).value =
+        recipe.portions;
+
+
+    document.getElementById(
+        "targetPortions"
+    ).value =
+        recipe.portions;
+
+
+    calculateScale();
+}
+
+
+/* =========================
+   MODURI
+========================= */
+
+function setMode(
+    mode,
+    button
+) {
+
+    currentMode =
+        mode;
+
+
+    document
+        .querySelectorAll(
+            ".mode-button"
+        )
+        .forEach(
+            item =>
+                item.classList.remove(
+                    "active"
+                )
+        );
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    document
+        .querySelectorAll(
+            ".scale-section"
+        )
+        .forEach(
+            section =>
+                section.classList.remove(
+                    "active"
+                )
+        );
+
+
+    document.getElementById(
+        "mode-" + mode
+    ).classList.add(
+        "active"
+    );
+
+
+    calculateScale();
+}
+
+
+/* =========================
+   FACTOR
+========================= */
+
+function getScaleFactor() {
+
+    const recipe =
+        getSelectedRecipe();
+
+
+    if (!recipe) {
+        return 1;
+    }
+
+
+    /* PORTII */
+
+    if (
+        currentMode ===
+        "portions"
+    ) {
+
+        const original =
+            Number(
+                recipe.portions
+            );
+
+
+        const target =
+            Number(
+                document.getElementById(
+                    "targetPortions"
+                ).value
+            );
+
+
+        if (
+            !original ||
+            !target ||
+            target <= 0
+        ) {
+
+            return null;
+        }
+
+
+        return (
+            target /
+            original
+        );
+    }
+
+
+    /* ROTUND */
+
+    if (
+        currentMode ===
+        "round"
+    ) {
+
+        const original =
+            Number(
+                document.getElementById(
+                    "originalDiameter"
+                ).value
+            );
+
+
+        const target =
+            Number(
+                document.getElementById(
+                    "targetDiameter"
+                ).value
+            );
+
+
+        if (
+            !original ||
+            !target ||
+            original <= 0 ||
+            target <= 0
+        ) {
+
+            return null;
+        }
+
+
+        return (
+            target * target
+        ) /
+        (
+            original * original
+        );
+    }
+
+
+    /* DREPTUNGHI */
+
+    if (
+        currentMode ===
+        "rectangle"
+    ) {
+
+        const ow =
+            Number(
+                document.getElementById(
+                    "originalWidth"
+                ).value
+            );
+
+
+        const ol =
+            Number(
+                document.getElementById(
+                    "originalLength"
+                ).value
+            );
+
+
+        const tw =
+            Number(
+                document.getElementById(
+                    "targetWidth"
+                ).value
+            );
+
+
+        const tl =
+            Number(
+                document.getElementById(
+                    "targetLength"
+                ).value
+            );
+
+
+        if (
+            !ow ||
+            !ol ||
+            !tw ||
+            !tl ||
+            ow <= 0 ||
+            ol <= 0 ||
+            tw <= 0 ||
+            tl <= 0
+        ) {
+
+            return null;
+        }
+
+
+        return (
+            tw * tl
+        ) /
+        (
+            ow * ol
+        );
+    }
+
+
+    /* FACTOR MANUAL */
+
+    if (
+        currentMode ===
+        "factor"
+    ) {
+
+        const factor =
+            Number(
+                document.getElementById(
+                    "manualFactor"
+                ).value
+            );
+
+
+        if (
+            !factor ||
+            factor <= 0
+        ) {
+
+            return null;
+        }
+
+
+        return factor;
+    }
+
+
+    return 1;
+}
+
+
+/* =========================
+   FORMAT FACTOR
+========================= */
+
+function formatFactor(
+    value
+) {
+
+    return Number(value)
+        .toFixed(2)
+        .replace(".", ",");
+}
+
+
+/* =========================
+   CALCUL COST ORIGINAL
+========================= */
+
+function calculateOriginalCost(
+    recipe
+) {
+
+    let total = 0;
+
+
+    recipe.ingredients.forEach(
+        line => {
+
+            const ingredient =
+                getIngredientById(
+                    line.ingredientId
+                );
+
+
+            if (!ingredient) {
+                return;
+            }
+
+
+            total +=
+                Number(
+                    ingredient.unitCost
+                ) *
+                Number(
+                    line.quantity
+                );
+
+        }
+    );
+
+
+    return total;
+}
+
+
+/* =========================
+   CALCUL
+========================= */
+
+function calculateScale() {
+
+    const recipe =
+        getSelectedRecipe();
+
+
+    if (!recipe) {
+        return;
+    }
+
+
+    const factor =
+        getScaleFactor();
+
+
+    const factorDisplay =
+        document.getElementById(
+            "factorValue"
+        );
+
+
+    const resultArea =
+        document.getElementById(
+            "resultArea"
+        );
+
+
+    if (
+        factor === null ||
+        !isFinite(factor) ||
+        factor <= 0
+    ) {
+
+        factorDisplay.textContent =
+            "—";
+
+
+        resultArea.innerHTML = `
+
+            <div class="empty-state">
+
+                Completează valorile de scalare
+                pentru a vedea rezultatul.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    factorDisplay.textContent =
+        "× " +
+        formatFactor(
+            factor
+        );
+
+
+    renderScaledRecipe(
+        recipe,
+        factor
+    );
+}
+
+
+/* =========================
+   AFISARE REZULTAT
+========================= */
+
+function renderScaledRecipe(
+    recipe,
+    factor
+) {
+
+    const originalCost =
+        calculateOriginalCost(
+            recipe
+        );
+
+
+    const scaledCost =
+        originalCost *
+        factor;
+
+
+    const equivalentPortions =
+        Number(
+            recipe.portions
+        ) *
+        factor;
+
+
+    let html = `
+
+        <div class="result-card">
+
+            <div class="result-header">
+
+                <div>
+
+                    <h2>
+
+                        ${escapeHtml(
+                            recipe.name
+                        )}
+
+                    </h2>
+
+                    <div class="result-meta">
+
+                        Scalare ×
+                        ${formatFactor(
+                            factor
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="result-cost">
+
+                    <strong>
+
+                        ${formatMoney(
+                            scaledCost
+                        )}
+
+                    </strong>
+
+                    <span class="result-meta">
+                        cost estimat
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+            <table class="scale-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Ingredient
+                        </th>
+
+                        <th>
+                            Cantitate originală
+                        </th>
+
+                        <th>
+                            Cantitate nouă
+                        </th>
+
+                        <th>
+                            Cost nou
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+    `;
+
+
+    recipe.ingredients.forEach(
+        line => {
+
+            const ingredient =
+                getIngredientById(
+                    line.ingredientId
+                );
+
+
+            if (!ingredient) {
+
+                html += `
+
+                    <tr>
+
+                        <td>
+                            Ingredient indisponibil
+                        </td>
+
+                        <td>-</td>
+
+                        <td>-</td>
+
+                        <td>-</td>
+
+                    </tr>
+
+                `;
+
+                return;
+            }
+
+
+            const originalQuantity =
+                Number(
+                    line.quantity
+                );
+
+
+            const scaledQuantity =
+                originalQuantity *
+                factor;
+
+
+            const scaledIngredientCost =
+                scaledQuantity *
+                Number(
+                    ingredient.unitCost
+                );
+
+
+            html += `
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+
+                            ${escapeHtml(
+                                ingredient.name
+                            )}
+
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        ${formatQuantity(
+                            originalQuantity
+                        )}
+
+                        ${ingredient.unit}
+
+                    </td>
+
+
+                    <td
+                        class="scaled-quantity">
+
+                        ${formatQuantity(
+                            scaledQuantity
+                        )}
+
+                        ${ingredient.unit}
+
+                    </td>
+
+
+                    <td>
+
+                        ${formatMoney(
+                            scaledIngredientCost
+                        )}
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+                </tbody>
+
+            </table>
+
+            </div>
+
+
+            <div class="summary-grid">
+
+                <div class="summary-box">
+
+                    <div class="summary-label">
+                        Cost original
+                    </div>
+
+                    <div class="summary-value">
+
+                        ${formatMoney(
+                            originalCost
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <div class="summary-label">
+                        Cost după scalare
+                    </div>
+
+                    <div class="summary-value">
+
+                        ${formatMoney(
+                            scaledCost
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <div class="summary-label">
+                        Porții echivalente
+                    </div>
+
+                    <div class="summary-value">
+
+                        ${formatQuantity(
+                            equivalentPortions
+                        )}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "resultArea"
+    ).innerHTML =
+        html;
+}
+
+
+initCalculator();
+
+</script>
+
+
+</body>
+
+</html>
