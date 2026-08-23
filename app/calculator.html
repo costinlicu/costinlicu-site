@@ -50,9 +50,9 @@
             gap: 18px;
         }
 
-        .grid-4 {
+        .grid-3 {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 18px;
         }
 
@@ -61,14 +61,14 @@
             gap: 10px;
             flex-wrap: wrap;
             margin-top: 25px;
-            margin-bottom: 28px;
+            margin-bottom: 30px;
         }
 
         .mode-button {
             border: 1px solid #d8d4cc;
             background: white;
             color: #222;
-            padding: 11px 16px;
+            padding: 11px 17px;
             border-radius: 9px;
             cursor: pointer;
             font-size: 14px;
@@ -88,6 +88,48 @@
             display: block;
         }
 
+        .shape-panel {
+            background: #fbfaf7;
+            border: 1px solid #eee8de;
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .shape-panel h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .dimension-group {
+            margin-top: 15px;
+        }
+
+        .height-option {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #e8e3da;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-row input {
+            width: auto;
+            transform: scale(1.2);
+        }
+
+        .checkbox-row label {
+            margin: 0;
+            color: #222;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
         .button {
             border: 0;
             background: #1c1c1c;
@@ -104,9 +146,9 @@
 
         .factor-box {
             background: #f7f4ee;
-            padding: 20px;
+            padding: 22px;
             border-radius: 12px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .factor-label {
@@ -115,9 +157,25 @@
         }
 
         .factor-value {
-            font-size: 31px;
+            font-size: 32px;
             font-weight: bold;
             margin-top: 5px;
+        }
+
+        .factor-description {
+            margin-top: 7px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 14px 16px;
+            background: #f7f4ee;
+            border-radius: 9px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
         }
 
         .result-header {
@@ -143,7 +201,7 @@
 
         .result-cost strong {
             display: block;
-            font-size: 26px;
+            font-size: 27px;
         }
 
         .scale-table {
@@ -176,7 +234,7 @@
 
         .summary-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             margin-top: 25px;
         }
@@ -198,14 +256,33 @@
             font-weight: bold;
         }
 
-        .info {
-            margin-top: 20px;
-            padding: 14px 16px;
-            background: #f7f4ee;
-            border-radius: 9px;
-            font-size: 13px;
+        .shape-summary {
+            margin-top: 25px;
+            padding: 20px;
+            border: 1px solid #e8e3da;
+            border-radius: 11px;
+        }
+
+        .shape-summary-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .shape-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .shape-summary-item {
             color: #666;
-            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .shape-summary-item strong {
+            display: block;
+            color: #222;
+            margin-top: 4px;
         }
 
         .empty-state {
@@ -218,22 +295,23 @@
             margin-top: 30px;
         }
 
-        @media (max-width: 900px) {
-
-            .grid-4 {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @media (max-width: 1000px) {
 
             .summary-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
 
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
 
             .grid-2,
-            .grid-4 {
+            .grid-3,
+            .shape-summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -250,7 +328,7 @@
             }
 
             .scale-table {
-                min-width: 700px;
+                min-width: 720px;
             }
 
         }
@@ -308,7 +386,7 @@
             <h1>Calculator</h1>
 
             <p>
-                Scalează automat rețetele după porții sau dimensiunea formei.
+                Scalează rețete după porții, forme, dimensiuni și volum.
             </p>
 
         </div>
@@ -317,6 +395,8 @@
         <div id="calculatorArea">
 
             <div class="calculator-card">
+
+                <!-- RETETA -->
 
                 <div class="field">
 
@@ -332,11 +412,12 @@
                 </div>
 
 
+                <!-- MODURI -->
+
                 <div class="mode-tabs">
 
                     <button
                         class="mode-button active"
-                        data-mode="portions"
                         onclick="setMode('portions', this)">
 
                         Porții
@@ -346,27 +427,15 @@
 
                     <button
                         class="mode-button"
-                        data-mode="round"
-                        onclick="setMode('round', this)">
+                        onclick="setMode('shapes', this)">
 
-                        Formă rotundă
-
-                    </button>
-
-
-                    <button
-                        class="mode-button"
-                        data-mode="rectangle"
-                        onclick="setMode('rectangle', this)">
-
-                        Tavă dreptunghiulară
+                        Conversie forme
 
                     </button>
 
 
                     <button
                         class="mode-button"
-                        data-mode="factor"
                         onclick="setMode('factor', this)">
 
                         Factor manual
@@ -376,7 +445,9 @@
                 </div>
 
 
-                <!-- PORTII -->
+                <!-- ====================
+                     PORTII
+                ===================== -->
 
                 <div
                     id="mode-portions"
@@ -387,7 +458,7 @@
                         <div class="field">
 
                             <label>
-                                Porții rețetă originală
+                                Porții originale
                             </label>
 
                             <input
@@ -418,44 +489,166 @@
                 </div>
 
 
-                <!-- FORMA ROTUNDA -->
+                <!-- ====================
+                     CONVERSIE FORME
+                ===================== -->
 
                 <div
-                    id="mode-round"
+                    id="mode-shapes"
                     class="scale-section">
 
                     <div class="grid-2">
 
-                        <div class="field">
 
-                            <label>
-                                Diametru original (cm)
-                            </label>
+                        <!-- FORMA ORIGINALA -->
 
-                            <input
-                                type="number"
-                                id="originalDiameter"
-                                min="1"
-                                step="0.1"
-                                placeholder="16"
-                                oninput="calculateScale()">
+                        <div class="shape-panel">
+
+                            <h3>
+                                Forma originală
+                            </h3>
+
+
+                            <div class="field">
+
+                                <label>
+                                    Tip formă
+                                </label>
+
+                                <select
+                                    id="originalShape"
+                                    onchange="renderShapeFields('original')">
+
+                                    <option value="round">
+                                        Rotundă
+                                    </option>
+
+                                    <option value="square">
+                                        Pătrată
+                                    </option>
+
+                                    <option value="rectangle">
+                                        Dreptunghiulară
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div
+                                id="originalDimensions"
+                                class="dimension-group">
+                            </div>
 
                         </div>
 
 
-                        <div class="field">
+                        <!-- FORMA DORITA -->
 
-                            <label>
-                                Diametru dorit (cm)
-                            </label>
+                        <div class="shape-panel">
+
+                            <h3>
+                                Forma dorită
+                            </h3>
+
+
+                            <div class="field">
+
+                                <label>
+                                    Tip formă
+                                </label>
+
+                                <select
+                                    id="targetShape"
+                                    onchange="renderShapeFields('target')">
+
+                                    <option value="round">
+                                        Rotundă
+                                    </option>
+
+                                    <option value="square">
+                                        Pătrată
+                                    </option>
+
+                                    <option value="rectangle">
+                                        Dreptunghiulară
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div
+                                id="targetDimensions"
+                                class="dimension-group">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- INALTIME -->
+
+                    <div class="height-option">
+
+                        <div class="checkbox-row">
 
                             <input
-                                type="number"
-                                id="targetDiameter"
-                                min="1"
-                                step="0.1"
-                                placeholder="20"
-                                oninput="calculateScale()">
+                                type="checkbox"
+                                id="sameHeight"
+                                checked
+                                onchange="toggleHeightFields()">
+
+                            <label for="sameHeight">
+
+                                Păstrează aceeași înălțime / grosime
+
+                            </label>
+
+                        </div>
+
+
+                        <div
+                            id="heightFields"
+                            class="grid-2"
+                            style="display:none;">
+
+
+                            <div class="field">
+
+                                <label>
+                                    Înălțime originală (cm)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="originalHeight"
+                                    min="0.1"
+                                    step="0.1"
+                                    placeholder="4"
+                                    oninput="calculateScale()">
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>
+                                    Înălțime dorită (cm)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="targetHeight"
+                                    min="0.1"
+                                    step="0.1"
+                                    placeholder="5"
+                                    oninput="calculateScale()">
+
+                            </div>
 
                         </div>
 
@@ -463,102 +656,22 @@
 
 
                     <div class="info">
-                        Calculul se face după raportul suprafețelor.
-                        Exemplu: 16 cm → 20 cm nu înseamnă ×1,25,
-                        ci aproximativ ×1,56. Se presupune aceeași înălțime a produsului.
+
+                        Dacă înălțimea rămâne aceeași,
+                        calculatorul compară suprafețele formelor.
+
+                        Dacă modifici și înălțimea,
+                        calculatorul compară volumele și
+                        ajustează întreaga rețetă proporțional.
+
                     </div>
 
                 </div>
 
 
-                <!-- TAVA DREPTUNGHIULARA -->
-
-                <div
-                    id="mode-rectangle"
-                    class="scale-section">
-
-                    <div class="grid-4">
-
-                        <div class="field">
-
-                            <label>
-                                Lățime originală (cm)
-                            </label>
-
-                            <input
-                                type="number"
-                                id="originalWidth"
-                                min="1"
-                                step="0.1"
-                                placeholder="30"
-                                oninput="calculateScale()">
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label>
-                                Lungime originală (cm)
-                            </label>
-
-                            <input
-                                type="number"
-                                id="originalLength"
-                                min="1"
-                                step="0.1"
-                                placeholder="40"
-                                oninput="calculateScale()">
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label>
-                                Lățime dorită (cm)
-                            </label>
-
-                            <input
-                                type="number"
-                                id="targetWidth"
-                                min="1"
-                                step="0.1"
-                                placeholder="40"
-                                oninput="calculateScale()">
-
-                        </div>
-
-
-                        <div class="field">
-
-                            <label>
-                                Lungime dorită (cm)
-                            </label>
-
-                            <input
-                                type="number"
-                                id="targetLength"
-                                min="1"
-                                step="0.1"
-                                placeholder="60"
-                                oninput="calculateScale()">
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="info">
-                        Calculul folosește raportul dintre suprafața tăvii noi
-                        și suprafața tăvii originale și presupune aceeași grosime
-                        a produsului.
-                    </div>
-
-                </div>
-
-
-                <!-- FACTOR -->
+                <!-- ====================
+                     FACTOR MANUAL
+                ===================== -->
 
                 <div
                     id="mode-factor"
@@ -576,24 +689,29 @@
                             min="0.01"
                             step="0.01"
                             value="1"
-                            placeholder="Ex: 1.5"
                             oninput="calculateScale()">
 
                     </div>
 
+
                     <div class="info">
-                        Exemple: 0,5 = jumătate de rețetă,
+
+                        Exemple:
+                        0,5 = jumătate de rețetă,
                         1,5 = o rețetă și jumătate,
                         2 = rețetă dublă.
+
                     </div>
 
                 </div>
 
 
+                <!-- FACTOR -->
+
                 <div class="factor-box">
 
                     <div class="factor-label">
-                        Factor calculat
+                        Factor de scalare
                     </div>
 
                     <div
@@ -604,13 +722,19 @@
 
                     </div>
 
+                    <div
+                        id="factorDescription"
+                        class="factor-description">
+                    </div>
+
                 </div>
 
             </div>
 
 
-            <div
-                id="resultArea">
+            <!-- REZULTAT -->
+
+            <div id="resultArea">
             </div>
 
         </div>
@@ -620,7 +744,7 @@
 </div>
 
 
-<script src="app.js?v=4"></script>
+<script src="app.js?v=5"></script>
 
 
 <script>
@@ -628,9 +752,9 @@
 let currentMode = "portions";
 
 
-/* =========================
+/* ==================================================
    INITIALIZARE
-========================= */
+================================================== */
 
 function initCalculator() {
 
@@ -638,15 +762,7 @@ function initCalculator() {
         getRecipes();
 
 
-    const select =
-        document.getElementById(
-            "recipeSelect"
-        );
-
-
-    if (
-        recipes.length === 0
-    ) {
+    if (recipes.length === 0) {
 
         document.getElementById(
             "calculatorArea"
@@ -659,7 +775,7 @@ function initCalculator() {
                 <br><br>
 
                 Creează mai întâi o rețetă
-                pentru a putea folosi calculatorul.
+                pentru a folosi calculatorul.
 
             </div>
 
@@ -669,41 +785,55 @@ function initCalculator() {
     }
 
 
+    const select =
+        document.getElementById(
+            "recipeSelect"
+        );
+
+
     select.innerHTML = "";
 
 
-    const sorted =
-        [...recipes].sort(
+    [...recipes]
+        .sort(
             (a, b) =>
                 a.name.localeCompare(
                     b.name,
                     "ro"
                 )
+        )
+        .forEach(
+            recipe => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    recipe.id;
+
+
+                option.textContent =
+                    recipe.name;
+
+
+                select.appendChild(
+                    option
+                );
+
+            }
         );
 
 
-    sorted.forEach(
-        recipe => {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
+    renderShapeFields(
+        "original"
+    );
 
 
-            option.value =
-                recipe.id;
-
-
-            option.textContent =
-                recipe.name;
-
-
-            select.appendChild(
-                option
-            );
-
-        }
+    renderShapeFields(
+        "target"
     );
 
 
@@ -711,9 +841,9 @@ function initCalculator() {
 }
 
 
-/* =========================
+/* ==================================================
    RETETA SELECTATA
-========================= */
+================================================== */
 
 function getSelectedRecipe() {
 
@@ -727,7 +857,9 @@ function getSelectedRecipe() {
 
     return getRecipes().find(
         recipe =>
-            Number(recipe.id) === id
+            Number(
+                recipe.id
+            ) === id
     );
 }
 
@@ -759,9 +891,9 @@ function recipeChanged() {
 }
 
 
-/* =========================
-   MODURI
-========================= */
+/* ==================================================
+   MOD CALCULATOR
+================================================== */
 
 function setMode(
     mode,
@@ -812,9 +944,342 @@ function setMode(
 }
 
 
-/* =========================
+/* ==================================================
+   CAMPURI FORME
+================================================== */
+
+function renderShapeFields(
+    side
+) {
+
+    const shape =
+        document.getElementById(
+            side + "Shape"
+        ).value;
+
+
+    const container =
+        document.getElementById(
+            side + "Dimensions"
+        );
+
+
+    let html = "";
+
+
+    if (shape === "round") {
+
+        html = `
+
+            <div class="field">
+
+                <label>
+                    Diametru (cm)
+                </label>
+
+                <input
+                    type="number"
+                    id="${side}Diameter"
+                    min="0.1"
+                    step="0.1"
+                    placeholder="16"
+                    oninput="calculateScale()">
+
+            </div>
+
+        `;
+
+    }
+
+
+    if (shape === "square") {
+
+        html = `
+
+            <div class="field">
+
+                <label>
+                    Latură (cm)
+                </label>
+
+                <input
+                    type="number"
+                    id="${side}SquareSide"
+                    min="0.1"
+                    step="0.1"
+                    placeholder="20"
+                    oninput="calculateScale()">
+
+            </div>
+
+        `;
+
+    }
+
+
+    if (shape === "rectangle") {
+
+        html = `
+
+            <div class="grid-2">
+
+                <div class="field">
+
+                    <label>
+                        Lățime (cm)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="${side}Width"
+                        min="0.1"
+                        step="0.1"
+                        placeholder="20"
+                        oninput="calculateScale()">
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Lungime (cm)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="${side}Length"
+                        min="0.1"
+                        step="0.1"
+                        placeholder="30"
+                        oninput="calculateScale()">
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    container.innerHTML =
+        html;
+
+
+    calculateScale();
+}
+
+
+/* ==================================================
+   INALTIME
+================================================== */
+
+function toggleHeightFields() {
+
+    const same =
+        document.getElementById(
+            "sameHeight"
+        ).checked;
+
+
+    document.getElementById(
+        "heightFields"
+    ).style.display =
+        same
+            ? "none"
+            : "grid";
+
+
+    calculateScale();
+}
+
+
+/* ==================================================
+   SUPRAFATA FORMA
+================================================== */
+
+function getShapeArea(
+    side
+) {
+
+    const shape =
+        document.getElementById(
+            side + "Shape"
+        ).value;
+
+
+    /* ROTUND */
+
+    if (shape === "round") {
+
+        const input =
+            document.getElementById(
+                side + "Diameter"
+            );
+
+
+        if (!input) {
+            return null;
+        }
+
+
+        const diameter =
+            Number(
+                input.value
+            );
+
+
+        if (
+            !diameter ||
+            diameter <= 0
+        ) {
+
+            return null;
+        }
+
+
+        const radius =
+            diameter / 2;
+
+
+        return (
+            Math.PI *
+            radius *
+            radius
+        );
+
+    }
+
+
+    /* PATRAT */
+
+    if (shape === "square") {
+
+        const input =
+            document.getElementById(
+                side + "SquareSide"
+            );
+
+
+        if (!input) {
+            return null;
+        }
+
+
+        const value =
+            Number(
+                input.value
+            );
+
+
+        if (
+            !value ||
+            value <= 0
+        ) {
+
+            return null;
+        }
+
+
+        return (
+            value *
+            value
+        );
+
+    }
+
+
+    /* DREPTUNGHI */
+
+    if (shape === "rectangle") {
+
+        const widthInput =
+            document.getElementById(
+                side + "Width"
+            );
+
+
+        const lengthInput =
+            document.getElementById(
+                side + "Length"
+            );
+
+
+        if (
+            !widthInput ||
+            !lengthInput
+        ) {
+
+            return null;
+        }
+
+
+        const width =
+            Number(
+                widthInput.value
+            );
+
+
+        const length =
+            Number(
+                lengthInput.value
+            );
+
+
+        if (
+            !width ||
+            !length ||
+            width <= 0 ||
+            length <= 0
+        ) {
+
+            return null;
+        }
+
+
+        return (
+            width *
+            length
+        );
+
+    }
+
+
+    return null;
+}
+
+
+/* ==================================================
+   NUME FORMA
+================================================== */
+
+function getShapeName(
+    shape
+) {
+
+    if (shape === "round") {
+        return "Rotundă";
+    }
+
+
+    if (shape === "square") {
+        return "Pătrată";
+    }
+
+
+    if (shape === "rectangle") {
+        return "Dreptunghiulară";
+    }
+
+
+    return "";
+}
+
+
+/* ==================================================
    FACTOR
-========================= */
+================================================== */
 
 function getScaleFactor() {
 
@@ -823,11 +1288,11 @@ function getScaleFactor() {
 
 
     if (!recipe) {
-        return 1;
+        return null;
     }
 
 
-    /* PORTII */
+    /* PORȚII */
 
     if (
         currentMode ===
@@ -851,6 +1316,7 @@ function getScaleFactor() {
         if (
             !original ||
             !target ||
+            original <= 0 ||
             target <= 0
         ) {
 
@@ -862,112 +1328,87 @@ function getScaleFactor() {
             target /
             original
         );
+
     }
 
 
-    /* ROTUND */
+    /* FORME */
 
     if (
         currentMode ===
-        "round"
+        "shapes"
     ) {
 
-        const original =
-            Number(
-                document.getElementById(
-                    "originalDiameter"
-                ).value
+        const originalArea =
+            getShapeArea(
+                "original"
             );
 
 
-        const target =
-            Number(
-                document.getElementById(
-                    "targetDiameter"
-                ).value
+        const targetArea =
+            getShapeArea(
+                "target"
             );
 
 
         if (
-            !original ||
-            !target ||
-            original <= 0 ||
-            target <= 0
+            !originalArea ||
+            !targetArea
         ) {
 
             return null;
         }
 
 
-        return (
-            target * target
-        ) /
-        (
-            original * original
-        );
-    }
+        let factor =
+            targetArea /
+            originalArea;
 
 
-    /* DREPTUNGHI */
-
-    if (
-        currentMode ===
-        "rectangle"
-    ) {
-
-        const ow =
-            Number(
-                document.getElementById(
-                    "originalWidth"
-                ).value
-            );
+        const sameHeight =
+            document.getElementById(
+                "sameHeight"
+            ).checked;
 
 
-        const ol =
-            Number(
-                document.getElementById(
-                    "originalLength"
-                ).value
-            );
+        if (!sameHeight) {
+
+            const originalHeight =
+                Number(
+                    document.getElementById(
+                        "originalHeight"
+                    ).value
+                );
 
 
-        const tw =
-            Number(
-                document.getElementById(
-                    "targetWidth"
-                ).value
-            );
+            const targetHeight =
+                Number(
+                    document.getElementById(
+                        "targetHeight"
+                    ).value
+                );
 
 
-        const tl =
-            Number(
-                document.getElementById(
-                    "targetLength"
-                ).value
-            );
+            if (
+                !originalHeight ||
+                !targetHeight ||
+                originalHeight <= 0 ||
+                targetHeight <= 0
+            ) {
+
+                return null;
+            }
 
 
-        if (
-            !ow ||
-            !ol ||
-            !tw ||
-            !tl ||
-            ow <= 0 ||
-            ol <= 0 ||
-            tw <= 0 ||
-            tl <= 0
-        ) {
+            factor *=
+                targetHeight /
+                originalHeight;
 
-            return null;
         }
 
 
-        return (
-            tw * tl
-        ) /
-        (
-            ow * ol
-        );
+        return factor;
+
     }
 
 
@@ -978,7 +1419,7 @@ function getScaleFactor() {
         "factor"
     ) {
 
-        const factor =
+        const value =
             Number(
                 document.getElementById(
                     "manualFactor"
@@ -987,39 +1428,62 @@ function getScaleFactor() {
 
 
         if (
-            !factor ||
-            factor <= 0
+            !value ||
+            value <= 0
         ) {
 
             return null;
         }
 
 
-        return factor;
+        return value;
+
     }
 
 
-    return 1;
+    return null;
 }
 
 
-/* =========================
-   FORMAT FACTOR
-========================= */
+/* ==================================================
+   FORMATARI
+================================================== */
 
 function formatFactor(
     value
 ) {
 
     return Number(value)
-        .toFixed(2)
+        .toFixed(3)
         .replace(".", ",");
 }
 
 
-/* =========================
-   CALCUL COST ORIGINAL
-========================= */
+function formatArea(
+    value
+) {
+
+    return Number(value)
+        .toFixed(1)
+        .replace(".", ",") +
+        " cm²";
+}
+
+
+function formatVolume(
+    value
+) {
+
+    return Number(value)
+        .toFixed(1)
+        .replace(".", ",") +
+        " cm³";
+}
+
+
+/* ==================================================
+   COST ORIGINAL
+================================================== */
 
 function calculateOriginalCost(
     recipe
@@ -1058,9 +1522,9 @@ function calculateOriginalCost(
 }
 
 
-/* =========================
+/* ==================================================
    CALCUL
-========================= */
+================================================== */
 
 function calculateScale() {
 
@@ -1077,9 +1541,15 @@ function calculateScale() {
         getScaleFactor();
 
 
-    const factorDisplay =
+    const factorValue =
         document.getElementById(
             "factorValue"
+        );
+
+
+    const factorDescription =
+        document.getElementById(
+            "factorDescription"
         );
 
 
@@ -1095,16 +1565,20 @@ function calculateScale() {
         factor <= 0
     ) {
 
-        factorDisplay.textContent =
+        factorValue.textContent =
             "—";
+
+
+        factorDescription.textContent =
+            "Completează valorile necesare.";
 
 
         resultArea.innerHTML = `
 
             <div class="empty-state">
 
-                Completează valorile de scalare
-                pentru a vedea rezultatul.
+                Completează dimensiunile pentru
+                a vedea rezultatul scalării.
 
             </div>
 
@@ -1114,11 +1588,52 @@ function calculateScale() {
     }
 
 
-    factorDisplay.textContent =
+    factorValue.textContent =
         "× " +
         formatFactor(
             factor
         );
+
+
+    if (
+        currentMode ===
+        "portions"
+    ) {
+
+        factorDescription.textContent =
+            "Scalare după numărul de porții.";
+
+    }
+
+
+    if (
+        currentMode ===
+        "factor"
+    ) {
+
+        factorDescription.textContent =
+            "Factor introdus manual.";
+
+    }
+
+
+    if (
+        currentMode ===
+        "shapes"
+    ) {
+
+        const sameHeight =
+            document.getElementById(
+                "sameHeight"
+            ).checked;
+
+
+        factorDescription.textContent =
+            sameHeight
+                ? "Calcul după suprafața formelor."
+                : "Calcul după volumul formelor.";
+
+    }
 
 
     renderScaledRecipe(
@@ -1128,9 +1643,9 @@ function calculateScale() {
 }
 
 
-/* =========================
-   AFISARE REZULTAT
-========================= */
+/* ==================================================
+   REZULTAT
+================================================== */
 
 function renderScaledRecipe(
     recipe,
@@ -1155,6 +1670,13 @@ function renderScaledRecipe(
         factor;
 
 
+    const scaledCostPerPortion =
+        equivalentPortions > 0
+            ? scaledCost /
+              equivalentPortions
+            : 0;
+
+
     let html = `
 
         <div class="result-card">
@@ -1173,7 +1695,7 @@ function renderScaledRecipe(
 
                     <div class="result-meta">
 
-                        Scalare ×
+                        Factor ×
                         ${formatFactor(
                             factor
                         )}
@@ -1204,33 +1726,33 @@ function renderScaledRecipe(
 
             <div class="table-wrapper">
 
-            <table class="scale-table">
+                <table class="scale-table">
 
-                <thead>
+                    <thead>
 
-                    <tr>
+                        <tr>
 
-                        <th>
-                            Ingredient
-                        </th>
+                            <th>
+                                Ingredient
+                            </th>
 
-                        <th>
-                            Cantitate originală
-                        </th>
+                            <th>
+                                Cantitate originală
+                            </th>
 
-                        <th>
-                            Cantitate nouă
-                        </th>
+                            <th>
+                                Cantitate nouă
+                            </th>
 
-                        <th>
-                            Cost nou
-                        </th>
+                            <th>
+                                Cost nou
+                            </th>
 
-                    </tr>
+                        </tr>
 
-                </thead>
+                    </thead>
 
-                <tbody>
+                    <tbody>
 
     `;
 
@@ -1265,6 +1787,7 @@ function renderScaledRecipe(
                 `;
 
                 return;
+
             }
 
 
@@ -1314,8 +1837,7 @@ function renderScaledRecipe(
                     </td>
 
 
-                    <td
-                        class="scaled-quantity">
+                    <td class="scaled-quantity">
 
                         ${formatQuantity(
                             scaledQuantity
@@ -1344,9 +1866,9 @@ function renderScaledRecipe(
 
     html += `
 
-                </tbody>
+                    </tbody>
 
-            </table>
+                </table>
 
             </div>
 
@@ -1373,7 +1895,7 @@ function renderScaledRecipe(
                 <div class="summary-box">
 
                     <div class="summary-label">
-                        Cost după scalare
+                        Cost nou
                     </div>
 
                     <div class="summary-value">
@@ -1403,7 +1925,216 @@ function renderScaledRecipe(
 
                 </div>
 
+
+                <div class="summary-box">
+
+                    <div class="summary-label">
+                        Cost / porție
+                    </div>
+
+                    <div class="summary-value">
+
+                        ${formatMoney(
+                            scaledCostPerPortion
+                        )}
+
+                    </div>
+
+                </div>
+
             </div>
+
+    `;
+
+
+    /* REZUMAT FORME */
+
+    if (
+        currentMode ===
+        "shapes"
+    ) {
+
+        const originalShape =
+            document.getElementById(
+                "originalShape"
+            ).value;
+
+
+        const targetShape =
+            document.getElementById(
+                "targetShape"
+            ).value;
+
+
+        const originalArea =
+            getShapeArea(
+                "original"
+            );
+
+
+        const targetArea =
+            getShapeArea(
+                "target"
+            );
+
+
+        const sameHeight =
+            document.getElementById(
+                "sameHeight"
+            ).checked;
+
+
+        html += `
+
+            <div class="shape-summary">
+
+                <div class="shape-summary-title">
+
+                    Conversie formă
+
+                </div>
+
+
+                <div class="shape-summary-grid">
+
+                    <div class="shape-summary-item">
+
+                        Forma originală
+
+                        <strong>
+
+                            ${getShapeName(
+                                originalShape
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="shape-summary-item">
+
+                        Forma dorită
+
+                        <strong>
+
+                            ${getShapeName(
+                                targetShape
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="shape-summary-item">
+
+                        Suprafață originală
+
+                        <strong>
+
+                            ${formatArea(
+                                originalArea
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="shape-summary-item">
+
+                        Suprafață nouă
+
+                        <strong>
+
+                            ${formatArea(
+                                targetArea
+                            )}
+
+                        </strong>
+
+                    </div>
+
+        `;
+
+
+        if (!sameHeight) {
+
+            const originalHeight =
+                Number(
+                    document.getElementById(
+                        "originalHeight"
+                    ).value
+                );
+
+
+            const targetHeight =
+                Number(
+                    document.getElementById(
+                        "targetHeight"
+                    ).value
+                );
+
+
+            const originalVolume =
+                originalArea *
+                originalHeight;
+
+
+            const targetVolume =
+                targetArea *
+                targetHeight;
+
+
+            html += `
+
+                    <div class="shape-summary-item">
+
+                        Volum original
+
+                        <strong>
+
+                            ${formatVolume(
+                                originalVolume
+                            )}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="shape-summary-item">
+
+                        Volum nou
+
+                        <strong>
+
+                            ${formatVolume(
+                                targetVolume
+                            )}
+
+                        </strong>
+
+                    </div>
+
+            `;
+
+        }
+
+
+        html += `
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    html += `
 
         </div>
 
@@ -1416,6 +2147,10 @@ function renderScaledRecipe(
         html;
 }
 
+
+/* ==================================================
+   START
+================================================== */
 
 initCalculator();
 
