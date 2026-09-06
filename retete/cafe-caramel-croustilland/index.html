@@ -48,12 +48,22 @@
     content="O creație originală Costin Licu. După ani de testare, ajustări și predare, rețeta Café Caramel Croustilland este publicată integral."
   >
 
+  <meta
+    property="og:image"
+    content="https://costinlicu.ro/images/cafe-caramel-croustilland-1.jpg"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="Café Caramel Croustilland — creație originală Costin Licu"
+  >
+
 
   <!-- ==================================================
        TWITTER / SOCIAL
   ================================================== -->
 
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
 
   <meta
     name="twitter:title"
@@ -63,6 +73,11 @@
   <meta
     name="twitter:description"
     content="Creație originală Costin Licu. Rețeta completă, procesul tehnologic și povestea desertului."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://costinlicu.ro/images/cafe-caramel-croustilland-1.jpg"
   >
 
   <meta name="theme-color" content="#16120f">
@@ -240,6 +255,67 @@
       color: var(--muted);
       background: rgba(255,255,255,0.025);
       font-size: 0.9rem;
+    }
+
+
+    /* IMAGINI */
+
+    .hero-image-section {
+      padding: 0 0 90px;
+    }
+
+    .feature-image {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      background: var(--surface);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.28);
+    }
+
+    .feature-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .image-caption {
+      padding: 15px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .content-image {
+      max-width: 1000px;
+      margin-top: 45px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--surface);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+    }
+
+    .content-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .final-image {
+      max-width: 1000px;
+      margin: 55px auto 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--surface);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+    }
+
+    .final-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
     }
 
 
@@ -579,6 +655,7 @@
     /* RESPONSIVE */
 
     @media (max-width: 900px) {
+
       .concept-grid {
         grid-template-columns: 1fr;
       }
@@ -590,9 +667,11 @@
       .recipe-columns {
         grid-template-columns: 1fr;
       }
+
     }
 
     @media (max-width: 850px) {
+
       .menu-toggle {
         display: block;
       }
@@ -629,9 +708,11 @@
       .footer-content {
         flex-direction: column;
       }
+
     }
 
     @media (max-width: 600px) {
+
       .container {
         width: min(calc(100% - 30px),var(--max-width));
       }
@@ -649,7 +730,17 @@
       }
 
       .hero {
-        padding: 70px 0 60px;
+        padding: 70px 0 55px;
+      }
+
+      .hero-image-section {
+        padding-bottom: 65px;
+      }
+
+      .feature-image,
+      .content-image,
+      .final-image {
+        border-radius: 16px;
       }
 
       h1 {
@@ -680,12 +771,15 @@
       .author-card {
         padding: 26px;
       }
+
     }
 
   </style>
 
 
-  <!-- SCHEMA.ORG / RECIPE -->
+  <!-- ==================================================
+       SCHEMA.ORG / RECIPE
+  ================================================== -->
 
   <script type="application/ld+json">
   {
@@ -695,6 +789,11 @@
     "name": "Café Caramel Croustilland — CL Signature",
     "description": "Creație originală Costin Licu: desert stratificat cu blat de cacao, caramel sărat cu arahide, Dacquoise, cremeux de ciocolată cu lapte și cafea, cremă de ciocolată albă cu mascarpone și glazură de ciocolată.",
     "url": "https://costinlicu.ro/retete/cafe-caramel-croustilland/",
+    "image": [
+      "https://costinlicu.ro/images/cafe-caramel-croustilland-1.jpg",
+      "https://costinlicu.ro/images/cafe-caramel-croustilland-2.jpg",
+      "https://costinlicu.ro/images/cafe-caramel-croustilland-3.jpg"
+    ],
     "datePublished": "2026-09-06",
     "inLanguage": "ro",
     "recipeCategory": "Cofetărie",
@@ -753,6 +852,7 @@
     ],
 
     "recipeInstructions": [
+
       {
         "@type": "HowToSection",
         "name": "Cremă ganache de ciocolată albă cu cremă de brânză și mascarpone",
@@ -926,6 +1026,7 @@
           }
         ]
       }
+
     ]
   }
   </script>
@@ -934,6 +1035,7 @@
 
 
 <body>
+
 
 <header>
 
@@ -972,7 +1074,9 @@
 <main>
 
 
-  <!-- HERO -->
+  <!-- ==================================================
+       HERO
+  ================================================== -->
 
   <section class="hero">
 
@@ -1017,7 +1121,39 @@
   </section>
 
 
-  <!-- POVESTEA -->
+  <!-- ==================================================
+       IMAGINE PRINCIPALĂ
+  ================================================== -->
+
+  <section class="hero-image-section">
+
+    <div class="container">
+
+      <figure class="feature-image">
+
+        <img
+          src="/images/cafe-caramel-croustilland-1.jpg"
+          alt="Café Caramel Croustilland — creație originală Costin Licu"
+          width="1600"
+          height="1067"
+          loading="eager"
+          fetchpriority="high"
+        >
+
+        <figcaption class="image-caption">
+          Café Caramel Croustilland · CL Signature · Costin Licu
+        </figcaption>
+
+      </figure>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       POVESTEA
+  ================================================== -->
 
   <section class="content-section">
 
@@ -1106,7 +1242,6 @@
             de Costin Licu în urmă cu aproximativ cinci ani.
             Rețeta a trecut prin mai multe etape de testare
             și ajustare înainte de a ajunge la forma actuală.
-           
           </p>
 
         </div>
@@ -1118,7 +1253,9 @@
   </section>
 
 
-  <!-- CONCEPT -->
+  <!-- ==================================================
+       CONCEPT
+  ================================================== -->
 
   <section class="content-section">
 
@@ -1204,7 +1341,9 @@
   </section>
 
 
-  <!-- STRUCTURA -->
+  <!-- ==================================================
+       STRUCTURA
+  ================================================== -->
 
   <section class="content-section">
 
@@ -1280,12 +1419,31 @@
 
       </div>
 
+
+      <!-- IMAGINEA 2 -->
+
+      <figure class="content-image">
+
+        <img
+          src="/images/cafe-caramel-croustilland-2.jpg"
+          alt="Secțiunea Café Caramel Croustilland și structura straturilor desertului"
+          loading="lazy"
+        >
+
+        <figcaption class="image-caption">
+          Structura și secțiunea Café Caramel Croustilland
+        </figcaption>
+
+      </figure>
+
     </div>
 
   </section>
 
 
-  <!-- REȚETA -->
+  <!-- ==================================================
+       REȚETA
+  ================================================== -->
 
   <section class="content-section">
 
@@ -1887,7 +2045,9 @@
   </section>
 
 
-  <!-- MONTAJ -->
+  <!-- ==================================================
+       MONTAJ
+  ================================================== -->
 
   <section class="content-section">
 
@@ -1954,12 +2114,31 @@
 
       </div>
 
+
+      <!-- IMAGINEA 3 -->
+
+      <figure class="final-image">
+
+        <img
+          src="/images/cafe-caramel-croustilland-3.jpg"
+          alt="Café Caramel Croustilland finalizat — CL Signature, Costin Licu"
+          loading="lazy"
+        >
+
+        <figcaption class="image-caption">
+          Café Caramel Croustilland · produs final
+        </figcaption>
+
+      </figure>
+
     </div>
 
   </section>
 
 
-  <!-- AUTOR -->
+  <!-- ==================================================
+       AUTOR
+  ================================================== -->
 
   <section class="content-section">
 
